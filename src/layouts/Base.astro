@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import site from '../../site.config.mjs';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { defaultLocale, localeInfo, localeUrl, locales, t } from '../i18n';
+import { DESCRIPTION_LIMIT, checkDescription, checkVerificationToken } from '../lib/seo';
+
+interface Props {
+  locale: string;
+  title: string;
+  /** Required on every page except the error page; at most 160 characters, or the build fails. */
+  description?: string;
+  /** Locale-independent path of the page: '/' or '/features/'. */
+  path?: string;
+  /** Error pages: no canonical or alternates, not indexed, no language picker. */
+  error?: boolean;
+  /** Keep a normal page out of search results (placeholders). */
+  noindex?: boolean;
+  /** Serialised JSON-LD document (src/lib/seo.ts `jsonLdDocument`), written as a data block. */
+  jsonLd?: string;
+}
+const { locale, title, description, path = '/', error = false, noindex = false, jsonLd } = Astro.props;
+const info = localeInfo(locale);
+const absolute = (code: string) => new URL(localeUrl(code, path), site.url).href;
+const pageDescription = error ? undefined : checkDescription(description, DESCRIPTION_LIMIT, `${locale}:${path}`);
+const verification = checkVerificationToken(site.seo.googleSiteVerification);
+const image = new URL(site.seo.ogImage.path, site.url).href;
+const imageAlt = t(locale, 'meta.ogImageAlt');
+---
+
+<!doctype html>
+<html lang={info.code} dir={info.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{title}</title>
+    {pageDescription && <meta name="description" content={pageDescription} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {(error || noindex) && <meta name="robots" content="noindex" />}
+    {verification && <meta name="google-site-verification" content={verification} />}
+    {!error && <link rel="canonical" href={absolute(locale)} />}
+    {!error && locales.map((l) => <link rel="alternate" hreflang={l.code} href={absolute(l.code)} />)}
+    {!error && <link rel="alternate" hreflang="x-default" href={absolute(defaultLocale)} />}
+    {
+      !error && (
+        <>
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content={site.productName} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={pageDescription} />
+          <meta property="og:url" content={absolute(locale)} />
+          <meta property="og:locale" content={info.og} />
+          {locales.filter((l) => l.code !== locale).map((l) => <meta property="og:locale:alternate" content={l.og} />)}
+          <meta property="og:image" content={image} />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content={String(site.seo.ogImage.width)} />
+          <meta property="og:image:height" content={String(site.seo.ogImage.height)} />
+          <meta property="og:image:alt" content={imageAlt} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={pageDescription} />
+          <meta name="twitter:image" content={image} />
+          <meta name="twitter:image:alt" content={imageAlt} />
+        </>
+      )
+    }
+    {!error && jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{t(locale, 'a11y.skipToContent')}</a>
+    <Header locale={locale} path={path} showLanguagePicker={!error} />
+    <main id="content" class="container">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

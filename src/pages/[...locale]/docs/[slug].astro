@@ -1,0 +1,50 @@
+---
+import site from '../../../../site.config.mjs';
+import Base from '../../../layouts/Base.astro';
+import { publishedDocs } from '../../../lib/app-repo';
+import { renderMarkdown } from '../../../lib/markdown';
+import { localeInfo, localeStaticPaths, localeUrl, t } from '../../../i18n';
+
+export function getStaticPaths() {
+  return localeStaticPaths(publishedDocs().map((doc) => ({ params: { slug: doc.slug }, props: { name: doc.name } })));
+}
+
+const { locale, name } = Astro.props as { locale: string; name: string };
+const docs = publishedDocs();
+const doc = docs.find((d) => d.name === name)!;
+
+const rendered = renderMarkdown(doc.source, {
+  docs: Object.fromEntries(docs.map((d) => [d.name, localeUrl(locale, `/docs/${d.slug}/`)])),
+  repoUrl: (path) => site.repo.blobUrl(path),
+});
+const contents = rendered.headings.filter((h) => h.depth === 2 || h.depth === 3);
+const docLanguage = localeInfo(site.docs.language);
+const translated = locale !== site.docs.language;
+---
+
+<Base
+  locale={locale}
+  title={`${rendered.title} · ${t(locale, 'nav.docs')}`}
+  description={rendered.description}
+  path={`/docs/${doc.slug}/`}
+>
+  <p class="back"><a href={localeUrl(locale, '/docs/')}>{t(locale, 'docs.back')}</a></p>
+  {translated && <p class="status">{t(locale, 'docs.englishOnly')}</p>}
+  <div class="doc-layout" lang={docLanguage.code} dir={docLanguage.dir}>
+    {
+      contents.length > 0 && (
+        <nav class="toc" aria-label={t(locale, 'docs.contents')}>
+          <p class="toc-title">{t(locale, 'docs.contents')}</p>
+          <ul>
+            {contents.map((h) => (
+              <li class={`depth-${h.depth}`}>
+                <a href={`#${h.id}`}>{h.text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    <article class="prose doc" set:html={rendered.html} />
+  </div>
+</Base>

@@ -1,0 +1,46 @@
+---
+import site from '../../../../site.config.mjs';
+import Base from '../../../layouts/Base.astro';
+import { localeStaticPaths, t, type MessageKey } from '../../../i18n';
+import { renderLegalDocument } from '../../../lib/legal';
+
+export function getStaticPaths() {
+  return localeStaticPaths(site.legalPages.map((page: string) => ({ params: { page }, props: { page } })));
+}
+
+const { locale, page } = Astro.props as { locale: string; page: string };
+const shortTitle = t(locale, `legal.${page}.title` as MessageKey);
+const description = t(locale, `legal.${page}.description` as MessageKey, { license: site.license.app.name });
+const rendered = renderLegalDocument(locale, page);
+const contents = rendered.headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<Base
+  locale={locale}
+  title={t(locale, 'legal.documentTitle', { title: shortTitle })}
+  description={description}
+  path={`/legal/${page}/`}
+  noindex={site.legal.draft}
+>
+  <section class="page-head">
+    <h1>{rendered.title}</h1>
+    {site.legal.draft && <p class="status">{t(locale, 'legal.draftNotice', { date: site.legal.draftDate })}</p>}
+  </section>
+  <div class="doc-layout">
+    {
+      contents.length > 0 && (
+        <nav class="toc" aria-label={t(locale, 'docs.contents')}>
+          <p class="toc-title">{t(locale, 'docs.contents')}</p>
+          <ul>
+            {contents.map((h) => (
+              <li class={`depth-${h.depth}`}>
+                <a href={`#${h.id}`}>{h.text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    <article class="prose doc" set:html={rendered.html} />
+  </div>
+</Base>

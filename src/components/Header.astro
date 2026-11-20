@@ -1,0 +1,38 @@
+---
+import LanguagePicker from './LanguagePicker.astro';
+import Wordmark from './Wordmark.astro';
+import { localeUrl, t } from '../i18n';
+import { nav } from '../nav';
+
+interface Props {
+  locale: string;
+  path: string;
+  showLanguagePicker: boolean;
+}
+const { locale, path, showLanguagePicker } = Astro.props;
+const inSection = (item: string) => path.startsWith(item.replace(/\/$/, ''));
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="home-link" href={localeUrl(locale)} aria-label={t(locale, 'header.homeLabel')}>
+      <Wordmark />
+    </a>
+    {
+      showLanguagePicker && (
+        <nav class="main-nav" aria-label={t(locale, 'nav.label')}>
+          <ul>
+            {nav.map((item) => (
+              <li>
+                <a href={localeUrl(locale, item.path)} aria-current={inSection(item.path) ? 'page' : undefined}>
+                  {t(locale, item.key)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    {showLanguagePicker && <LanguagePicker locale={locale} path={path} />}
+  </div>
+</header>

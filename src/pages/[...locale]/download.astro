@@ -1,0 +1,99 @@
+---
+import site from '../../../site.config.mjs';
+import Base from '../../layouts/Base.astro';
+import { localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
+import { jsonLdDocument, softwareNode } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props;
+const platforms = site.download.platforms as string[];
+// Fallback static table links to the repository releases page when /releases.json is unavailable.
+const hasPackage = (platform: string) => ['windows', 'macos', 'linux'].includes(platform);
+const note = (platform: string): string | null => {
+  if (platform === 'windows') return t(locale, 'download.note.windows');
+  if (platform === 'macos') return t(locale, 'download.note.macos');
+  if (platform === 'android' || platform === 'ios') return t(locale, 'download.note.store');
+  return null;
+};
+const description = t(locale, 'download.description');
+const software = softwareNode({
+  name: site.productName,
+  url: new URL(localeUrl(locale, '/download/'), site.url).href,
+  description,
+  language: locale,
+  operatingSystems: platforms.map((p) => t(locale, `download.platform.${p}` as MessageKey)),
+  license: site.license.app.url,
+  downloadUrl: site.download.allDownloadsUrl,
+});
+// Templates keep their {placeholders}: the script fills them in.
+const keep = (key: MessageKey, names: string[]) =>
+  t(locale, key, Object.fromEntries(names.map((n) => [n, `{${n}}`])));
+---
+
+<Base
+  locale={locale}
+  title={t(locale, 'download.documentTitle')}
+  description={description}
+  path="/download/"
+  jsonLd={jsonLdDocument([software])}
+>
+  <section class="page-head">
+    <h1>{t(locale, 'download.title')}</h1>
+    <p class="lead">{t(locale, 'download.lead')}</p>
+  </section>
+
+  <section
+    data-download
+    data-releases={site.releasesPath}
+    data-hosts={site.download.allowedHosts.join(',')}
+    data-dl-host={site.hosts.dl}
+    data-primary-template={keep('download.primary', ['platform'])}
+    data-version-template={keep('download.version', ['version'])}
+    data-released-template={keep('download.released', ['date'])}
+    data-get={t(locale, 'download.get')}
+  >
+    <div class="primary" data-primary hidden>
+      <p class="meta" data-version-text></p>
+      <p><a class="button" data-primary-link href={site.download.allDownloadsUrl} hidden></a></p>
+    </div>
+
+    <table class="platforms">
+      <thead>
+        <tr>
+          <th scope="col">{t(locale, 'download.col.platform')}</th>
+          <th scope="col">{t(locale, 'download.col.requirements')}</th>
+          <th scope="col">{t(locale, 'download.col.get')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          platforms.map((platform) => (
+            <tr data-platform={platform} data-name={t(locale, `download.platform.${platform}` as MessageKey)}>
+              <th scope="row">{t(locale, `download.platform.${platform}` as MessageKey)}</th>
+              <td>
+                {t(locale, `download.req.${platform}` as MessageKey)}
+                {note(platform) && <p class="note">{note(platform)}</p>}
+              </td>
+              <td data-action>
+                {hasPackage(platform) ? (
+                  <a href={site.download.allDownloadsUrl} rel="noopener">
+                    {t(locale, 'download.all')}
+                  </a>
+                ) : (
+                  <span>{t(locale, 'download.unavailable')}</span>
+                )}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </section>
+</Base>
+
+<script>
+  import '../../scripts/download';
+</script>

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+*.log
+.env
+.env.*
+.DS_Store
+/.agents/
+/.claude/
+/.cursor/
+/.gitea/
+/AGENTS.md
+/CLAUDE.md
+/docs/

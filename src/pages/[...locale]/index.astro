@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import site from '../../../site.config.mjs';
+import { localeCodes, localeStaticPaths, localeUrl, t } from '../../i18n';
+import { jsonLdDocument, siteNodes } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props;
+const siteJsonLd = jsonLdDocument(
+  siteNodes({
+    name: site.productName,
+    origin: site.url,
+    logo: `${site.url}/favicon.svg`,
+    sameAs: [site.repo.appRepoUrl],
+    locales: localeCodes,
+  }),
+);
+---
+
+<Base
+  locale={locale}
+  title={t(locale, 'home.documentTitle')}
+  description={t(locale, 'meta.description')}
+  path="/"
+  jsonLd={siteJsonLd}>
+  <section class="hero">
+    <h1>{t(locale, 'home.title')}</h1>
+    <p class="lead">{t(locale, 'home.lead')}</p>
+    <p class="actions">
+      <a class="button" href={localeUrl(locale, '/download/')}>{t(locale, 'home.cta.download')}</a>
+      <a class="button secondary" href={localeUrl(locale, '/features/')}>{t(locale, 'home.cta.features')}</a>
+    </p>
+  </section>
+  <section class="cards" aria-label={t(locale, 'nav.features')}>
+    <article class="card">
+      <h2>{t(locale, 'home.shell.title')}</h2>
+      <p>{t(locale, 'home.shell.body')}</p>
+    </article>
+    <article class="card">
+      <h2>{t(locale, 'home.everywhere.title')}</h2>
+      <p>{t(locale, 'home.everywhere.body')}</p>
+    </article>
+    <article class="card">
+      <h2>{t(locale, 'home.schema.title')}</h2>
+      <p>{t(locale, 'home.schema.body')}</p>
+    </article>
+  </section>
+</Base>

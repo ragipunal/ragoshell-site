@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { changelogReleases } from '../../lib/app-repo';
+import { codeSpans, releaseAnchor } from '../../lib/changelog';
+import { localeStaticPaths, t } from '../../i18n';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props;
+const releases = changelogReleases();
+---
+
+<Base
+  locale={locale}
+  title={t(locale, 'changes.documentTitle')}
+  description={t(locale, 'changes.description')}
+  path="/changes/">
+  <section class="page-head">
+    <h1>{t(locale, 'changes.title')}</h1>
+    <p class="lead">{t(locale, 'changes.lead')}</p>
+  </section>
+  <!-- The change log is English: it is shown as written, in an English block. -->
+  <div class="prose" lang="en" dir="ltr">
+    {
+      releases.map((release) => (
+        <article id={releaseAnchor(release.version)}>
+          <h2>{t(locale, 'changes.version', { version: release.version })}</h2>
+          {release.intro !== '' && <p>{release.intro}</p>}
+          <ul>
+            {release.items.map((item) => (
+              <li>
+                {codeSpans(item).map((part) => (part.code ? <code>{part.text}</code> : part.text))}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</Base>

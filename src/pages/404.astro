@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { defaultLocale, localeUrl, locales, t } from '../i18n';
+---
+
+<Base locale={defaultLocale} title={t(defaultLocale, 'notFound.documentTitle')} error>
+  {
+    locales.map((l) => (
+      <section class="hero" lang={l.code} dir={l.dir}>
+        <h1>{t(l.code, 'notFound.title')}</h1>
+        <p class="lead">{t(l.code, 'notFound.text')}</p>
+        <p>
+          <a href={localeUrl(l.code)}>{t(l.code, 'notFound.home')}</a>
+        </p>
+      </section>
+    ))
+  }
+</Base>

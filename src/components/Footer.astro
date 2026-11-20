@@ -1,0 +1,41 @@
+---
+import site from '../../site.config.mjs';
+import Wordmark from './Wordmark.astro';
+import { localeUrl, t, trademarkNotice, type MessageKey } from '../i18n';
+import { trademarkPath } from '../nav';
+
+interface Props {
+  locale: string;
+}
+const { locale } = Astro.props;
+const { code, content } = site.license;
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-brand"><Wordmark /></p>
+    <p class="notice">{trademarkNotice(locale)}</p>
+    <p class="notice">{t(locale, 'footer.noCookies')}</p>
+    <nav aria-label={t(locale, 'footer.legal')}>
+      <ul class="footer-links">
+        {
+          site.legalPages.map((page: string) => (
+            <li>
+              <a href={localeUrl(locale, `/legal/${page}/`)}>{t(locale, `legal.${page}.title` as MessageKey)}</a>
+            </li>
+          ))
+        }
+        <li><a href={localeUrl(locale, trademarkPath)}>{t(locale, 'nav.trademark')}</a></li>
+      </ul>
+    </nav>
+    <ul class="footer-links">
+      <li>
+        {t(locale, 'footer.codeLicense')}: <a href={code.url} rel="license noopener">{code.name}</a>
+      </li>
+      <li>
+        {t(locale, 'footer.contentLicense')}: <a href={content.url} rel="license noopener">{content.name}</a>
+      </li>
+      <li><a href={site.repo.siteRepoUrl} rel="noopener">{t(locale, 'footer.source')}</a></li>
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,294 @@
+---
+import site from '../../../site.config.mjs';
+import Base from '../../layouts/Base.astro';
+import { localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
+import { localizeTokenCount, validatePricingConfig } from '../../lib/pricing';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { locale } = Astro.props;
+const cfg = validatePricingConfig(site.pricing, new URL(site.urls.app).origin);
+const isBeta = cfg.mode === 'beta';
+const defaultRegion = locale === 'tr' ? 'try' : 'usd';
+const downloadHref = localeUrl(locale, '/download/');
+const refundsHref = localeUrl(locale, '/legal/refunds/');
+const billingHref = `${site.urls.app}/billing`;
+
+const params: Record<string, string> = {
+  appHost: site.hosts.app,
+  bridgeHost: site.hosts.bridge,
+  freePrice: locale === 'tr' ? cfg.try.free : cfg.usd.free,
+  freeUsd: cfg.usd.free,
+  proUsdMonthly: cfg.usd.proMonthly,
+  proUsdYearly: cfg.usd.proYearly,
+  teamUsdMonthly: cfg.usd.teamMonthly,
+  teamUsdYearly: cfg.usd.teamYearly,
+  freeTry: cfg.try.free,
+  proTryMonthly: cfg.try.proMonthly,
+  proTryYearly: cfg.try.proYearly,
+  teamTryMonthly: cfg.try.teamMonthly,
+  teamTryYearly: cfg.try.teamYearly,
+  teamMinSeats: String(cfg.teamMinSeats),
+  maxDevices: String(cfg.maxDevicesPerUser),
+  syncCollections: String(cfg.syncMaxCollections),
+  syncBlobMiB: String(cfg.syncMaxBlobMiB),
+  aiTokensPro: localizeTokenCount(cfg.aiMonthlyTokensPro, locale),
+  aiTokensProShort: cfg.aiMonthlyTokensProShort,
+  aiTokensTeam: localizeTokenCount(cfg.aiMonthlyTokensTeam, locale),
+  aiTokensTeamShort: cfg.aiMonthlyTokensTeamShort,
+  trialDays: String(cfg.trialDays),
+  trialAiRequests: String(cfg.trialAiRequests),
+  refundDays: String(cfg.refundDays),
+  billingGraceDays: String(cfg.billingGraceDays),
+  offlineGraceDays: String(cfg.offlineGraceDays),
+  retentionDays: String(cfg.syncReadOnlyRetentionDays),
+  earlyDiscount: String(cfg.earlySupporterDiscountPercent),
+};
+
+const p = (key: MessageKey) => t(locale, key, params);
+const cloudCta = isBeta ? p('pricing.cloud.cta.beta') : p('pricing.cloud.cta.live');
+
+const freeFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'] as const;
+const proFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'] as const;
+const teamFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'] as const;
+
+const compareGroups = [
+  { id: 'core', rows: ['clients', 'shell', 'mcp'] },
+  { id: 'ai', rows: ['byok', 'cloudAi'] },
+  { id: 'sync', rows: ['devices', 'e2ee', 'vault'] },
+  { id: 'bridge', rows: ['webSelf', 'webHosted'] },
+  { id: 'billing', rows: ['priceSummary', 'guarantees', 'grace'] },
+] as const;
+
+const faqs = [
+  { id: 'open', linkHref: null, linkKey: null, external: false },
+  { id: 'regional', linkHref: null, linkKey: null, external: false },
+  { id: 'refund', linkHref: refundsHref, linkKey: 'pricing.faq.refund.link' as MessageKey, external: false },
+  { id: 'cancel', linkHref: null, linkKey: null, external: false },
+  { id: 'sponsor', linkHref: cfg.donateUrl, linkKey: 'pricing.faq.sponsor.link' as MessageKey, external: true },
+] as const;
+---
+
+<Base
+  locale={locale}
+  title={p('pricing.documentTitle')}
+  description={p('pricing.description')}
+  path="/pricing/"
+>
+  <section class="page-head">
+    <h1>{p('pricing.title')}</h1>
+    <p class="lead">{p('pricing.lead')}</p>
+    {
+      isBeta && (
+        <div class="beta-banner" role="note">
+          <p class="beta-badge">{p('pricing.beta.badge')}</p>
+          <p class="beta-body">{p('pricing.beta.body')}</p>
+          <p class="beta-actions">
+            <a class="button" href={downloadHref}>{p('pricing.beta.downloadLink')}</a>
+            <a class="button secondary" href={billingHref} rel="noopener">
+              {p('pricing.beta.portalLink')}
+            </a>
+          </p>
+        </div>
+      )
+    }
+  </section>
+
+  <div class="pricing-shell">
+    <fieldset class="region-picker">
+      <legend class="region-legend">{p('pricing.region.legend')}</legend>
+      <div class="region-options">
+        <div class="region-choice">
+          <input
+            type="radio"
+            id="billing-region-usd"
+            name="billing-region"
+            checked={defaultRegion === 'usd'}
+          />
+          <label for="billing-region-usd">{p('pricing.region.usd')}</label>
+        </div>
+        <div class="region-choice">
+          <input
+            type="radio"
+            id="billing-region-try"
+            name="billing-region"
+            checked={defaultRegion === 'try'}
+          />
+          <label for="billing-region-try">{p('pricing.region.try')}</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="plan-grid">
+      <article class="card plan-card">
+        <div class="plan-head">
+          <h2>{p('pricing.free.name')}</h2>
+          <span class="plan-badge">{p('pricing.free.badge')}</span>
+        </div>
+
+        <div class="price-panel price-panel-usd">
+          <p class="price-region-tag">{p('pricing.region.tag.usd')}</p>
+          <p class="price-main">
+            <strong class="price-amount">{cfg.usd.free}</strong>
+            <span class="price-unit">{p('pricing.free.period')}</span>
+          </p>
+          <p class="price-tax">{p('pricing.free.taxNote')}</p>
+        </div>
+
+        <div class="price-panel price-panel-try">
+          <p class="price-region-tag">{p('pricing.region.tag.try')}</p>
+          <p class="price-main">
+            <strong class="price-amount">{cfg.try.free}</strong>
+            <span class="price-unit">{p('pricing.free.period')}</span>
+          </p>
+          <p class="price-tax">{p('pricing.free.taxNote')}</p>
+        </div>
+
+        <p class="plan-summary">{p('pricing.free.summary')}</p>
+        <ul class="plan-features">
+          {freeFeatures.map((k) => <li>{p(`pricing.free.${k}` as MessageKey)}</li>)}
+        </ul>
+        <p class="plan-cta">
+          <a class="button secondary" href={downloadHref}>{p('pricing.free.cta')}</a>
+        </p>
+      </article>
+
+      <article class="card plan-card plan-card-featured">
+        <div class="plan-head">
+          <h2>{p('pricing.pro.name')}</h2>
+          <span class="plan-badge plan-badge-accent">{p('pricing.pro.badge')}</span>
+        </div>
+
+        <div class="price-panel price-panel-usd">
+          <p class="price-region-tag">{p('pricing.region.tag.usd')}</p>
+          <p class="price-main">
+            <strong class="price-amount">{cfg.usd.proMonthly}</strong>
+            <span class="price-unit">{p('pricing.pro.monthlyUnit')}</span>
+          </p>
+          <p class="price-annual">{p('pricing.pro.annualLine.usd')}</p>
+          <p class="price-tax">{p('pricing.pro.taxNote.usd')}</p>
+        </div>
+
+        <div class="price-panel price-panel-try">
+          <p class="price-region-tag">{p('pricing.region.tag.try')}</p>
+          <p class="price-main">
+            <strong class="price-amount">{cfg.try.proMonthly}</strong>
+            <span class="price-unit">{p('pricing.pro.monthlyUnit')}</span>
+          </p>
+          <p class="price-annual">{p('pricing.pro.annualLine.try')}</p>
+          <p class="price-tax">{p('pricing.pro.taxNote.try')}</p>
+        </div>
+
+        <p class="guarantee-pill">{p('pricing.pro.guaranteeBadge')}</p>
+        <p class="plan-summary">{p('pricing.pro.summary')}</p>
+        <ul class="plan-features">
+          {proFeatures.map((k) => <li>{p(`pricing.pro.${k}` as MessageKey)}</li>)}
+        </ul>
+        <p class="plan-cta">
+          <a class="button" href={billingHref} rel="noopener">{cloudCta}</a>
+        </p>
+      </article>
+
+      <article class="card plan-card">
+        <div class="plan-head">
+          <h2>{p('pricing.team.name')}</h2>
+          <span class="plan-badge">{p('pricing.team.badge')}</span>
+        </div>
+
+        <div class="price-panel price-panel-usd">
+          <p class="price-region-tag">{p('pricing.region.tag.usd')}</p>
+          <p class="price-main">
+            <strong class="price-amount">{cfg.usd.teamMonthly}</strong>
+            <span class="price-unit">{p('pricing.team.monthlyUnit')}</span>
+          </p>
+          <p class="price-annual">{p('pricing.team.annualLine.usd')}</p>
+          <p class="price-tax">{p('pricing.team.taxNote.usd')}</p>
+        </div>
+
+        <div class="price-panel price-panel-try">
+          <p class="price-region-tag">{p('pricing.region.tag.try')}</p>
+          <p class="price-main">
+            <strong class="price-amount">{cfg.try.teamMonthly}</strong>
+            <span class="price-unit">{p('pricing.team.monthlyUnit')}</span>
+          </p>
+          <p class="price-annual">{p('pricing.team.annualLine.try')}</p>
+          <p class="price-tax">{p('pricing.team.taxNote.try')}</p>
+        </div>
+
+        <p class="guarantee-pill">{p('pricing.pro.guaranteeBadge')}</p>
+        <p class="plan-summary">{p('pricing.team.summary')}</p>
+        <ul class="plan-features">
+          {teamFeatures.map((k) => <li>{p(`pricing.team.${k}` as MessageKey)}</li>)}
+        </ul>
+        <p class="plan-cta">
+          <a class="button secondary" href={billingHref} rel="noopener">{cloudCta}</a>
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <section class="pricing-section" aria-labelledby="compare-heading">
+    <h2 id="compare-heading">{p('pricing.compare.title')}</h2>
+    <p class="section-lead">{p('pricing.compare.lead')}</p>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-caption">
+      <table class="compare-table">
+        <caption id="compare-caption">{p('pricing.compare.caption')}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{p('pricing.compare.col.feature')}</th>
+            <th scope="col">{p('pricing.compare.col.free')}</th>
+            <th scope="col">{p('pricing.compare.col.pro')}</th>
+            <th scope="col">{p('pricing.compare.col.team')}</th>
+          </tr>
+        </thead>
+        {
+          compareGroups.map((group) => (
+            <tbody>
+              <tr class="group-row">
+                <th scope="colgroup" colspan="4">
+                  {p(`pricing.compare.group.${group.id}` as MessageKey)}
+                </th>
+              </tr>
+              {group.rows.map((row) => (
+                <tr>
+                  <th scope="row">{p(`pricing.compare.${row}.label` as MessageKey)}</th>
+                  <td>{p(`pricing.compare.${row}.free` as MessageKey)}</td>
+                  <td>{p(`pricing.compare.${row}.pro` as MessageKey)}</td>
+                  <td>{p(`pricing.compare.${row}.team` as MessageKey)}</td>
+                </tr>
+              ))}
+            </tbody>
+          ))
+        }
+      </table>
+    </div>
+  </section>
+
+  <section class="pricing-section" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">{p('pricing.faq.title')}</h2>
+    <p class="section-lead">{p('pricing.faq.lead')}</p>
+
+    <div class="faq-list">
+      {
+        faqs.map((item, idx) => (
+          <details class="faq-item" open={idx === 0}>
+            <summary class="faq-summary">{p(`pricing.faq.${item.id}.q` as MessageKey)}</summary>
+            <div class="faq-body">
+              <p>{p(`pricing.faq.${item.id}.a` as MessageKey)}</p>
+              {item.linkHref && item.linkKey && (
+                <p class="faq-link">
+                  <a href={item.linkHref} rel={item.external ? 'noopener' : undefined}>
+                    {p(item.linkKey)}
+                  </a>
+                </p>
+              )}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+</Base>

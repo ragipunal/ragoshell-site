@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Deep dark green / black-green squircle background -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c2319" />
+      <stop offset="100%" stop-color="#05140e" />
+    </linearGradient>
+
+    <!-- Subtle inner border gradient -->
+    <linearGradient id="innerBorderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1ae575" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#00a344" stop-opacity="0.10" />
+    </linearGradient>
+
+    <!-- Flower petal gradient: emerald to mint green -->
+    <linearGradient id="petalGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#028639" />
+      <stop offset="45%" stop-color="#00be54" />
+      <stop offset="100%" stop-color="#34f28b" />
+    </linearGradient>
+
+    <!-- Flower core subtle radial glow -->
+    <radialGradient id="flowerCenterGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7affb8" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#028639" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Soft ambient shadow under flower mark -->
+    <filter id="flowerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <!-- Base App Icon: Dark-green squircle edge-to-edge -->
+  <rect x="0" y="0" width="512" height="512" rx="116" ry="116" fill="url(#bgGradient)" />
+
+  <!-- Subtle thin lighter-green inner ring border: sober, corporate finish -->
+  <rect x="5" y="5" width="502" height="502" rx="112" ry="112" fill="none" stroke="url(#innerBorderGrad)" stroke-width="2.5" />
+
+  <!-- Stylized Geometric 5-Petal Mango Flower Emblem -->
+  <g filter="url(#flowerShadow)">
+    <!-- Optically centered in 512x512 squircle -->
+    <g transform="translate(256, 266)">
+      <!-- 5 Petals positioned radially at 72 degree intervals (0, 72, 144, 216, 288) -->
+      <!-- Petal 1: Top (0 deg) -->
+      <g transform="rotate(0)">
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 C -46,-58 -30,-120 0,-160 Z" fill="url(#petalGrad)" />
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 L 0,-160 Z" fill="#ffffff" opacity="0.14" />
+        <path d="M 0,-160 L 0,0" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.24" />
+      </g>
+
+      <!-- Petal 2: Right Top (72 deg) -->
+      <g transform="rotate(72)">
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 C -46,-58 -30,-120 0,-160 Z" fill="url(#petalGrad)" />
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 L 0,-160 Z" fill="#ffffff" opacity="0.14" />
+        <path d="M 0,-160 L 0,0" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.24" />
+      </g>
+
+      <!-- Petal 3: Right Bottom (144 deg) -->
+      <g transform="rotate(144)">
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 C -46,-58 -30,-120 0,-160 Z" fill="url(#petalGrad)" />
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 L 0,-160 Z" fill="#ffffff" opacity="0.14" />
+        <path d="M 0,-160 L 0,0" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.24" />
+      </g>
+
+      <!-- Petal 4: Left Bottom (216 deg) -->
+      <g transform="rotate(216)">
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 C -46,-58 -30,-120 0,-160 Z" fill="url(#petalGrad)" />
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 L 0,-160 Z" fill="#ffffff" opacity="0.14" />
+        <path d="M 0,-160 L 0,0" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.24" />
+      </g>
+
+      <!-- Petal 5: Left Top (288 deg) -->
+      <g transform="rotate(288)">
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 C -46,-58 -30,-120 0,-160 Z" fill="url(#petalGrad)" />
+        <path d="M 0,-160 C 30,-120 46,-58 0,0 L 0,-160 Z" fill="#ffffff" opacity="0.14" />
+        <path d="M 0,-160 L 0,0" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.24" />
+      </g>
+
+      <!-- Central blossom nucleus / stamen disk -->
+      <circle cx="0" cy="0" r="46" fill="#04180f" opacity="0.58" />
+      <circle cx="0" cy="0" r="32" fill="url(#flowerCenterGlow)" />
+      <circle cx="0" cy="0" r="15" fill="#022a18" />
+      <circle cx="0" cy="0" r="6.5" fill="#3bf592" opacity="0.95" />
+    </g>
+  </g>
+</svg>
