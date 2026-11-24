@@ -109,9 +109,10 @@ export function inspect(dir, site) {
         // inspect-seo.mjs (valid JSON, schema.org, no "<"); with a src or any other type it is a script like the rest.
         if (attrs.src === undefined && type !== 'application/ld+json') fail(name, 'inline <script> (CSP script-src is self only)');
         if (type === 'application/ld+json' && attrs.src !== undefined) fail(name, 'JSON-LD <script> with a src');
-        // the download page's script is the only JavaScript of the site
-        if (attrs.src !== undefined && !/(^|\/)download\/index\.html$/.test(name)) fail(name, 'script outside the download page');
-        if (attrs.src !== undefined && !attrs.src.startsWith('/_astro/')) fail(name, `script ${attrs.src} is not a hashed file under /_astro/`);
+        // Client scripts must be content-hashed modules under /_astro/ (see docs/Motion.md).
+        if (attrs.src !== undefined && (!attrs.src.startsWith('/_astro/') || !HASHED.test(attrs.src))) {
+          fail(name, `script ${attrs.src} is not a hashed file under /_astro/`);
+        }
       }
       if (tag === 'style') fail(name, 'inline <style> block');
       for (const [attr, value] of Object.entries(attrs)) {

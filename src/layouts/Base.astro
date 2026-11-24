@@ -34,10 +34,22 @@ const imageAlt = t(locale, 'meta.ogImageAlt');
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#090B0E" />
     <title>{title}</title>
     {pageDescription && <meta name="description" content={pageDescription} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/bricolage-grotesque-400_800-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-sans-400_700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono-400_700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    {
+      info.code !== 'en' && (
+        <>
+          <link rel="preload" href="/fonts/bricolage-grotesque-400_800-normal-ext.woff2" as="font" type="font/woff2" crossorigin />
+          <link rel="preload" href="/fonts/instrument-sans-400_700-normal-ext.woff2" as="font" type="font/woff2" crossorigin />
+        </>
+      )
+    }
     {(error || noindex) && <meta name="robots" content="noindex" />}
     {verification && <meta name="google-site-verification" content={verification} />}
     {!error && <link rel="canonical" href={absolute(locale)} />}
@@ -69,11 +81,16 @@ const imageAlt = t(locale, 'meta.ogImageAlt');
     {!error && jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
-    <a class="skip-link" href="#content">{t(locale, 'a11y.skipToContent')}</a>
+    <a class="skip-link" href="#content">
+      {t(locale, 'a11y.skipToContent')}<span class="sr-only"> (#content)</span>
+    </a>
     <Header locale={locale} path={path} showLanguagePicker={!error} />
-    <main id="content" class="container">
+    <main id="content" class="site-main" tabindex="-1">
       <slot />
     </main>
     <Footer locale={locale} />
+    <script>
+      import '../scripts/motion';
+    </script>
   </body>
 </html>

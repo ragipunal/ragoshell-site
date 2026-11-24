@@ -1,7 +1,7 @@
 ---
-import Base from '../../layouts/Base.astro';
 import site from '../../../site.config.mjs';
-import { localeCodes, localeStaticPaths, localeUrl, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+import { localeCodes, localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
 import { jsonLdDocument, siteNodes } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -18,6 +18,64 @@ const siteJsonLd = jsonLdDocument(
     locales: localeCodes,
   }),
 );
+
+const stageOrder = ['shell', 'long', 'schema', 'mcp', 'e2ee'] as const;
+const stagePresets = {
+  shell: {
+    cmd: 'db.orders.find({ status: "paid" }).sort({ ts: -1 }).limit(1)',
+    elapsed: 'eval 4.2 ms · QJSEngine',
+    desc: t(locale, 'home.stage.desc.shell'),
+    lines: [
+      { key: '_id', type: 'ObjectId', value: '"674f9c12e4b09a31c20018a1"' },
+      { key: 'totalCents', type: 'NumberLong', value: '"9007199254740993"' },
+      { key: 'paidAt', type: 'ISODate', value: '"2026-11-21T20:14:00Z"' },
+      { key: 'engine', type: 'String', value: '"in-process C++ mongocxx"' },
+    ],
+  },
+  long: {
+    cmd: 'db.ledger.insertOne({ seq: NumberLong("9007199254740995"), amount: NumberDecimal("124.50") })',
+    elapsed: 'exact 64-bit · 0 drift',
+    desc: t(locale, 'home.stage.desc.long'),
+    lines: [
+      { key: 'acknowledged', type: 'Bool', value: 'true' },
+      { key: 'seq', type: 'NumberLong', value: '9007199254740995', note: 'full 64-bit decimal text preserved' },
+      { key: 'amount', type: 'Decimal128', value: '"124.50"' },
+    ],
+  },
+  schema: {
+    cmd: 'SchemaCatalog.inspect("analytics.events", { sample: 200 })',
+    elapsed: 'background · idle-safe',
+    desc: t(locale, 'home.stage.desc.schema'),
+    lines: [
+      { key: 'customer.id', type: 'ObjectId', value: '100% present' },
+      { key: 'meta.region', type: 'String', value: '94.5% present · indexed' },
+      { key: 'payload.amount', type: 'Decimal128', value: '88.0% present' },
+    ],
+  },
+  mcp: {
+    cmd: 'mcp.tools.find({ connection: "reporting-ro", limit: 25 })',
+    elapsed: 'stdio · read-only guard',
+    desc: t(locale, 'home.stage.desc.mcp'),
+    lines: [
+      { key: 'policy', type: 'Guard', value: 'read-only ($out/$merge blocked)' },
+      { key: 'credentials', type: 'KeyStore', value: 'scrubbed from output' },
+      { key: 'hasMore', type: 'Bool', value: 'false' },
+    ],
+  },
+  e2ee: {
+    cmd: 'sync.seal({ kdf: "Argon2id", cipher: "AES-256-GCM", collections: 20 })',
+    elapsed: 'client-side · zero-knowledge',
+    desc: t(locale, 'home.stage.desc.e2ee'),
+    lines: [
+      { key: 'kdf', type: 'Argon2id', value: 'derived locally on device' },
+      { key: 'blob', type: 'AES-256-GCM', value: '"ciphertext (1 MiB max / coll)"' },
+      { key: 'serverKey', type: 'Null', value: 'never transmitted' },
+    ],
+  },
+};
+
+const initialPreset = stagePresets.shell;
+const platforms = site.download.platforms as string[];
 ---
 
 <Base
@@ -25,27 +83,231 @@ const siteJsonLd = jsonLdDocument(
   title={t(locale, 'home.documentTitle')}
   description={t(locale, 'meta.description')}
   path="/"
-  jsonLd={siteJsonLd}>
-  <section class="hero">
-    <h1>{t(locale, 'home.title')}</h1>
-    <p class="lead">{t(locale, 'home.lead')}</p>
-    <p class="actions">
-      <a class="button" href={localeUrl(locale, '/download/')}>{t(locale, 'home.cta.download')}</a>
-      <a class="button secondary" href={localeUrl(locale, '/features/')}>{t(locale, 'home.cta.features')}</a>
-    </p>
+  jsonLd={siteJsonLd}
+>
+  <section class="hero-band">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{t(locale, 'home.eyebrow')}</p>
+        <h1 class="hero-title">{t(locale, 'home.title')}</h1>
+        <p class="lead">{t(locale, 'home.lead')}</p>
+        <div class="actions">
+          <a class="button" data-fill href={localeUrl(locale, '/download/')}>
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span>{t(locale, 'home.cta.download')}</span>
+          </a>
+          <a class="button secondary" data-fill href={localeUrl(locale, '/features/')}>
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span>{t(locale, 'home.cta.features')}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-stage-col">
+        <div class="shell-stage" data-shell-stage data-presets={JSON.stringify(stagePresets)}>
+          <div class="stage-topbar">
+            <span class="stage-engine">
+              <span class="stage-beacon" aria-hidden="true"></span>
+              <span>{t(locale, 'home.stage.engine')}</span>
+            </span>
+            <div class="stage-clock-wrap">
+              <span class="stage-mode">{t(locale, 'home.stage.mode')}</span>
+              <span class="stage-clock" data-stage-clock>00:00.000</span>
+            </div>
+          </div>
+
+          <div class="stage-telemetry-track" aria-hidden="true">
+            <div class="stage-telemetry-bar" data-stage-pulse></div>
+          </div>
+
+          <div class="stage-tabs" role="tablist" aria-label={t(locale, 'home.stage.latency')}>
+            {
+              stageOrder.map((key, idx) => (
+                <button
+                  type="button"
+                  role="tab"
+                  class={`stage-tab${idx === 0 ? ' is-active' : ''}`}
+                  data-stage-tab={key}
+                  aria-selected={idx === 0 ? 'true' : 'false'}
+                >
+                  {t(locale, `home.stage.tab.${key}` as MessageKey)}
+                </button>
+              ))
+            }
+          </div>
+
+          <div class="stage-screen">
+            <div class="stage-cmd-row">
+              <span class="stage-prompt" aria-hidden="true">&gt;</span>
+              <code class="stage-cmd" data-stage-cmd>{initialPreset.cmd}</code>
+            </div>
+            <div class="bson-tree" data-stage-body>
+              {
+                initialPreset.lines.map((row) => (
+                  <div class="bson-line">
+                    <span class="bson-key">{row.key}</span>
+                    <span class="bson-type">{row.type}</span>
+                    <span class={`bson-val bson-val--${row.type.toLowerCase()}`}>{row.value}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="stage-foot">
+            <p class="stage-desc" data-stage-desc>{initialPreset.desc}</p>
+            <span class="stage-elapsed" data-stage-elapsed>{initialPreset.elapsed}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-  <section class="cards" aria-label={t(locale, 'nav.features')}>
-    <article class="card">
-      <h2>{t(locale, 'home.shell.title')}</h2>
-      <p>{t(locale, 'home.shell.body')}</p>
-    </article>
-    <article class="card">
-      <h2>{t(locale, 'home.everywhere.title')}</h2>
-      <p>{t(locale, 'home.everywhere.body')}</p>
-    </article>
-    <article class="card">
-      <h2>{t(locale, 'home.schema.title')}</h2>
-      <p>{t(locale, 'home.schema.body')}</p>
-    </article>
+
+  <section class="metrics-band" aria-label={t(locale, 'home.metrics.label')}>
+    <div class="container metrics-grid">
+      <div class="metric-cell">
+        <p class="metric-val">{t(locale, 'home.metrics.engine.value')}</p>
+        <p class="metric-label">{t(locale, 'home.metrics.engine.label')}</p>
+      </div>
+      <div class="metric-cell">
+        <p class="metric-val">{t(locale, 'home.metrics.platforms.value')}</p>
+        <p class="metric-label">{t(locale, 'home.metrics.platforms.label')}</p>
+      </div>
+      <div class="metric-cell">
+        <p class="metric-val">{t(locale, 'home.metrics.compat.value')}</p>
+        <p class="metric-label">{t(locale, 'home.metrics.compat.label')}</p>
+      </div>
+      <div class="metric-cell">
+        <p class="metric-val">{t(locale, 'home.metrics.locales.value')}</p>
+        <p class="metric-label">{t(locale, 'home.metrics.locales.label')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="surface-band" aria-labelledby="surface-heading">
+    <div class="container">
+      <div class="surface-head">
+        <p class="eyebrow">{t(locale, 'home.surface.eyebrow')}</p>
+        <h2 id="surface-heading" class="surface-title">{t(locale, 'home.surface.title')}</h2>
+        <p class="lead">{t(locale, 'home.surface.lead')}</p>
+      </div>
+
+      <div class="surface-grid">
+        <figure class="screen-frame screen-frame--desktop">
+          <div class="screen-chrome" aria-hidden="true">
+            <span class="screen-led"></span>
+            <span class="screen-chrome-label">{t(locale, 'home.surface.desktop.chrome')}<span class="screen-chrome-meta">{t(locale, 'home.surface.desktop.chromeMeta')}</span></span>
+          </div>
+          <picture>
+            <source media="(max-width: 40rem)" srcset="/screens/ui-shell-detail.webp" width="660" height="664" />
+            <img
+              src="/screens/ui-shell-desktop.webp"
+              alt={t(locale, 'home.surface.desktop.alt')}
+              width="1600"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>{t(locale, 'home.surface.desktop.caption')}</figcaption>
+        </figure>
+
+        <figure class="screen-frame screen-frame--touch">
+          <div class="screen-chrome" aria-hidden="true">
+            <span class="screen-led"></span>
+            <span class="screen-chrome-label">{t(locale, 'home.surface.mobile.chrome')}<span class="screen-chrome-meta">{t(locale, 'home.surface.mobile.chromeMeta')}</span></span>
+          </div>
+          <img
+            src="/screens/ui-touch-mobile.webp"
+            alt={t(locale, 'home.surface.mobile.alt')}
+            width="540"
+            height="1012"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{t(locale, 'home.surface.mobile.caption')}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="narrative-band" aria-labelledby="narrative-heading">
+    <div class="container narrative-grid">
+      <div class="narrative-sticky">
+        <p class="eyebrow">{t(locale, 'home.narrative.eyebrow')}</p>
+        <h2 id="narrative-heading">{t(locale, 'home.narrative.title')}</h2>
+        <p>{t(locale, 'home.narrative.body')}</p>
+        <div class="actions">
+          <a class="button secondary" data-fill href={localeUrl(locale, '/features/')}>
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span>{t(locale, 'home.narrative.cta')}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="narrative-list ledger-cards">
+        <article class="ledger-card" data-reveal>
+          <div class="ledger-card-head">
+            <span class="ledger-idx">01</span>
+            <code class="ledger-code-tag">{t(locale, 'home.shell.codeTag')}</code>
+          </div>
+          <h3>{t(locale, 'home.shell.title')}</h3>
+          <p>{t(locale, 'home.shell.body')}</p>
+        </article>
+
+        <article class="ledger-card" data-reveal>
+          <div class="ledger-card-head">
+            <span class="ledger-idx">02</span>
+            <code class="ledger-code-tag">{t(locale, 'home.everywhere.codeTag')}</code>
+          </div>
+          <h3>{t(locale, 'home.everywhere.title')}</h3>
+          <p>{t(locale, 'home.everywhere.body')}</p>
+        </article>
+
+        <article class="ledger-card" data-reveal>
+          <div class="ledger-card-head">
+            <span class="ledger-idx">03</span>
+            <code class="ledger-code-tag">{t(locale, 'home.schema.codeTag')}</code>
+          </div>
+          <h3>{t(locale, 'home.schema.title')}</h3>
+          <p>{t(locale, 'home.schema.body')}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pair-band">
+    <div class="container pair-grid">
+      <article class="pair-panel pair-left">
+        <div>
+          <p class="eyebrow">{t(locale, 'home.matrix.eyebrow')}</p>
+          <h2>{t(locale, 'home.matrix.title')}</h2>
+          <p>{t(locale, 'home.matrix.body')}</p>
+          <ul class="platform-pills">
+            {platforms.map((p) => <li>{t(locale, `download.platform.${p}` as MessageKey)}</li>)}
+          </ul>
+        </div>
+        <div class="actions">
+          <a class="button" data-fill href={localeUrl(locale, '/download/')}>
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span>{t(locale, 'home.matrix.cta')}</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="pair-panel pair-right">
+        <div>
+          <p class="eyebrow">{t(locale, 'home.cloud.eyebrow')}</p>
+          <h2>{t(locale, 'home.cloud.title')}</h2>
+          <p>{t(locale, 'home.cloud.body')}</p>
+        </div>
+        <div class="actions">
+          <a class="button secondary" data-fill href={localeUrl(locale, '/pricing/')}>
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span>{t(locale, 'home.cloud.cta')}</span>
+          </a>
+        </div>
+      </article>
+    </div>
   </section>
 </Base>

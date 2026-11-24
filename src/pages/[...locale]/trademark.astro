@@ -13,11 +13,17 @@ const { locale } = Astro.props;
   locale={locale}
   title={t(locale, 'trademark.documentTitle')}
   description={t(locale, 'trademark.description')}
-  path="/trademark/">
-  <section class="page-head">
-    <h1>{t(locale, 'trademark.title')}</h1>
-    <p class="lead">{trademarkNotice(locale)}</p>
-    <p>{t(locale, 'trademark.nominative')}</p>
-    <p>{t(locale, 'trademark.logo')}</p>
-  </section>
+  path="/trademark/"
+>
+  <div class="container">
+    <section class="page-head">
+      <p class="eyebrow">{t(locale, 'nav.trademark')}</p>
+      <h1>{t(locale, 'trademark.title')}</h1>
+      <p class="lead">{trademarkNotice(locale)}</p>
+    </section>
+    <div class="prose">
+      <p>{t(locale, 'trademark.nominative')}</p>
+      <p>{t(locale, 'trademark.logo')}</p>
+    </div>
+  </div>
 </Base>

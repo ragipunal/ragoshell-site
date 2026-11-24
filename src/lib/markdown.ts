@@ -35,6 +35,8 @@ const plainText = (markdown: string): string =>
   markdown
     .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
     .replace(/[`*_]/g, '')
+    .replace(/\s*\u2014\s*/g, ': ')
+    .replace(/\u2013/g, '-')
     .replace(/\s+/g, ' ')
     .trim();
 
@@ -108,6 +110,12 @@ export function renderMarkdown(source: string, ctx: RenderContext): Rendered {
         const external = /^https?:/i.test(target);
         const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
         return `<a href="${escapeHtml(target)}"${titleAttr}${external ? ' rel="noopener"' : ''}>${inline}</a>`;
+      },
+      text(token) {
+        if (!('tokens' in token && token.tokens)) {
+          token.text = token.text.replace(/\s*\u2014\s*/g, ': ').replace(/\u2013/g, '-');
+        }
+        return false;
       },
       code({ text, lang }) {
         const language = lang ? lang.split(/\s+/)[0].replace(/[^\w+-]/g, '') : '';

@@ -1,5 +1,6 @@
 ---
 import site from '../../site.config.mjs';
+import BrandMark from './BrandMark.astro';
 import Wordmark from './Wordmark.astro';
 import { localeUrl, t, trademarkNotice, type MessageKey } from '../i18n';
 import { trademarkPath } from '../nav';
@@ -12,30 +13,51 @@ const { code, content } = site.license;
 ---
 
 <footer class="site-footer">
-  <div class="container">
-    <p class="footer-brand"><Wordmark /></p>
-    <p class="notice">{trademarkNotice(locale)}</p>
-    <p class="notice">{t(locale, 'footer.noCookies')}</p>
-    <nav aria-label={t(locale, 'footer.legal')}>
+  <div class="container footer-grid">
+    <div class="footer-hero-col">
+      <p class="footer-brand">
+        <BrandMark size={28} />
+        <Wordmark />
+      </p>
+      <div class="footer-notice">{trademarkNotice(locale)}</div>
+      <div class="footer-notice">{t(locale, 'footer.noCookies')}</div>
+    </div>
+
+    <div class="footer-links-col">
+      <nav aria-label={t(locale, 'footer.legal')}>
+        <p class="footer-col-title">{t(locale, 'footer.legal')}</p>
+        <ul class="footer-links">
+          {
+            site.legalPages.map((page: string) => (
+              <li>
+                <a class="utility-link" href={localeUrl(locale, `/legal/${page}/`)}>
+                  {t(locale, `legal.${page}.title` as MessageKey)}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a class="utility-link" href={localeUrl(locale, trademarkPath)}>{t(locale, 'nav.trademark')}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-meta-col">
+      <p class="footer-col-title">{t(locale, 'footer.source')}</p>
       <ul class="footer-links">
-        {
-          site.legalPages.map((page: string) => (
-            <li>
-              <a href={localeUrl(locale, `/legal/${page}/`)}>{t(locale, `legal.${page}.title` as MessageKey)}</a>
-            </li>
-          ))
-        }
-        <li><a href={localeUrl(locale, trademarkPath)}>{t(locale, 'nav.trademark')}</a></li>
+        <li>
+          <span class="meta-label">{t(locale, 'footer.codeLicense')}:</span>{' '}
+          <a class="utility-link" href={code.url} rel="license noopener">{code.name}</a>
+        </li>
+        <li>
+          <span class="meta-label">{t(locale, 'footer.contentLicense')}:</span>{' '}
+          <a class="utility-link" href={content.url} rel="license noopener">{content.name}</a>
+        </li>
+        <li>
+          <a class="utility-link" href={site.repo.siteRepoUrl} rel="noopener">{t(locale, 'footer.source')}</a>
+        </li>
       </ul>
-    </nav>
-    <ul class="footer-links">
-      <li>
-        {t(locale, 'footer.codeLicense')}: <a href={code.url} rel="license noopener">{code.name}</a>
-      </li>
-      <li>
-        {t(locale, 'footer.contentLicense')}: <a href={content.url} rel="license noopener">{content.name}</a>
-      </li>
-      <li><a href={site.repo.siteRepoUrl} rel="noopener">{t(locale, 'footer.source')}</a></li>
-    </ul>
+    </div>
   </div>
 </footer>

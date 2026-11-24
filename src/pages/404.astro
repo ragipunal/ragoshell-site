@@ -1,18 +1,61 @@
 ---
 import Base from '../layouts/Base.astro';
-import { defaultLocale, localeUrl, locales, t } from '../i18n';
+import { defaultLocale, localeUrl, locales, t, type MessageKey } from '../i18n';
+
+const secondaryLocales = locales.filter((l) => l.code !== defaultLocale);
+const routeLinks: ReadonlyArray<{ path: string; key: MessageKey }> = [
+  { path: '/features/', key: 'nav.features' },
+  { path: '/download/', key: 'nav.download' },
+  { path: '/docs/', key: 'nav.docs' },
+  { path: '/changes/', key: 'nav.changes' },
+  { path: '/pricing/', key: 'nav.pricing' },
+];
 ---
 
 <Base locale={defaultLocale} title={t(defaultLocale, 'notFound.documentTitle')} error>
-  {
-    locales.map((l) => (
-      <section class="hero" lang={l.code} dir={l.dir}>
-        <h1>{t(l.code, 'notFound.title')}</h1>
-        <p class="lead">{t(l.code, 'notFound.text')}</p>
-        <p>
-          <a href={localeUrl(l.code)}>{t(l.code, 'notFound.home')}</a>
-        </p>
-      </section>
-    ))
-  }
+  <div class="container error-stage">
+    <section class="error-console" lang={defaultLocale}>
+      <p class="eyebrow">{t(defaultLocale, 'notFound.code')}</p>
+      <h1>{t(defaultLocale, 'notFound.title')}</h1>
+      <p class="lead">{t(defaultLocale, 'notFound.text')}</p>
+      <div class="actions">
+        <a class="button" data-fill href={localeUrl(defaultLocale)}>
+          <span class="btn-fill" aria-hidden="true"></span>
+          <span>{t(defaultLocale, 'notFound.home')}</span>
+        </a>
+      </div>
+
+      {
+        secondaryLocales.map((l) => (
+          <div class="error-secondary" lang={l.code} dir={l.dir}>
+            <p class="lead">{t(l.code, 'notFound.title')} · {t(l.code, 'notFound.text')}</p>
+            <div class="actions">
+              <a class="button secondary" data-fill href={localeUrl(l.code)}>
+                <span class="btn-fill" aria-hidden="true"></span>
+                <span>{t(l.code, 'notFound.home')}</span>
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <nav class="error-routes" aria-labelledby="error-routes-heading" lang={defaultLocale}>
+      <h2 id="error-routes-heading">{t(defaultLocale, 'notFound.routesTitle')}</h2>
+      <p class="error-routes-lead">{t(defaultLocale, 'notFound.routesLead')}</p>
+      <ul class="error-routes-list">
+        {
+          routeLinks.map((item, idx) => (
+            <li>
+              <a class="error-route-link" href={localeUrl(defaultLocale, item.path)}>
+                <span class="error-route-num">{String(idx + 1).padStart(2, '0')}</span>
+                <span class="error-route-name">{t(defaultLocale, item.key)}</span>
+                <code class="error-route-path">{item.path}</code>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
 </Base>

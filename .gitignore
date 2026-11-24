@@ -12,3 +12,6 @@ dist/
 /AGENTS.md
 /CLAUDE.md
 /docs/
+.jury/
+.shots/
+/DESIGN.md

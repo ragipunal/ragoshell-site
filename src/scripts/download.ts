@@ -1,6 +1,6 @@
-// The only script of the site, loaded by the download page only (a hashed file under /_astro/). It reads the
-// release manifest, treats it as untrusted input (lib/releases.ts), and fills in the page. The page is complete
-// without it, so any failure just leaves the static table. It stores nothing and sends nothing about the visitor.
+// Loaded on the download page (a hashed file under /_astro/). Reads the release manifest, treats it as
+// untrusted input (lib/releases.ts), and fills in the page. The static table works complete without JS; any
+// failure or offline preview falls back to it cleanly. Stores nothing and sends nothing about the visitor.
 import { detectPlatform, parseManifest, platforms, type Platform, type ReleaseInfo } from '../lib/releases';
 
 const root = document.querySelector<HTMLElement>('[data-download]');
@@ -12,6 +12,10 @@ const fill = (template: string, values: Record<string, string>): string =>
 async function loadManifest(root: HTMLElement): Promise<ReleaseInfo | null> {
   const url = root.dataset.releases;
   if (!url) return null;
+  // Local static preview (`serve.mjs dist` / `astro preview`) does not host nginx's /releases.json.
+  if ((location.hostname === '127.0.0.1' || location.hostname === 'localhost') && root.dataset.forceReleases !== 'true') {
+    return null;
+  }
   const hosts = (root.dataset.hosts ?? '').split(',').filter(Boolean);
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 8000);
@@ -38,7 +42,6 @@ async function run(root: HTMLElement): Promise<void> {
     if ((platforms as readonly string[]).includes(platform)) rows.set(platform, row);
   }
 
-  // table: a direct link wherever the manifest has one
   for (const [platform, row] of rows) {
     const download = info.downloads[platform];
     const cell = row.querySelector('[data-action]');
@@ -46,12 +49,12 @@ async function run(root: HTMLElement): Promise<void> {
     const link = document.createElement('a');
     link.href = download.url;
     link.rel = 'noopener';
+    link.className = 'table-action-link';
     const direct = new URL(download.url).hostname === dlHost;
     link.textContent = !direct && download.label ? download.label : get;
     cell.replaceChildren(link);
   }
 
-  // the visitor's platform, highlighted
   const primary = root.querySelector<HTMLElement>('[data-primary]');
   const versionText = root.querySelector<HTMLElement>('[data-version-text]');
   const primaryLink = root.querySelector<HTMLAnchorElement>('[data-primary-link]');
@@ -70,7 +73,8 @@ async function run(root: HTMLElement): Promise<void> {
   if (mine && download) {
     primaryLink.href = download.url;
     primaryLink.rel = 'noopener';
-    primaryLink.textContent = fill(root.dataset.primaryTemplate ?? '', { platform: rows.get(mine)?.dataset.name ?? '' });
+    const labelTarget = primaryLink.querySelector<HTMLElement>('[data-primary-label]') ?? primaryLink;
+    labelTarget.textContent = fill(root.dataset.primaryTemplate ?? '', { platform: rows.get(mine)?.dataset.name ?? '' });
     primaryLink.hidden = false;
   }
   primary.hidden = false;

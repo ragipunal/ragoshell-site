@@ -10,13 +10,17 @@ const current = locales.find((l) => l.code === locale);
 ---
 
 <nav class="lang" aria-label={t(locale, 'lang.label')}>
-  <details>
-    <summary>{current?.label}</summary>
-    <ul>
+  <details data-disclosure>
+    <summary class="lang-toggle">
+      <span class="lang-code" aria-hidden="true">{current?.code.toUpperCase()}</span>
+      <span class="lang-name">{current?.label}</span>
+    </summary>
+    <ul class="lang-list">
       {
         locales.map((l) => (
           <li>
             <a
+              class="lang-option"
               href={localeUrl(l.code, path)}
               lang={l.code}
               hreflang={l.code}

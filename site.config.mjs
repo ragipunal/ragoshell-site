@@ -87,42 +87,13 @@ const site = {
   },
 
   /**
-   * Single source of plan prices, quotas, grace windows and beta/live checkout state.
+   * The pricing page. Nothing is sold: card sales were dropped on 2026-11-22 and no sale is planned,
+   * so the page says the app is free and the optional cloud services are free with limits (2026-11-23).
    */
   pricing: {
-    /** @type {'beta' | 'live'} 'beta' shows the invite / early-supporter beta banner while live merchant keys activate; 'live' opens standard trial copy. */
-    mode: 'beta',
-    billingUrl: `https://app.${domain}/billing`,
+    /** @type {'soon'} The only mode: cloud services are free with limits, nothing is on sale. */
+    mode: 'soon',
     donateUrl: `${repoBlobBase}/DONATE.md`,
-    usd: {
-      free: '$0',
-      proMonthly: '$4.99',
-      proYearly: '$49',
-      teamMonthly: '$9',
-      teamYearly: '$89',
-    },
-    try: {
-      free: '0 ₺',
-      proMonthly: '119 ₺',
-      proYearly: '1.190 ₺',
-      teamMonthly: '229 ₺',
-      teamYearly: '2.290 ₺',
-    },
-    teamMinSeats: 3,
-    maxDevicesPerUser: 5,
-    syncMaxCollections: 20,
-    syncMaxBlobMiB: 1,
-    aiMonthlyTokensPro: '2,000,000',
-    aiMonthlyTokensProShort: '2M',
-    aiMonthlyTokensTeam: '4,000,000',
-    aiMonthlyTokensTeamShort: '4M',
-    trialDays: 14,
-    trialAiRequests: 15,
-    refundDays: 14,
-    billingGraceDays: 7,
-    offlineGraceDays: 14,
-    syncReadOnlyRetentionDays: 90,
-    earlySupporterDiscountPercent: 20,
   },
 
   /**
@@ -136,7 +107,7 @@ const site = {
 
   /** Pages every locale has (routes under src/pages/[...locale]/), and the legal pages under /legal/. */
   pages: ['features', 'download', 'docs', 'changes', 'pricing', 'trademark'],
-  legalPages: ['terms', 'privacy', 'refunds', 'imprint'],
+  legalPages: ['terms', 'privacy', 'imprint'],
 
   /**
    * Legal draft status and operator contact placeholders.
@@ -144,14 +115,14 @@ const site = {
    */
   legal: {
     draft: true,
-    draftDate: '2026-11-02',
+    draftDate: '2026-11-22',
     entity: {
-      en: '[Pending statutory commercial registration — Legal entity name, tax office/ID, MERSİS & ETBİS]',
-      tr: '[Yasal ticari sicil tescili bekleniyor — Ticari unvan, vergi dairesi/VKN, MERSİS ve ETBİS kaydı]',
+      en: '[Pending statutory commercial registration: Legal entity name, tax office/ID and MERSİS]',
+      tr: '[Yasal ticari sicil tescili bekleniyor: Ticari unvan, vergi dairesi/VKN ve MERSİS kaydı]',
     },
     address: {
-      en: '[Pending statutory commercial registration — Registered business address in the Republic of Türkiye]',
-      tr: '[Yasal ticari sicil tescili bekleniyor — Türkiye Cumhuriyeti yasal tebligat ve merkez adresi]',
+      en: '[Pending statutory commercial registration: Registered business address in the Republic of Türkiye]',
+      tr: '[Yasal ticari sicil tescili bekleniyor: Türkiye Cumhuriyeti yasal tebligat ve merkez adresi]',
     },
     supportContact: {
       en: `[support@${domain}](mailto:support@${domain})`,
@@ -174,7 +145,7 @@ const site = {
    * environment variable named here, or the sibling folder named like the product's repository.
    */
   docs: {
-    publish: ['Shell', 'McpServer', 'Platforms'],
+    publish: ['Shell', 'McpServer', 'Platforms', 'AiAssistant'],
     language: 'en',
     repoEnv: 'APP_REPO_DIR',
   },

@@ -8,17 +8,17 @@ Bu Künye ve Yasal Bildirim sayfası; 5651 sayılı Kanun, 6563 sayılı Elektro
 | --- | --- |
 | **Hizmet Sağlayıcı / Ticari Unvan** | {legalEntity} |
 | **Yasal Tebligat ve Merkez Adresi** | {legalAddress} |
-| **Vergi Dairesi & VKN / MERSİS / ETBİS** | Ücretli planların ticari yayını öncesinde yasal vergi sicili ve ETBİS tescili tamamlandığında yayımlanacaktır |
+| **Vergi Dairesi & VKN / MERSİS** | Yasal sicil tescili tamamlandığında yayımlanacaktır |
 | **Birincil Alan Adları** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{bridgeHost}` |
 | **Taslak Sürüm Tarihi** | {draftDate} |
 
 ## 2. Resmi İletişim Kanalları
 
-- **Genel ve Abonelik Desteği:** {supportContact}
+- **Genel Destek:** {supportContact}
 - **Gizlilik, KVKK ve GDPR Başvuruları:** {privacyContact} (bkz. [Gizlilik Politikası]({privacyPath}))
 - **Açık Hata ve Özellik Takip Sistemi (Issue Tracker):** [{issuesUrl}]({issuesUrl})
 
-Lütfen herkese açık hata kayıtlarında veritabanı parolası, SSH anahtarı, özel bağlantı dizgesi, ödeme bilgisi veya henüz yamalanmamış güvenlik açığı ayrıntısı paylaşmayın.
+Lütfen herkese açık hata kayıtlarında veritabanı parolası, SSH anahtarı, özel bağlantı dizgesi, API anahtarları veya henüz yamalanmamış güvenlik açığı ayrıntısı paylaşmayın.
 
 ## 3. Güvenlik Açığı Bildirimi
 
@@ -33,7 +33,7 @@ Lütfen herkese açık hata kayıtlarında veritabanı parolası, SSH anahtarı,
 - **{productName} Masaüstü ve Mobil İstemci (`{productId}` ve `{productId}-mcp`):**
   - Kaynak kodu deposu: [{appRepoUrl}]({appRepoUrl})
   - Lisans: **[{appLicenseName}]({appLicenseUrl})** (GNU Genel Kamu Lisansı Sürüm 3.0)
-  - Atıf: {productName}, açık kaynaklı **Robomongo 1.4.4** kod tabanının (Paralect ve 3T Software Labs Ltd.) devamıdır; tüm üçüncü taraf lisans bildirimleri ve Qt LGPLv3 yükümlülükleri her kurulum paketinin içinde (`THIRD-PARTY-NOTICES.txt` ve `licenses/`) sunulur.
+  - Atıf: {productName} açık kaynaklıdır; tüm üçüncü taraf lisans bildirimleri ve Qt LGPLv3 yükümlülükleri her kurulum paketinin içinde (`THIRD-PARTY-NOTICES.txt` ve `licenses/`) sunulur.
 - **{productName} Web Sitesi (`{domain}`):**
   - Kaynak kodu deposu: [{siteRepoUrl}]({siteRepoUrl})
   - Kod lisansı: **[{siteCodeLicenseName}]({siteCodeLicenseUrl})**

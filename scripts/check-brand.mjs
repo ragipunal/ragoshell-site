@@ -8,7 +8,7 @@ import { dirname, extname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', '.astro', '.agents', '.claude', '.cursor', '.gitea', 'docs']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', '.astro', '.agents', '.claude', '.cursor', '.gitea', 'docs', '.jury', '.shots']);
 const SKIP_FILES = new Set(['package-lock.json']);
 const CODE_EXT = new Set([
   '.astro', '.ts', '.mjs', '.js', '.cjs', '.json', '.css', '.svg', '.txt', '.yml', '.yaml', '.html', '.xml', '.toml',

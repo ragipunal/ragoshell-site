@@ -2,36 +2,58 @@
 import Base from '../../../layouts/Base.astro';
 import { publishedDocs } from '../../../lib/app-repo';
 import { renderMarkdown } from '../../../lib/markdown';
-import { localeStaticPaths, localeUrl, t } from '../../../i18n';
+import { localeStaticPaths, localeUrl, t, type MessageKey } from '../../../i18n';
 
 export function getStaticPaths() {
   return localeStaticPaths();
 }
 
 const { locale } = Astro.props;
-const docs = publishedDocs().map((doc) => ({
-  slug: doc.slug,
-  ...renderMarkdown(doc.source, { docs: {}, repoUrl: () => '' }),
-}));
+const cardKeys: Record<string, { title: MessageKey; desc: MessageKey }> = {
+  shell: { title: 'docs.card.shell.title', desc: 'docs.card.shell.desc' },
+  'mcp-server': { title: 'docs.card.mcp-server.title', desc: 'docs.card.mcp-server.desc' },
+  platforms: { title: 'docs.card.platforms.title', desc: 'docs.card.platforms.desc' },
+  'ai-assistant': { title: 'docs.card.ai-assistant.title', desc: 'docs.card.ai-assistant.desc' },
+};
+const docs = publishedDocs().map((doc) => {
+  const rendered = renderMarkdown(doc.source, { docs: {}, repoUrl: () => '' });
+  const keys = cardKeys[doc.slug];
+  return {
+    slug: doc.slug,
+    title: keys ? t(locale, keys.title) : rendered.title,
+    description: keys ? t(locale, keys.desc) : rendered.description,
+  };
+});
 ---
 
 <Base
   locale={locale}
   title={t(locale, 'docs.documentTitle')}
   description={t(locale, 'docs.description')}
-  path="/docs/">
-  <section class="page-head">
-    <h1>{t(locale, 'docs.title')}</h1>
-    <p class="lead">{t(locale, 'docs.lead')}</p>
-  </section>
-  <ul class="doc-list" lang="en" dir="ltr">
-    {
-      docs.map((doc) => (
-        <li>
-          <a href={localeUrl(locale, `/docs/${doc.slug}/`)}>{doc.title}</a>
-          <p>{doc.description}</p>
-        </li>
-      ))
-    }
-  </ul>
+  path="/docs/"
+>
+  <div class="container">
+    <section class="page-head page-head--display">
+      <p class="eyebrow">{t(locale, 'nav.docs')}</p>
+      <h1>{t(locale, 'docs.title')}</h1>
+      <p class="lead">{t(locale, 'docs.lead')}</p>
+    </section>
+
+    <ul class="doc-index-list">
+      {
+        docs.map((doc, idx) => (
+          <li class="doc-index-item">
+            <a class="doc-index-link" href={localeUrl(locale, `/docs/${doc.slug}/`)}>
+              <span class="doc-index-num">{String(idx + 1).padStart(2, '0')}</span>
+              <span>
+                <span class="doc-index-title">{doc.title}</span>
+                <span class="doc-index-desc">{doc.description}</span>
+              </span>
+              <span class="doc-index-arrow" aria-hidden="true">-&gt;</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </Base>

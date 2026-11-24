@@ -28,23 +28,27 @@ const translated = locale !== site.docs.language;
   description={rendered.description}
   path={`/docs/${doc.slug}/`}
 >
-  <p class="back"><a href={localeUrl(locale, '/docs/')}>{t(locale, 'docs.back')}</a></p>
-  {translated && <p class="status">{t(locale, 'docs.englishOnly')}</p>}
-  <div class="doc-layout" lang={docLanguage.code} dir={docLanguage.dir}>
-    {
-      contents.length > 0 && (
-        <nav class="toc" aria-label={t(locale, 'docs.contents')}>
-          <p class="toc-title">{t(locale, 'docs.contents')}</p>
-          <ul>
-            {contents.map((h) => (
-              <li class={`depth-${h.depth}`}>
-                <a href={`#${h.id}`}>{h.text}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )
-    }
-    <article class="prose doc" set:html={rendered.html} />
+  <div class="container">
+    <div class="back-bar">
+      <a class="back-link" href={localeUrl(locale, '/docs/')}>&lt;- {t(locale, 'docs.back')}</a>
+    </div>
+    {translated && <p class="status-banner">{t(locale, 'docs.englishOnly')}</p>}
+    <div class="doc-layout" lang={docLanguage.code} dir={docLanguage.dir}>
+      {
+        contents.length > 0 && (
+          <nav class="toc" aria-label={t(locale, 'docs.contents')}>
+            <p class="toc-title">{t(locale, 'docs.contents')}</p>
+            <div class="toc-list">
+              {contents.map((h) => (
+                <a class={`toc-link depth-${h.depth}`} href={`#${h.id}`}>
+                  {h.text}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )
+      }
+      <article class="prose doc" set:html={rendered.html} />
+    </div>
   </div>
 </Base>

@@ -74,7 +74,6 @@ export function legalParams(locale: string): Record<string, string> {
     securityTxtUrl: `${site.url}${site.legal.securityTxtPath}`,
     termsPath: localizedPath(locale, '/legal/terms/'),
     privacyPath: localizedPath(locale, '/legal/privacy/'),
-    refundsPath: localizedPath(locale, '/legal/refunds/'),
     imprintPath: localizedPath(locale, '/legal/imprint/'),
     trademarkPath: localizedPath(locale, '/trademark/'),
     downloadPath: localizedPath(locale, '/download/'),

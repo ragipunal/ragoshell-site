@@ -1,0 +1,78 @@
+---
+import { t, type MessageKey } from '../i18n';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const mainNodes = [
+  { key: 'n1', target: 'feature-platforms', tone: 'mint' },
+  { key: 'n2', target: 'feature-shell', tone: 'mint' },
+  { key: 'n3', target: 'feature-shell', tone: 'warm' },
+  { key: 'n4', target: 'feature-compat', tone: 'warm' },
+] as const;
+
+const sideNodes = [
+  { key: 'n5', target: 'feature-schema', tone: 'mint' },
+  { key: 'n6', target: 'feature-mcp', tone: 'mint' },
+  { key: 'n7', target: 'feature-ai', tone: 'warm' },
+] as const;
+---
+
+<figure class="arch-figure runtime-bus" data-bus-stage>
+  <div class="bus-topbar">
+    <span class="bus-title-wrap">
+      <span class="stage-beacon" aria-hidden="true"></span>
+      <span class="bus-title">{t(locale, 'features.bus.header')}</span>
+    </span>
+    <span class="bus-status-badge">{t(locale, 'features.bus.badge')}</span>
+  </div>
+
+  <div class="stage-telemetry-track" aria-hidden="true">
+    <div class="stage-telemetry-bar bus-telemetry-bar" data-bus-pulse></div>
+  </div>
+
+  <div class="bus-body">
+    <div class="bus-grid-main">
+      {
+        mainNodes.map((node) => (
+          <a
+            class={`bus-node bus-node--${node.tone}`}
+            href={`#${node.target}`}
+            data-bus-target={node.target}
+          >
+            <span class="bus-kicker">{t(locale, `features.bus.${node.key}.kicker` as MessageKey)}</span>
+            <strong class="bus-name">{t(locale, `features.bus.${node.key}.title` as MessageKey)}</strong>
+            <span class="bus-meta">{t(locale, `features.bus.${node.key}.meta` as MessageKey)}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="bus-side-band">
+      <div class="bus-side-label">
+        <span>{t(locale, 'features.bus.sideLabel')}</span>
+      </div>
+
+      <div class="bus-grid-side">
+        {
+          sideNodes.map((node) => (
+            <a
+              class={`bus-node bus-node--side bus-node--${node.tone}`}
+              href={`#${node.target}`}
+              data-bus-target={node.target}
+            >
+              <span class="bus-kicker">{t(locale, `features.bus.${node.key}.kicker` as MessageKey)}</span>
+              <strong class="bus-name">{t(locale, `features.bus.${node.key}.title` as MessageKey)}</strong>
+              <span class="bus-meta">{t(locale, `features.bus.${node.key}.meta` as MessageKey)}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <figcaption>{t(locale, 'features.diagram.caption')}</figcaption>
+</figure>

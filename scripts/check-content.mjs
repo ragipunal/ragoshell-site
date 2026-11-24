@@ -8,7 +8,7 @@ import { appRepoDir, changelogReleases, publishedDocs } from '../src/lib/app-rep
 import { codeSpans, parseChangelog, releaseAnchor } from '../src/lib/changelog.ts';
 import { interpolateLegal, readLegalSource, renderLegalDocument } from '../src/lib/legal.ts';
 import { renderMarkdown, rewriteHref } from '../src/lib/markdown.ts';
-import { localizeTokenCount, validatePricingConfig } from '../src/lib/pricing.ts';
+import { validatePricingConfig } from '../src/lib/pricing.ts';
 import { detectPlatform, parseManifest } from '../src/lib/releases.ts';
 import { indexablePaths } from '../src/lib/routes.ts';
 import { DESCRIPTION_LIMIT, checkDescription, checkVerificationToken, jsonLdDocument, robotsTxt, shorten, siteNodes, sitemapXml, softwareNode } from '../src/lib/seo.ts';
@@ -130,43 +130,20 @@ check('gate: src', jsonLdProblems({ src: '/x.js' }, '{"@context":"https://schema
 check('gate: not an object', jsonLdProblems({}, '[1]').length === 1);
 
 // pricing config invariants
-const appOrigin = new URL(site.urls.app).origin;
-check('site.pricing passes validation', validatePricingConfig(site.pricing, appOrigin) === site.pricing);
-check('site.pricing live mode accepted', validatePricingConfig({ ...site.pricing, mode: 'live' }, appOrigin).mode === 'live');
-check(
-  'site.pricing Option A figures accepted',
-  validatePricingConfig(
-    {
-      ...site.pricing,
-      usd: { free: '$0', proMonthly: '$3.99', proYearly: '$39', teamMonthly: '$6.99', teamYearly: '$69' },
-      try: { free: '0 ₺', proMonthly: '89 ₺', proYearly: '890 ₺', teamMonthly: '169 ₺', teamYearly: '1.690 ₺' },
-    },
-    appOrigin,
-  ).usd.proMonthly === '$3.99',
-);
-check('localizeTokenCount formats en and tr', localizeTokenCount('2,000,000', 'en') === '2,000,000' && localizeTokenCount('2,000,000', 'tr') === '2.000.000');
-throws('pricing bad mode', () => validatePricingConfig({ ...site.pricing, mode: 'soon' }, appOrigin));
-throws('pricing insecure billingUrl', () => validatePricingConfig({ ...site.pricing, billingUrl: 'http://evil.test/billing' }, appOrigin));
-throws('pricing wrong billingUrl origin', () => validatePricingConfig({ ...site.pricing, billingUrl: 'https://evil.test/billing' }, appOrigin));
-throws('pricing missing usd symbol', () => validatePricingConfig({ ...site.pricing, usd: { ...site.pricing.usd, proMonthly: '4.99' } }, appOrigin));
-throws('pricing missing try symbol', () => validatePricingConfig({ ...site.pricing, try: { ...site.pricing.try, proMonthly: '119 TL' } }, appOrigin));
-throws('pricing non-zero free tier', () => validatePricingConfig({ ...site.pricing, usd: { ...site.pricing.usd, free: '$1' } }, appOrigin));
-throws('pricing annual exceeds 12x monthly', () => validatePricingConfig({ ...site.pricing, usd: { ...site.pricing.usd, proYearly: '$490' } }, appOrigin));
-throws('pricing refundDays below 14', () => validatePricingConfig({ ...site.pricing, refundDays: 7 }, appOrigin));
-throws('pricing retention below 30', () => validatePricingConfig({ ...site.pricing, syncReadOnlyRetentionDays: 14 }, appOrigin));
-throws('pricing team tokens not above pro', () => validatePricingConfig({ ...site.pricing, aiMonthlyTokensTeam: '2,000,000', aiMonthlyTokensTeamShort: '2M' }, appOrigin));
-throws('pricing short token mismatch', () => validatePricingConfig({ ...site.pricing, aiMonthlyTokensProShort: '5M' }, appOrigin));
+check('site.pricing passes validation', validatePricingConfig(site.pricing) === site.pricing);
+throws('pricing live mode refused while nothing is on sale', () => validatePricingConfig({ ...site.pricing, mode: 'live' }));
+throws('pricing insecure donateUrl', () => validatePricingConfig({ ...site.pricing, donateUrl: 'http://evil.test/donate' }));
 
 // the real files
 check('indexable paths list home, pages and docs but no legal page while legal.draft is true', (() => { const paths = indexablePaths(); return paths.includes('/') && paths.includes('/docs/shell/') && paths.length === 1 + site.pages.length + site.docs.publish.length && !paths.some((x) => x.startsWith('/legal/')); })());
 
 // legal documents
 const legalRequiredTokens = {
-  privacy: ['KVKK', 'GDPR', 'AES-256-GCM', 'Argon2id', '/v1/account/export', '/v1/account', '72', 'Paddle', 'iyzico', 'Cloudflare', 'shareAnonymousUsage', 'disableHttpsFeatures'],
-  terms: ['RFC 8628', '6502', '127.0.0.0/8', 'Paddle', 'iyzico', site.license.app.name],
-  refunds: ['14', '90', '7', 'Paddle', 'iyzico', '/v1/sync/*', '/v1/account/export'],
-  imprint: ['/.well-known/security.txt', 'Robomongo', site.repo.appRepoUrl, site.repo.siteRepoUrl],
+  privacy: ['KVKK', 'GDPR', 'AES-256-GCM', 'Argon2id', '/v1/account/export', '/v1/account', '72', 'Cloudflare', 'shareAnonymousUsage', 'disableHttpsFeatures'],
+  terms: ['RFC 8628', '127.0.0.0/8', site.license.app.name],
+  imprint: ['/.well-known/security.txt', site.repo.appRepoUrl, site.repo.siteRepoUrl],
 };
+const legalForbiddenTokens = ['Paddle', 'iyzico', 'refundsPath', '/legal/refunds/'];
 const legalHeadingsByPage = new Map();
 for (const page of site.legalPages) {
   for (const { code } of site.enabledLocales) {
@@ -187,6 +164,9 @@ for (const page of site.legalPages) {
       } else {
         const ref = legalHeadingsByPage.get(page);
         check(`${label} matches ${ref.locale} section structure`, depths === ref.depths, `${depths} !== ${ref.depths}`);
+      }
+      for (const token of legalForbiddenTokens) {
+        check(`${label} does not mention "${token}" (card sales were dropped)`, !raw.includes(token) && !rendered.html.includes(token));
       }
       for (const token of legalRequiredTokens[page] ?? []) {
         check(`${label} covers "${token}"`, rendered.html.includes(token));

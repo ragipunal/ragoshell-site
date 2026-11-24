@@ -10,12 +10,12 @@ export function getStaticPaths() {
 
 const { locale } = Astro.props;
 const platforms = site.download.platforms as string[];
-// Fallback static table links to the repository releases page when /releases.json is unavailable.
 const hasPackage = (platform: string) => ['windows', 'macos', 'linux'].includes(platform);
 const note = (platform: string): string | null => {
   if (platform === 'windows') return t(locale, 'download.note.windows');
   if (platform === 'macos') return t(locale, 'download.note.macos');
-  if (platform === 'android' || platform === 'ios') return t(locale, 'download.note.store');
+  if (platform === 'android') return t(locale, 'download.note.android');
+  if (platform === 'ios') return t(locale, 'download.note.ios');
   return null;
 };
 const description = t(locale, 'download.description');
@@ -28,7 +28,6 @@ const software = softwareNode({
   license: site.license.app.url,
   downloadUrl: site.download.allDownloadsUrl,
 });
-// Templates keep their {placeholders}: the script fills them in.
 const keep = (key: MessageKey, names: string[]) =>
   t(locale, key, Object.fromEntries(names.map((n) => [n, `{${n}}`])));
 ---
@@ -40,58 +39,96 @@ const keep = (key: MessageKey, names: string[]) =>
   path="/download/"
   jsonLd={jsonLdDocument([software])}
 >
-  <section class="page-head">
-    <h1>{t(locale, 'download.title')}</h1>
-    <p class="lead">{t(locale, 'download.lead')}</p>
-  </section>
+  <div class="container">
+    <section class="page-head page-head--display">
+      <p class="eyebrow">{t(locale, 'nav.status')}</p>
+      <h1>{t(locale, 'download.title')}</h1>
+      <p class="lead">{t(locale, 'download.lead')}</p>
+    </section>
 
-  <section
-    data-download
-    data-releases={site.releasesPath}
-    data-hosts={site.download.allowedHosts.join(',')}
-    data-dl-host={site.hosts.dl}
-    data-primary-template={keep('download.primary', ['platform'])}
-    data-version-template={keep('download.version', ['version'])}
-    data-released-template={keep('download.released', ['date'])}
-    data-get={t(locale, 'download.get')}
-  >
-    <div class="primary" data-primary hidden>
-      <p class="meta" data-version-text></p>
-      <p><a class="button" data-primary-link href={site.download.allDownloadsUrl} hidden></a></p>
-    </div>
+    <section
+      class="download-stage"
+      data-download
+      data-releases={site.releasesPath}
+      data-hosts={site.download.allowedHosts.join(',')}
+      data-dl-host={site.hosts.dl}
+      data-primary-template={keep('download.primary', ['platform'])}
+      data-version-template={keep('download.version', ['version'])}
+      data-released-template={keep('download.released', ['date'])}
+      data-get={t(locale, 'download.get')}
+    >
+      <div class="primary" data-primary hidden>
+        <p class="meta" data-version-text></p>
+        <p>
+          <a class="button" data-fill data-primary-link href={site.download.allDownloadsUrl} hidden>
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span data-primary-label>{t(locale, 'download.all')}</span>
+          </a>
+        </p>
+      </div>
 
-    <table class="platforms">
-      <thead>
-        <tr>
-          <th scope="col">{t(locale, 'download.col.platform')}</th>
-          <th scope="col">{t(locale, 'download.col.requirements')}</th>
-          <th scope="col">{t(locale, 'download.col.get')}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          platforms.map((platform) => (
-            <tr data-platform={platform} data-name={t(locale, `download.platform.${platform}` as MessageKey)}>
-              <th scope="row">{t(locale, `download.platform.${platform}` as MessageKey)}</th>
-              <td>
-                {t(locale, `download.req.${platform}` as MessageKey)}
-                {note(platform) && <p class="note">{note(platform)}</p>}
-              </td>
-              <td data-action>
-                {hasPackage(platform) ? (
-                  <a href={site.download.allDownloadsUrl} rel="noopener">
-                    {t(locale, 'download.all')}
-                  </a>
-                ) : (
-                  <span>{t(locale, 'download.unavailable')}</span>
-                )}
-              </td>
+      <div class="platforms-wrap">
+        <table class="platforms">
+          <thead>
+            <tr>
+              <th scope="col">{t(locale, 'download.col.platform')}</th>
+              <th scope="col">{t(locale, 'download.col.requirements')}</th>
+              <th scope="col">{t(locale, 'download.col.get')}</th>
             </tr>
-          ))
-        }
-      </tbody>
-    </table>
-  </section>
+          </thead>
+          <tbody>
+            {
+              platforms.map((platform) => {
+                const platformName = t(locale, `download.platform.${platform}` as MessageKey);
+                return (
+                  <tr data-platform={platform} data-name={platformName}>
+                    <th scope="row">{platformName}</th>
+                    <td>
+                      {t(locale, `download.req.${platform}` as MessageKey)}
+                      {note(platform) && <p class="note">{note(platform)}</p>}
+                    </td>
+                    <td data-action>
+                      {hasPackage(platform) ? (
+                        <a class="table-action-link" href={site.download.allDownloadsUrl} rel="noopener">
+                          {t(locale, 'download.allFor', { platform: platformName })}
+                        </a>
+                      ) : (
+                        <span class="meta">{t(locale, 'download.unavailable')}</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="download-preview" aria-labelledby="download-preview-heading">
+      <p class="eyebrow">{t(locale, 'download.preview.eyebrow')}</p>
+      <h2 id="download-preview-heading" class="screens-heading">{t(locale, 'download.preview.title')}</h2>
+
+      <figure class="screen-frame">
+        <div class="screen-chrome" aria-hidden="true">
+          <span class="screen-led"></span>
+          <span class="screen-chrome-label">{t(locale, 'home.surface.desktop.chrome')}<span class="screen-chrome-meta">{t(locale, 'home.surface.desktop.chromeMeta')}</span></span>
+        </div>
+        <picture>
+          <source media="(max-width: 40rem)" srcset="/screens/ui-shell-detail.webp" width="660" height="664" />
+          <img
+            src="/screens/ui-shell-desktop.webp"
+            alt={t(locale, 'home.surface.desktop.alt')}
+            width="1600"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption>{t(locale, 'download.preview.caption')}</figcaption>
+      </figure>
+    </section>
+  </div>
 </Base>
 
 <script>

@@ -32,7 +32,7 @@ Set `ASTRO_TELEMETRY_DISABLED=1` (CI does) or run `npx astro telemetry disable` 
 ## Where things are
 
 - `site.config.mjs`: the **only** place that spells the product name, the domain and sub-domain addresses,
-  the repository addresses, the license names, the `pricing` figures/quotas/beta switch, and the MongoDB trademark notice. `scripts/check-brand.mjs` fails
+  the repository addresses, the license names, the `pricing` page switch (`soon`: nothing is on sale) and sponsorship link, and the MongoDB trademark notice. `scripts/check-brand.mjs` fails
   when any other source file spells the name.
 - `src/i18n/locales/<code>.ts`: dictionaries (English is the reference). A missing or extra key, a missing
   dictionary for an enabled locale, a placeholder mismatch or a missing trademark notice fails the build.
@@ -43,8 +43,9 @@ Set `ASTRO_TELEMETRY_DISABLED=1` (CI does) or run `npx astro telemetry disable` 
   (RFC 9116) from the config.
 - Documents and change log: `docs.publish` in the config is the allowlist of documents read from the application
   repository; `src/lib/` holds the markdown renderer, the change log parser and the release manifest checks.
-- The download page is the one page with JavaScript (`src/scripts/download.ts`); it reads `/releases.json`,
-  which nginx serves and the build never contains.
+- Client-side scripts are content-hashed modules under `/_astro/` (`src/scripts/motion.ts` for progressive
+  motion and UI per `docs/Motion.md`, and `src/scripts/download.ts` on the download page only to read
+  `/releases.json`, which nginx serves and the build never contains). Every page stays complete without JS.
 - Search and sharing: `src/pages/sitemap.xml.ts` and `src/pages/robots.txt.ts` are built
   from the config; `Base.astro` writes the description, canonical, hreflang, Open Graph, Twitter card and JSON-LD
   tags and fails the build on a missing or over-long (>160) description; `src/lib/seo.ts` holds the pure

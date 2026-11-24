@@ -1,4 +1,5 @@
 ---
+import BrandMark from './BrandMark.astro';
 import LanguagePicker from './LanguagePicker.astro';
 import Wordmark from './Wordmark.astro';
 import { localeUrl, t } from '../i18n';
@@ -14,25 +15,61 @@ const inSection = (item: string) => path.startsWith(item.replace(/\/$/, ''));
 ---
 
 <header class="site-header">
-  <div class="container bar">
+  <div class="container header-bar">
     <a class="home-link" href={localeUrl(locale)} aria-label={t(locale, 'header.homeLabel')}>
+      <BrandMark size={32} />
       <Wordmark />
     </a>
-    {
-      showLanguagePicker && (
-        <nav class="main-nav" aria-label={t(locale, 'nav.label')}>
-          <ul>
-            {nav.map((item) => (
-              <li>
-                <a href={localeUrl(locale, item.path)} aria-current={inSection(item.path) ? 'page' : undefined}>
-                  {t(locale, item.key)}
-                </a>
-              </li>
-            ))}
+
+    <nav class="main-nav" aria-label={t(locale, 'nav.label')}>
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                class="nav-link roll"
+                href={localeUrl(locale, item.path)}
+                aria-current={inSection(item.path) ? 'page' : undefined}
+              >
+                <span class="roll-a">{t(locale, item.key)}</span>
+                <span class="roll-b" aria-hidden="true">{t(locale, item.key)}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <span class="header-status">{t(locale, 'nav.status')}</span>
+      {showLanguagePicker && <LanguagePicker locale={locale} path={path} />}
+      <details class="mobile-menu" data-disclosure>
+        <summary class="menu-toggle" aria-label={t(locale, 'nav.menu')}>
+          <span class="menu-label">{t(locale, 'nav.menu')}</span>
+        </summary>
+        <nav class="mobile-drawer" aria-label={t(locale, 'nav.label')}>
+          <ul class="mobile-drawer-list">
+            {
+              nav.map((item, idx) => (
+                <li>
+                  <a
+                    class="mobile-nav-link"
+                    href={localeUrl(locale, item.path)}
+                    aria-current={inSection(item.path) ? 'page' : undefined}
+                  >
+                    <span class="mobile-nav-idx" aria-hidden="true">{String(idx + 1).padStart(2, '0')}</span>
+                    <span class="mobile-nav-text">{t(locale, item.key)}</span>
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </nav>
-      )
-    }
-    {showLanguagePicker && <LanguagePicker locale={locale} path={path} />}
+      </details>
+    </div>
+  </div>
+  <div class="route-indicator" aria-hidden="true">
+    <span class="route-indicator-bar"></span>
+    <span class="route-indicator-label" data-route-label></span>
   </div>
 </header>

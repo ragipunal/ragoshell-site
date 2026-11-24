@@ -1,6 +1,7 @@
 ---
 import site from '../../../site.config.mjs';
 import Base from '../../layouts/Base.astro';
+import RuntimePipeline from '../../components/RuntimePipeline.astro';
 import { localeStaticPaths, t, type MessageKey } from '../../i18n';
 
 export function getStaticPaths() {
@@ -8,26 +9,84 @@ export function getStaticPaths() {
 }
 
 const { locale } = Astro.props;
-const groups = ['shell', 'schema', 'mcp', 'platforms', 'compat', 'open'] as const;
+const groups = ['shell', 'schema', 'mcp', 'ai', 'platforms', 'compat', 'open'] as const;
 ---
 
 <Base
   locale={locale}
   title={t(locale, 'features.documentTitle')}
   description={t(locale, 'features.description')}
-  path="/features/">
-  <section class="page-head">
-    <h1>{t(locale, 'features.title')}</h1>
-    <p class="lead">{t(locale, 'features.lead')}</p>
-  </section>
-  <section class="cards">
-    {
-      groups.map((group) => (
-        <article class="card">
-          <h2>{t(locale, `features.${group}.title` as MessageKey)}</h2>
-          <p>{t(locale, `features.${group}.body` as MessageKey, { license: site.license.app.name })}</p>
-        </article>
-      ))
-    }
-  </section>
+  path="/features/"
+>
+  <div class="container">
+    <section class="page-head page-head--display">
+      <p class="eyebrow">{t(locale, 'features.indexLabel')}</p>
+      <h1>{t(locale, 'features.title')}</h1>
+      <p class="lead">{t(locale, 'features.lead')}</p>
+    </section>
+
+    <RuntimePipeline locale={locale} />
+
+    <section class="features-ledger" aria-label={t(locale, 'nav.features')}>
+      {
+        groups.map((group, idx) => (
+          <article class="feature-row" id={`feature-${group}`}>
+            <div class="feature-num">{String(idx + 1).padStart(2, '0')}</div>
+            <div class="feature-body">
+              <h2>{t(locale, `features.${group}.title` as MessageKey)}</h2>
+              <p>{t(locale, `features.${group}.body` as MessageKey, { license: site.license.app.name })}</p>
+            </div>
+            <div class="feature-spec">
+              {t(locale, `features.spec.${group}` as MessageKey, { license: site.license.app.name })}
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="screens-band" aria-labelledby="features-screens-heading">
+      <p class="eyebrow">{t(locale, 'features.screens.eyebrow')}</p>
+      <h2 id="features-screens-heading" class="screens-heading">{t(locale, 'features.screens.title')}</h2>
+
+      <div class="screens-grid">
+        <figure class="screen-frame">
+          <div class="screen-chrome" aria-hidden="true">
+            <span class="screen-led"></span>
+            <span class="screen-chrome-label">{t(locale, 'features.screens.pipeline.chrome')}</span>
+          </div>
+          <picture>
+            <source media="(max-width: 40rem)" srcset="/screens/ui-pipeline-detail.webp" width="580" height="725" />
+            <img
+              src="/screens/ui-pipeline-builder.webp"
+              alt={t(locale, 'features.screens.pipeline.alt')}
+              width="1728"
+              height="1068"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>{t(locale, 'features.screens.pipeline.caption')}</figcaption>
+        </figure>
+
+        <figure class="screen-frame">
+          <div class="screen-chrome" aria-hidden="true">
+            <span class="screen-led"></span>
+            <span class="screen-chrome-label">{t(locale, 'features.screens.monitor.chrome')}</span>
+          </div>
+          <picture>
+            <source media="(max-width: 40rem)" srcset="/screens/ui-monitor-detail.webp" width="625" height="689" />
+            <img
+              src="/screens/ui-server-monitor.webp"
+              alt={t(locale, 'features.screens.monitor.alt')}
+              width="1800"
+              height="1140"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>{t(locale, 'features.screens.monitor.caption')}</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
 </Base>

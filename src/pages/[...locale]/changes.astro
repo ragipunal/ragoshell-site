@@ -16,27 +16,36 @@ const releases = changelogReleases();
   locale={locale}
   title={t(locale, 'changes.documentTitle')}
   description={t(locale, 'changes.description')}
-  path="/changes/">
-  <section class="page-head">
-    <h1>{t(locale, 'changes.title')}</h1>
-    <p class="lead">{t(locale, 'changes.lead')}</p>
-  </section>
-  <!-- The change log is English: it is shown as written, in an English block. -->
-  <div class="prose" lang="en" dir="ltr">
-    {
-      releases.map((release) => (
-        <article id={releaseAnchor(release.version)}>
-          <h2>{t(locale, 'changes.version', { version: release.version })}</h2>
-          {release.intro !== '' && <p>{release.intro}</p>}
-          <ul>
-            {release.items.map((item) => (
-              <li>
-                {codeSpans(item).map((part) => (part.code ? <code>{part.text}</code> : part.text))}
-              </li>
-            ))}
-          </ul>
-        </article>
-      ))
-    }
+  path="/changes/"
+>
+  <div class="container">
+    <section class="page-head page-head--display">
+      <p class="eyebrow">{t(locale, 'nav.changes')}</p>
+      <h1>{t(locale, 'changes.title')}</h1>
+      <p class="lead">{t(locale, 'changes.lead')}</p>
+    </section>
+
+    <!-- The change log is English: it is shown as written, in an English block. -->
+    <div class="changelog-list" lang="en" dir="ltr">
+      {
+        releases.map((release) => (
+          <article class="changelog-entry" id={releaseAnchor(release.version)}>
+            <div class="changelog-ver">
+              <h2>{t(locale, 'changes.version', { version: release.version })}</h2>
+            </div>
+            <div class="changelog-body">
+              {release.intro !== '' && <p>{release.intro}</p>}
+              <ul>
+                {release.items.map((item) => (
+                  <li>
+                    {codeSpans(item).map((part) => (part.code ? <code>{part.text}</code> : part.text))}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </Base>
