@@ -544,6 +544,7 @@ details:not([open]) > .mobile-drawer {
   font-family: var(--f-mono);
   font-size: var(--t-xs);
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   list-style: none;
   transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease), translate 0.25s var(--ease);
@@ -583,9 +584,14 @@ details:not([open]) > .mobile-drawer {
   position: absolute;
   inset-inline-end: 0;
   z-index: 60;
-  min-inline-size: 11.5rem;
+  display: grid;
+  gap: 0.15rem;
+  min-inline-size: 13.5rem;
+  max-block-size: min(26rem, calc(100svh - 5.5rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   margin: 0.4rem 0 0;
-  padding: 0.35rem;
+  padding: 0.4rem;
   list-style: none;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -593,22 +599,49 @@ details:not([open]) > .mobile-drawer {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 }
 
+@media (min-width: 36rem) {
+  .lang-list {
+    grid-template-columns: repeat(2, minmax(12rem, 1fr));
+    gap: 0.15rem 0.35rem;
+  }
+}
+
 .lang-option {
   display: flex;
   align-items: center;
-  min-block-size: 2.5rem;
-  padding-inline: 0.75rem;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  min-block-size: 2.4rem;
+  padding-inline: 0.65rem;
   border-radius: var(--r-sm);
   color: var(--ink);
   font-size: var(--t-s);
   text-decoration: none;
+  white-space: nowrap;
   transition: background-color 0.2s var(--ease), translate 0.2s var(--ease);
+}
+
+.lang-option-code {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--muted);
+  min-inline-size: 2.9rem;
+  flex-shrink: 0;
+}
+
+.lang-option-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .lang-option[aria-current='page'] {
   background: var(--accent-dim);
   color: var(--accent);
   font-weight: 700;
+}
+
+.lang-option[aria-current='page'] .lang-option-code {
+  color: var(--accent);
 }
 
 @media (hover: hover) {
@@ -834,9 +867,78 @@ details:not([open]) > .mobile-drawer {
   text-wrap: balance;
 }
 
-:lang(tr) .hero-title {
-  font-size: clamp(2.15rem, 1.25rem + 3.35vw, 3.8rem);
-  line-height: 0.98;
+:lang(tr) .hero-title,
+:lang(az) .hero-title,
+:lang(de) .hero-title,
+:lang(es) .hero-title,
+:lang(fr) .hero-title,
+:lang(pt-BR) .hero-title,
+:lang(ru) .hero-title,
+:lang(kk) .hero-title,
+:lang(ky) .hero-title,
+:lang(uz) .hero-title {
+  font-size: clamp(2.1rem, 1.2rem + 3.2vw, 3.7rem);
+  line-height: 1.02;
+}
+
+/* Per-language fallback font stacks (self-hosted Latin fonts keep restricted unicode-range) */
+:lang(ar) {
+  --f-display: 'Bricolage Grotesque', 'IBM Plex Sans Arabic', 'Noto Sans Arabic', 'Geeza Pro', 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+  --f-body: 'Instrument Sans', 'IBM Plex Sans Arabic', 'Noto Sans Arabic', 'Geeza Pro', 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+}
+
+:lang(hi) {
+  --f-display: 'Bricolage Grotesque', 'Noto Sans Devanagari', 'Kohinoor Devanagari', 'Nirmala UI', 'Mangal', system-ui, sans-serif;
+  --f-body: 'Instrument Sans', 'Noto Sans Devanagari', 'Kohinoor Devanagari', 'Nirmala UI', 'Mangal', system-ui, sans-serif;
+}
+
+:lang(ja) {
+  --f-display: 'Bricolage Grotesque', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', 'Meiryo', system-ui, sans-serif;
+  --f-body: 'Instrument Sans', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', 'Meiryo', system-ui, sans-serif;
+}
+
+:lang(zh-CN) {
+  --f-display: 'Bricolage Grotesque', 'PingFang SC', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', system-ui, sans-serif;
+  --f-body: 'Instrument Sans', 'PingFang SC', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', system-ui, sans-serif;
+}
+
+:lang(ru),
+:lang(kk),
+:lang(ky) {
+  --f-display: 'Bricolage Grotesque', 'Noto Sans', 'Segoe UI', 'Roboto', 'Liberation Sans', system-ui, -apple-system, sans-serif;
+  --f-body: 'Instrument Sans', 'Noto Sans', 'Segoe UI', 'Roboto', 'Liberation Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Script-aware line height and tracking for Arabic, Devanagari, and CJK */
+:lang(ar) .hero-title,
+:lang(ar) .page-head h1,
+:lang(ar) .page-head--display h1,
+:lang(ar) .surface-title,
+:lang(ar) .screens-heading,
+:lang(ar) .narrative-sticky h2,
+:lang(hi) .hero-title,
+:lang(hi) .page-head h1,
+:lang(hi) .page-head--display h1,
+:lang(hi) .surface-title,
+:lang(hi) .screens-heading,
+:lang(hi) .narrative-sticky h2 {
+  line-height: 1.22;
+}
+
+:lang(ja) .hero-title,
+:lang(ja) .page-head h1,
+:lang(ja) .page-head--display h1,
+:lang(ja) .surface-title,
+:lang(ja) .screens-heading,
+:lang(ja) .narrative-sticky h2,
+:lang(zh-CN) .hero-title,
+:lang(zh-CN) .page-head h1,
+:lang(zh-CN) .page-head--display h1,
+:lang(zh-CN) .surface-title,
+:lang(zh-CN) .screens-heading,
+:lang(zh-CN) .narrative-sticky h2 {
+  line-height: 1.16;
+  letter-spacing: -0.01em;
 }
 
 /* Interactive Shell-to-BSON Stage */
@@ -2553,11 +2655,63 @@ details:not([open]) > .mobile-drawer {
   font-weight: 800;
 }
 
-.error-secondary {
-  margin-block-start: 1.25rem;
-  padding-block-start: 1.25rem;
+.error-locales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: 0.55rem;
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 0 0;
+  list-style: none;
   border-block-start: 1px solid var(--line);
+}
+
+.error-locale-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-block-size: 3.25rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease), translate 0.2s var(--ease);
+}
+
+.error-locale-head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.error-locale-code {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--accent);
+}
+
+.error-locale-name {
+  font-size: var(--t-s);
+  font-weight: 600;
+}
+
+.error-locale-title {
+  font-size: var(--t-xs);
   color: var(--muted);
+}
+
+@media (hover: hover) {
+  .error-locale-link:hover {
+    border-color: var(--accent);
+    background: var(--surface-hi);
+    translate: 2px 0;
+  }
+}
+
+.error-locale-link:focus-visible {
+  border-color: var(--accent);
+  background: var(--surface-hi);
 }
 
 .error-routes {
@@ -2732,6 +2886,123 @@ details:not([open]) > .mobile-drawer {
 
 .utility-link:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* Right-to-left (Arabic) overrides */
+[dir='rtl'] .eyebrow,
+[dir='rtl'] .hero-title,
+[dir='rtl'] .page-head h1,
+[dir='rtl'] .stage-mode,
+[dir='rtl'] .metric-val,
+[dir='rtl'] .surface-title,
+[dir='rtl'] .screens-heading,
+[dir='rtl'] .narrative-sticky h2,
+[dir='rtl'] .ledger-card h3,
+[dir='rtl'] .pair-panel h2,
+[dir='rtl'] .bus-title-wrap,
+[dir='rtl'] .bus-kicker,
+[dir='rtl'] .bus-side-label,
+[dir='rtl'] .feature-body h2,
+[dir='rtl'] .platforms thead th,
+[dir='rtl'] .toc-title,
+[dir='rtl'] .prose h1,
+[dir='rtl'] .footer-col-title {
+  letter-spacing: 0;
+}
+
+[dir='rtl'] .hero-title {
+  margin-inline-start: 0;
+}
+
+[dir='rtl'] .ledger-card,
+[dir='rtl'] .pair-right,
+[dir='rtl'] .bus-node--mint,
+[dir='rtl'] .primary,
+[dir='rtl'] .cloud-card-featured,
+[dir='rtl'] .cloud-pill {
+  box-shadow: inset -3px 0 0 var(--accent);
+}
+
+[dir='rtl'] .bus-node--warm,
+[dir='rtl'] .cloud-pill-warm,
+[dir='rtl'] .cloud-note,
+[dir='rtl'] .status-banner,
+[dir='rtl'] .error-console {
+  box-shadow: inset -3px 0 0 var(--accent-warm);
+}
+
+[dir='rtl'] .cloud-card-selfhost,
+[dir='rtl'] .cloud-pill-neutral {
+  box-shadow: inset -3px 0 0 var(--accent-line);
+}
+
+[dir='rtl'] .feature-row.is-highlighted {
+  box-shadow: inset -3px 0 0 var(--accent);
+}
+
+[dir='rtl'] .toc-link.is-active {
+  box-shadow: inset -2px 0 0 var(--accent);
+}
+
+[dir='rtl'] .toc-link.is-active:focus-visible {
+  box-shadow: inset -3px 0 0 var(--accent), 0 0 0 1px var(--accent-line);
+}
+
+[dir='rtl'] .bus-grid-main .bus-node:not(:last-child)::after {
+  content: '<-';
+}
+
+[dir='rtl'] .doc-index-arrow,
+[dir='rtl'] .back-arrow {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+@media (hover: hover) {
+  [dir='rtl'] .lang-option:hover,
+  [dir='rtl'] .table-action-link:hover,
+  [dir='rtl'] .faq-summary:hover,
+  [dir='rtl'] .toc-link:hover,
+  [dir='rtl'] .utility-link:hover,
+  [dir='rtl'] .error-locale-link:hover {
+    translate: -2px 0;
+  }
+  [dir='rtl'] .home-link:hover {
+    translate: -2px -1px;
+  }
+  [dir='rtl'] .error-route-link:hover {
+    translate: -3px 0;
+  }
+  [dir='rtl'] .doc-index-link:hover > span:not(.doc-index-num),
+  [dir='rtl'] .doc-index-link:hover .doc-index-arrow {
+    translate: -4px 0;
+  }
+  [dir='rtl'] .back-link:hover {
+    translate: 2px 0;
+  }
+  [dir='rtl'] .bus-node:hover {
+    box-shadow: inset -3px 0 0 var(--accent), 0 12px 28px -12px rgba(56, 232, 176, 0.42);
+  }
+  [dir='rtl'] .feature-row:hover {
+    box-shadow: inset -2px 0 0 var(--accent);
+  }
+  [dir='rtl'] .toc-link.is-active:hover {
+    box-shadow: inset -3px 0 0 var(--accent), 0 0 0 1px var(--accent-line);
+  }
+}
+
+[dir='rtl'] .table-action-link:focus-visible,
+[dir='rtl'] .toc-link:focus-visible,
+[dir='rtl'] .utility-link:focus-visible {
+  translate: -2px 0;
+}
+
+[dir='rtl'] .error-route-link:focus-visible {
+  translate: -3px 0;
+}
+
+[dir='rtl'] .doc-index-link:focus-visible > span:not(.doc-index-num) {
+  translate: -4px 0;
 }
 
 /* Reduced motion overrides */

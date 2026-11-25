@@ -27,6 +27,7 @@ const pageDescription = error ? undefined : checkDescription(description, DESCRI
 const verification = checkVerificationToken(site.seo.googleSiteVerification);
 const image = new URL(site.seo.ogImage.path, site.url).href;
 const imageAlt = t(locale, 'meta.ogImageAlt');
+const latinExtLocales = new Set(['tr', 'az', 'de', 'es', 'fr', 'pt-BR', 'uz']);
 ---
 
 <!doctype html>
@@ -43,7 +44,7 @@ const imageAlt = t(locale, 'meta.ogImageAlt');
     <link rel="preload" href="/fonts/instrument-sans-400_700-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jetbrains-mono-400_700-normal.woff2" as="font" type="font/woff2" crossorigin />
     {
-      info.code !== 'en' && (
+      latinExtLocales.has(info.code) && (
         <>
           <link rel="preload" href="/fonts/bricolage-grotesque-400_800-normal-ext.woff2" as="font" type="font/woff2" crossorigin />
           <link rel="preload" href="/fonts/instrument-sans-400_700-normal-ext.woff2" as="font" type="font/woff2" crossorigin />

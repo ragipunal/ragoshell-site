@@ -23,20 +23,20 @@ const repoBlobBase = `${appRepoUrl}/blob/main`;
 const locales = [
   { code: 'en', og: 'en_US', label: 'English', dir: 'ltr', enabled: true },
   { code: 'tr', og: 'tr_TR', label: 'Türkçe', dir: 'ltr', enabled: true },
-  // Prepared and switched off: the same languages as the application.
-  { code: 'ar', og: 'ar_AR', label: 'العربية', dir: 'rtl', enabled: false },
-  { code: 'az', og: 'az_AZ', label: 'Azərbaycanca', dir: 'ltr', enabled: false },
-  { code: 'de', og: 'de_DE', label: 'Deutsch', dir: 'ltr', enabled: false },
-  { code: 'es', og: 'es_ES', label: 'Español', dir: 'ltr', enabled: false },
-  { code: 'fr', og: 'fr_FR', label: 'Français', dir: 'ltr', enabled: false },
-  { code: 'hi', og: 'hi_IN', label: 'हिन्दी', dir: 'ltr', enabled: false },
-  { code: 'ja', og: 'ja_JP', label: '日本語', dir: 'ltr', enabled: false },
-  { code: 'kk', og: 'kk_KZ', label: 'Қазақша', dir: 'ltr', enabled: false },
-  { code: 'ky', og: 'ky_KG', label: 'Кыргызча', dir: 'ltr', enabled: false },
-  { code: 'pt-BR', og: 'pt_BR', label: 'Português (Brasil)', dir: 'ltr', enabled: false },
-  { code: 'ru', og: 'ru_RU', label: 'Русский', dir: 'ltr', enabled: false },
-  { code: 'uz', og: 'uz_UZ', label: 'Oʻzbekcha', dir: 'ltr', enabled: false },
-  { code: 'zh-CN', og: 'zh_CN', label: '简体中文', dir: 'ltr', enabled: false },
+  // All 15 application languages are enabled (machine-draft translations awaiting native review, matching the application).
+  { code: 'ar', og: 'ar_AR', label: 'العربية', dir: 'rtl', enabled: true },
+  { code: 'az', og: 'az_AZ', label: 'Azərbaycanca', dir: 'ltr', enabled: true },
+  { code: 'de', og: 'de_DE', label: 'Deutsch', dir: 'ltr', enabled: true },
+  { code: 'es', og: 'es_ES', label: 'Español', dir: 'ltr', enabled: true },
+  { code: 'fr', og: 'fr_FR', label: 'Français', dir: 'ltr', enabled: true },
+  { code: 'hi', og: 'hi_IN', label: 'हिन्दी', dir: 'ltr', enabled: true },
+  { code: 'ja', og: 'ja_JP', label: '日本語', dir: 'ltr', enabled: true },
+  { code: 'kk', og: 'kk_KZ', label: 'Қазақша', dir: 'ltr', enabled: true },
+  { code: 'ky', og: 'ky_KG', label: 'Кыргызча', dir: 'ltr', enabled: true },
+  { code: 'pt-BR', og: 'pt_BR', label: 'Português (Brasil)', dir: 'ltr', enabled: true },
+  { code: 'ru', og: 'ru_RU', label: 'Русский', dir: 'ltr', enabled: true },
+  { code: 'uz', og: 'uz_UZ', label: 'Oʻzbekcha', dir: 'ltr', enabled: true },
+  { code: 'zh-CN', og: 'zh_CN', label: '简体中文', dir: 'ltr', enabled: true },
 ];
 
 const enabledLocales = locales.filter((l) => l.enabled);
@@ -103,6 +103,19 @@ const site = {
   trademarkNotice: {
     en: `MongoDB is a registered trademark of MongoDB, Inc. ${productName} is not affiliated with or endorsed by MongoDB, Inc.`,
     tr: `MongoDB, MongoDB, Inc.’in tescilli ticari markasıdır. ${productName}, MongoDB, Inc. ile bağlantılı değildir ve MongoDB, Inc. tarafından onaylanmamıştır.`,
+    ar: `تُعد MongoDB علامة تجارية مسجلة لشركة MongoDB, Inc. ولا يرتبط ${productName} بشركة MongoDB, Inc. ولا يحظى بدعمها.`,
+    az: `MongoDB, MongoDB, Inc. şirkətinin qeydiyyatdan keçmiş ticarət nişanıdır. ${productName} MongoDB, Inc. ilə əlaqəli deyil və onun tərəfindən təsdiqlənmir.`,
+    de: `MongoDB ist eine eingetragene Marke von MongoDB, Inc. ${productName} ist mit MongoDB, Inc. weder verbunden noch von ihr unterstützt.`,
+    es: `MongoDB es una marca registrada de MongoDB, Inc. ${productName} no está afiliado ni respaldado por MongoDB, Inc.`,
+    fr: `MongoDB est une marque déposée de MongoDB, Inc. ${productName} n’est ni affilié à MongoDB, Inc., ni approuvé par celle-ci.`,
+    hi: `MongoDB, MongoDB, Inc. का एक पंजीकृत ट्रेडमार्क है। ${productName}, MongoDB, Inc. से संबद्ध या उसके द्वारा समर्थित नहीं है।`,
+    ja: `MongoDBはMongoDB, Inc.の登録商標です。${productName}はMongoDB, Inc.と提携しておらず、同社による承認も受けていません。`,
+    kk: `MongoDB — MongoDB, Inc. компаниясының тіркелген сауда белгісі. ${productName} MongoDB, Inc. компаниясымен байланысты емес және оның қолдауына ие емес.`,
+    ky: `MongoDB — MongoDB, Inc. компаниясынын катталган соода белгиси. ${productName} MongoDB, Inc. менен байланышы жок жана анын колдоосуна ээ эмес.`,
+    'pt-BR': `MongoDB é uma marca registrada da MongoDB, Inc. O ${productName} não é afiliado nem endossado pela MongoDB, Inc.`,
+    ru: `MongoDB является зарегистрированным товарным знаком MongoDB, Inc. ${productName} не аффилирован с MongoDB, Inc. и не одобрен ею.`,
+    uz: `MongoDB — MongoDB, Inc. kompaniyasining roʻyxatdan oʻtgan savdo belgisidir. ${productName} MongoDB, Inc. bilan bogʻliq emas va uning tomonidan tasdiqlanmagan.`,
+    'zh-CN': `MongoDB是MongoDB, Inc.的注册商标。${productName}与MongoDB, Inc.没有关联，也未获得其认可。`,
   },
 
   /** Pages every locale has (routes under src/pages/[...locale]/), and the legal pages under /legal/. */

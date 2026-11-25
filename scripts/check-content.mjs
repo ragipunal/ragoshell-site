@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import site from '../site.config.mjs';
 import { appRepoDir, changelogReleases, publishedDocs } from '../src/lib/app-repo.ts';
 import { codeSpans, parseChangelog, releaseAnchor } from '../src/lib/changelog.ts';
-import { interpolateLegal, readLegalSource, renderLegalDocument } from '../src/lib/legal.ts';
+import { interpolateLegal, legalSourceLocale, readLegalSource, renderLegalDocument } from '../src/lib/legal.ts';
 import { renderMarkdown, rewriteHref } from '../src/lib/markdown.ts';
 import { validateCloudConfig } from '../src/lib/cloud.ts';
 import { detectPlatform, parseManifest } from '../src/lib/releases.ts';
@@ -138,6 +138,8 @@ throws('cloud insecure donateUrl', () => validateCloudConfig({ ...site.cloud, do
 check('indexable paths list home, pages and docs but no legal page while legal.draft is true', (() => { const paths = indexablePaths(); return paths.includes('/') && paths.includes('/docs/shell/') && paths.length === 1 + site.pages.length + site.docs.publish.length && !paths.some((x) => x.startsWith('/legal/')); })());
 
 // legal documents
+check('legalSourceLocale keeps tr for tr', legalSourceLocale('tr', 'terms') === 'tr');
+check('legalSourceLocale falls back to en for ar', legalSourceLocale('ar', 'terms') === 'en');
 const legalRequiredTokens = {
   privacy: ['KVKK', 'GDPR', 'AES-256-GCM', 'Argon2id', '/v1/account/export', '/v1/account', '72', 'Cloudflare', 'shareAnonymousUsage', 'disableHttpsFeatures'],
   terms: ['RFC 8628', '127.0.0.0/8', site.license.app.name],
@@ -149,30 +151,35 @@ for (const page of site.legalPages) {
   for (const { code } of site.enabledLocales) {
     const label = `content/legal/${code}/${page}.md`;
     try {
-      const raw = readLegalSource(code, page);
-      check(`${label} does not hardcode domain`, !raw.includes(site.domain));
-      check(`${label} does not hardcode repo host`, !raw.includes(site.repo.base));
+      if (legalSourceLocale(code, page) === code) {
+        const raw = readLegalSource(code, page);
+        check(`${label} does not hardcode domain`, !raw.includes(site.domain));
+        check(`${label} does not hardcode repo host`, !raw.includes(site.repo.base));
+        for (const token of legalForbiddenTokens) {
+          check(`${label} source does not mention "${token}" (card sales were dropped)`, !raw.includes(token));
+        }
+      }
       const rendered = renderLegalDocument(code, page);
-      check(`${label} has a title`, rendered.title !== '');
-      check(`${label} has substantial html`, rendered.html.length > 800);
-      check(`${label} has no unresolved braces`, !/[{}]/.test(rendered.html) && !/[{}]/.test(rendered.title));
-      check(`${label} has no inline style or script`, !/\sstyle\s*=|<script/i.test(rendered.html));
+      check(`${label} (${code}) has a title`, rendered.title !== '');
+      check(`${label} (${code}) has substantial html`, rendered.html.length > 800);
+      check(`${label} (${code}) has no unresolved braces`, !/[{}]/.test(rendered.html) && !/[{}]/.test(rendered.title));
+      check(`${label} (${code}) has no inline style or script`, !/\sstyle\s*=|<script/i.test(rendered.html));
       const depths = rendered.headings.map((h) => h.depth).join(',');
-      check(`${label} has structured sections`, rendered.headings.length >= 5);
+      check(`${label} (${code}) has structured sections`, rendered.headings.length >= 5);
       if (!legalHeadingsByPage.has(page)) {
         legalHeadingsByPage.set(page, { locale: code, depths });
       } else {
         const ref = legalHeadingsByPage.get(page);
-        check(`${label} matches ${ref.locale} section structure`, depths === ref.depths, `${depths} !== ${ref.depths}`);
+        check(`${label} (${code}) matches ${ref.locale} section structure`, depths === ref.depths, `${depths} !== ${ref.depths}`);
       }
       for (const token of legalForbiddenTokens) {
-        check(`${label} does not mention "${token}" (card sales were dropped)`, !raw.includes(token) && !rendered.html.includes(token));
+        check(`${label} (${code}) does not mention "${token}" (card sales were dropped)`, !rendered.html.includes(token));
       }
       for (const token of legalRequiredTokens[page] ?? []) {
-        check(`${label} covers "${token}"`, rendered.html.includes(token));
+        check(`${label} (${code}) covers "${token}"`, rendered.html.includes(token));
       }
     } catch (error) {
-      problems.push(`${label}: ${error.message}`);
+      problems.push(`${label} (${code}): ${error.message}`);
     }
   }
 }

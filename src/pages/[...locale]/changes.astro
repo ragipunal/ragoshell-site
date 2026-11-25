@@ -1,4 +1,5 @@
 ---
+import site from '../../../site.config.mjs';
 import Base from '../../layouts/Base.astro';
 import { changelogReleases } from '../../lib/app-repo';
 import { codeSpans, releaseAnchor } from '../../lib/changelog';
@@ -10,6 +11,7 @@ export function getStaticPaths() {
 
 const { locale } = Astro.props;
 const releases = changelogReleases();
+const isFallback = locale !== site.docs.language;
 ---
 
 <Base
@@ -25,15 +27,17 @@ const releases = changelogReleases();
       <p class="lead">{t(locale, 'changes.lead')}</p>
     </section>
 
-    <!-- The change log is English: it is shown as written, in an English block. -->
-    <div class="changelog-list" lang="en" dir="ltr">
+    {isFallback && <p class="status-banner">{t(locale, 'docs.englishOnly')}</p>}
+
+    <!-- The change log body is English: it is shown as written, in an English LTR block. -->
+    <div class="changelog-list">
       {
         releases.map((release) => (
           <article class="changelog-entry" id={releaseAnchor(release.version)}>
             <div class="changelog-ver">
               <h2>{t(locale, 'changes.version', { version: release.version })}</h2>
             </div>
-            <div class="changelog-body">
+            <div class="changelog-body" lang="en" dir="ltr">
               {release.intro !== '' && <p>{release.intro}</p>}
               <ul>
                 {release.items.map((item) => (

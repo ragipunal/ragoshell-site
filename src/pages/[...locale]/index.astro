@@ -112,7 +112,7 @@ const platforms = site.download.platforms as string[];
             </span>
             <div class="stage-clock-wrap">
               <span class="stage-mode">{t(locale, 'home.stage.mode')}</span>
-              <span class="stage-clock" data-stage-clock>00:00.000</span>
+              <span class="stage-clock" dir="ltr" data-stage-clock>00:00.000</span>
             </div>
           </div>
 
@@ -136,7 +136,7 @@ const platforms = site.download.platforms as string[];
             }
           </div>
 
-          <div class="stage-screen">
+          <div class="stage-screen" dir="ltr" lang="en">
             <div class="stage-cmd-row">
               <span class="stage-prompt" aria-hidden="true">&gt;</span>
               <code class="stage-cmd" data-stage-cmd>{initialPreset.cmd}</code>
@@ -249,7 +249,7 @@ const platforms = site.download.platforms as string[];
         <article class="ledger-card" data-reveal>
           <div class="ledger-card-head">
             <span class="ledger-idx">01</span>
-            <code class="ledger-code-tag">{t(locale, 'home.shell.codeTag')}</code>
+            <code class="ledger-code-tag" dir="ltr">{t(locale, 'home.shell.codeTag')}</code>
           </div>
           <h3>{t(locale, 'home.shell.title')}</h3>
           <p>{t(locale, 'home.shell.body')}</p>
@@ -258,7 +258,7 @@ const platforms = site.download.platforms as string[];
         <article class="ledger-card" data-reveal>
           <div class="ledger-card-head">
             <span class="ledger-idx">02</span>
-            <code class="ledger-code-tag">{t(locale, 'home.everywhere.codeTag')}</code>
+            <code class="ledger-code-tag" dir="ltr">{t(locale, 'home.everywhere.codeTag')}</code>
           </div>
           <h3>{t(locale, 'home.everywhere.title')}</h3>
           <p>{t(locale, 'home.everywhere.body')}</p>
@@ -267,7 +267,7 @@ const platforms = site.download.platforms as string[];
         <article class="ledger-card" data-reveal>
           <div class="ledger-card-head">
             <span class="ledger-idx">03</span>
-            <code class="ledger-code-tag">{t(locale, 'home.schema.codeTag')}</code>
+            <code class="ledger-code-tag" dir="ltr">{t(locale, 'home.schema.codeTag')}</code>
           </div>
           <h3>{t(locale, 'home.schema.title')}</h3>
           <p>{t(locale, 'home.schema.body')}</p>

@@ -1,7 +1,7 @@
 # RagoShell site
 
-The static web site of RagoShell: Astro, static output, English at the root and Turkish under `/tr/`, no
-cookies, no analytics, nothing loaded from third parties.
+The static web site of RagoShell: Astro, static output, English at the root and 14 localized routes under
+`/<code>/`, no cookies, no analytics, nothing loaded from third parties.
 
 ## Setup
 
@@ -36,11 +36,13 @@ Set `ASTRO_TELEMETRY_DISABLED=1` (CI does) or run `npx astro telemetry disable` 
   when any other source file spells the name.
 - `src/i18n/locales/<code>.ts`: dictionaries (English is the reference). A missing or extra key, a missing
   dictionary for an enabled locale, a placeholder mismatch or a missing trademark notice fails the build.
-  The thirteen other application languages are listed in the config with `enabled: false`; to enable one add its
-  dictionary and flip the flag. `ar` already renders with `dir="rtl"`.
+  All 15 application languages (`en`, `tr`, `ar`, `az`, `de`, `es`, `fr`, `hi`, `ja`, `kk`, `ky`, `pt-BR`,
+  `ru`, `uz`, `zh-CN`) are enabled as machine-draft translations awaiting native review, matching the app.
+  `ar` renders with `dir="rtl"`.
 - `src/pages/[...locale]/`: pages, generated once per enabled locale: home, features, download, docs, changes,
-  cloud, trademark and the legal drafts (`content/legal/`). `src/pages/.well-known/security.txt.ts` builds `security.txt`
-  (RFC 9116) from the config.
+  cloud, trademark and the legal drafts (`content/legal/`, with English fallback + notice for locales without
+  dedicated legal files). `src/pages/.well-known/security.txt.ts` builds `security.txt` (RFC 9116) from the
+  config.
 - Documents and change log: `docs.publish` in the config is the allowlist of documents read from the application
   repository; `src/lib/` holds the markdown renderer, the change log parser and the release manifest checks.
 - Client-side scripts are content-hashed modules under `/_astro/` (`src/scripts/motion.ts` for progressive

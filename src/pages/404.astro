@@ -25,19 +25,21 @@ const routeLinks: ReadonlyArray<{ path: string; key: MessageKey }> = [
         </a>
       </div>
 
-      {
-        secondaryLocales.map((l) => (
-          <div class="error-secondary" lang={l.code} dir={l.dir}>
-            <p class="lead">{t(l.code, 'notFound.title')} · {t(l.code, 'notFound.text')}</p>
-            <div class="actions">
-              <a class="button secondary" data-fill href={localeUrl(l.code)}>
-                <span class="btn-fill" aria-hidden="true"></span>
-                <span>{t(l.code, 'notFound.home')}</span>
+      <ul class="error-locales">
+        {
+          secondaryLocales.map((l) => (
+            <li>
+              <a class="error-locale-link" href={localeUrl(l.code)} lang={l.code} dir={l.dir}>
+                <span class="error-locale-head">
+                  <span class="error-locale-code" dir="ltr" aria-hidden="true">{l.code.toUpperCase()}</span>
+                  <span class="error-locale-name">{l.label}</span>
+                </span>
+                <span class="error-locale-title">{t(l.code, 'notFound.title')}</span>
               </a>
-            </div>
-          </div>
-        ))
-      }
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
     <nav class="error-routes" aria-labelledby="error-routes-heading" lang={defaultLocale}>

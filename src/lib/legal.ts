@@ -31,7 +31,7 @@ export function interpolateLegal(template: string, params: Record<string, string
 }
 
 /** Placeholder parameters supplied to `content/legal/<locale>/<page>.md` from `site.config.mjs`. */
-export function legalParams(locale: string): Record<string, string> {
+export function legalParams(locale: string, sourceLocale = locale): Record<string, string> {
   const notices = site.trademarkNotice as Record<string, string | undefined>;
   const entity = site.legal.entity as Record<string, string | undefined>;
   const address = site.legal.address as Record<string, string | undefined>;
@@ -63,13 +63,13 @@ export function legalParams(locale: string): Record<string, string> {
     siteCodeLicenseUrl: site.license.code.url,
     siteContentLicenseName: site.license.content.name,
     siteContentLicenseUrl: site.license.content.url,
-    trademarkNotice: requiredLocaleEntry(notices, locale, 'trademarkNotice'),
+    trademarkNotice: requiredLocaleEntry(notices, sourceLocale, 'trademarkNotice'),
     draftDate: site.legal.draftDate,
-    legalEntity: requiredLocaleEntry(entity, locale, 'legal.entity'),
-    legalAddress: requiredLocaleEntry(address, locale, 'legal.address'),
-    supportContact: requiredLocaleEntry(supportContact, locale, 'legal.supportContact'),
-    privacyContact: requiredLocaleEntry(privacyContact, locale, 'legal.privacyContact'),
-    securityContact: requiredLocaleEntry(securityContact, locale, 'legal.securityContact'),
+    legalEntity: requiredLocaleEntry(entity, sourceLocale, 'legal.entity'),
+    legalAddress: requiredLocaleEntry(address, sourceLocale, 'legal.address'),
+    supportContact: requiredLocaleEntry(supportContact, sourceLocale, 'legal.supportContact'),
+    privacyContact: requiredLocaleEntry(privacyContact, sourceLocale, 'legal.privacyContact'),
+    securityContact: requiredLocaleEntry(securityContact, sourceLocale, 'legal.securityContact'),
     securityTxtPath: site.legal.securityTxtPath,
     securityTxtUrl: `${site.url}${site.legal.securityTxtPath}`,
     termsPath: localizedPath(locale, '/legal/terms/'),
@@ -81,6 +81,16 @@ export function legalParams(locale: string): Record<string, string> {
   };
 }
 
+export interface RenderedLegal extends Rendered {
+  sourceLocale: string;
+}
+
+export function legalSourceLocale(locale: string, page: string, rootDir = process.cwd()): string {
+  if (!site.legalPages.includes(page)) throw new Error(`legal: unknown legal page "${page}"`);
+  const file = join(rootDir, 'content', 'legal', locale, `${page}.md`);
+  return existsSync(file) ? locale : site.defaultLocale;
+}
+
 export function readLegalSource(locale: string, page: string, rootDir = process.cwd()): string {
   if (!site.legalPages.includes(page)) throw new Error(`legal: unknown legal page "${page}"`);
   const file = join(rootDir, 'content', 'legal', locale, `${page}.md`);
@@ -88,10 +98,11 @@ export function readLegalSource(locale: string, page: string, rootDir = process.
   return readFileSync(file, 'utf8');
 }
 
-export function renderLegalDocument(locale: string, page: string, rootDir = process.cwd()): Rendered {
-  const label = `content/legal/${locale}/${page}.md`;
-  const raw = readLegalSource(locale, page, rootDir);
-  const markdown = interpolateLegal(raw, legalParams(locale), label);
+export function renderLegalDocument(locale: string, page: string, rootDir = process.cwd()): RenderedLegal {
+  const sourceLocale = legalSourceLocale(locale, page, rootDir);
+  const label = `content/legal/${sourceLocale}/${page}.md`;
+  const raw = readLegalSource(sourceLocale, page, rootDir);
+  const markdown = interpolateLegal(raw, legalParams(locale, sourceLocale), label);
   const rendered = renderMarkdown(markdown, {
     docs: {},
     repoUrl: (path) => site.repo.blobUrl(path),
@@ -99,5 +110,5 @@ export function renderLegalDocument(locale: string, page: string, rootDir = proc
     omitFirstH1: true,
   });
   if (rendered.title === '') throw new Error(`${label}: missing top-level "# " heading`);
-  return rendered;
+  return { ...rendered, sourceLocale };
 }

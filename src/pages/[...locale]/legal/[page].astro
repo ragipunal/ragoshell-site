@@ -1,7 +1,7 @@
 ---
 import site from '../../../../site.config.mjs';
 import Base from '../../../layouts/Base.astro';
-import { localeStaticPaths, t, type MessageKey } from '../../../i18n';
+import { localeInfo, localeStaticPaths, t, type MessageKey } from '../../../i18n';
 import { renderLegalDocument } from '../../../lib/legal';
 
 export function getStaticPaths() {
@@ -13,6 +13,9 @@ const shortTitle = t(locale, `legal.${page}.title` as MessageKey);
 const description = t(locale, `legal.${page}.description` as MessageKey, { license: site.license.app.name });
 const rendered = renderLegalDocument(locale, page);
 const contents = rendered.headings.filter((h) => h.depth === 2 || h.depth === 3);
+const sourceInfo = localeInfo(rendered.sourceLocale);
+const pageLocaleInfo = localeInfo(locale);
+const isFallback = rendered.sourceLocale !== locale;
 ---
 
 <Base
@@ -27,13 +30,14 @@ const contents = rendered.headings.filter((h) => h.depth === 2 || h.depth === 3)
       <p class="eyebrow">{t(locale, 'footer.legal')}</p>
       <h1>{rendered.title}</h1>
       {site.legal.draft && <p class="status-banner">{t(locale, 'legal.draftNotice', { date: site.legal.draftDate })}</p>}
+      {isFallback && <p class="status-banner">{t(locale, 'docs.englishOnly')}</p>}
     </section>
 
-    <div class="doc-layout">
+    <div class="doc-layout" lang={sourceInfo.code} dir={sourceInfo.dir}>
       {
         contents.length > 0 && (
           <nav class="toc" aria-label={t(locale, 'docs.contents')}>
-            <p class="toc-title">{t(locale, 'docs.contents')}</p>
+            <p class="toc-title" lang={pageLocaleInfo.code} dir={pageLocaleInfo.dir}>{t(locale, 'docs.contents')}</p>
             <div class="toc-list">
               {contents.map((h) => (
                 <a class={`toc-link depth-${h.depth}`} href={`#${h.id}`}>

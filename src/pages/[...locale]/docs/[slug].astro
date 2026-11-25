@@ -19,6 +19,7 @@ const rendered = renderMarkdown(doc.source, {
 });
 const contents = rendered.headings.filter((h) => h.depth === 2 || h.depth === 3);
 const docLanguage = localeInfo(site.docs.language);
+const pageLocaleInfo = localeInfo(locale);
 const translated = locale !== site.docs.language;
 ---
 
@@ -30,14 +31,17 @@ const translated = locale !== site.docs.language;
 >
   <div class="container">
     <div class="back-bar">
-      <a class="back-link" href={localeUrl(locale, '/docs/')}>&lt;- {t(locale, 'docs.back')}</a>
+      <a class="back-link" href={localeUrl(locale, '/docs/')}>
+        <span class="back-arrow" aria-hidden="true">&lt;-</span>
+        <span>{t(locale, 'docs.back')}</span>
+      </a>
     </div>
     {translated && <p class="status-banner">{t(locale, 'docs.englishOnly')}</p>}
     <div class="doc-layout" lang={docLanguage.code} dir={docLanguage.dir}>
       {
         contents.length > 0 && (
           <nav class="toc" aria-label={t(locale, 'docs.contents')}>
-            <p class="toc-title">{t(locale, 'docs.contents')}</p>
+            <p class="toc-title" lang={pageLocaleInfo.code} dir={pageLocaleInfo.dir}>{t(locale, 'docs.contents')}</p>
             <div class="toc-list">
               {contents.map((h) => (
                 <a class={`toc-link depth-${h.depth}`} href={`#${h.id}`}>
