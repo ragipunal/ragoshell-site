@@ -87,11 +87,11 @@ const site = {
   },
 
   /**
-   * The pricing page. Nothing is sold: card sales were dropped on 2026-11-22 and no sale is planned,
-   * so the page says the app is free and the optional cloud services are free with limits (2026-11-23).
+   * The cloud & deployment page. The client is GPLv3 free software, optional hosted cloud services are free
+   * with fair-use limits, nothing is sold, and self-hosted enterprise servers are supported.
    */
-  pricing: {
-    /** @type {'soon'} The only mode: cloud services are free with limits, nothing is on sale. */
+  cloud: {
+    /** @type {'soon'} The only mode: hosted cloud services are free with fair-use limits; nothing is on sale. */
     mode: 'soon',
     donateUrl: `${repoBlobBase}/DONATE.md`,
   },
@@ -106,7 +106,7 @@ const site = {
   },
 
   /** Pages every locale has (routes under src/pages/[...locale]/), and the legal pages under /legal/. */
-  pages: ['features', 'download', 'docs', 'changes', 'pricing', 'trademark'],
+  pages: ['features', 'download', 'docs', 'changes', 'cloud', 'trademark'],
   legalPages: ['terms', 'privacy', 'imprint'],
 
   /**

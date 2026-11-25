@@ -1,0 +1,139 @@
+---
+import site from '../../../site.config.mjs';
+import Base from '../../layouts/Base.astro';
+import { localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
+import { validateCloudConfig } from '../../lib/cloud';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+// Nothing is for sale: the client is GPLv3 free software forever, optional hosted cloud services are free with
+// fair-use limits (Terms of Service §2.1), and teams can self-host endpoints via custom server profiles & enterprise.json.
+const { locale } = Astro.props;
+const cfg = validateCloudConfig(site.cloud);
+const downloadHref = localeUrl(locale, '/download/');
+const termsHref = localeUrl(locale, '/legal/terms/');
+const p = (key: MessageKey) => t(locale, key, { bridgeHost: site.hosts.bridge });
+
+const localFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'] as const;
+const hostedFeatures = ['f1', 'f2', 'f3', 'f4'] as const;
+const selfhostFeatures = ['f1', 'f2', 'f3', 'f4'] as const;
+
+const faqs = [
+  { id: 'open', linkHref: null, linkKey: null, external: false },
+  { id: 'limits', linkHref: null, linkKey: null, external: false },
+  { id: 'selfhost', linkHref: null, linkKey: null, external: false },
+  { id: 'sponsor', linkHref: cfg.donateUrl, linkKey: 'cloud.faq.sponsor.link' as MessageKey, external: true },
+] as const;
+---
+
+<Base
+  locale={locale}
+  title={p('cloud.documentTitle')}
+  description={p('cloud.description')}
+  path="/cloud/"
+>
+  <div class="container">
+    <section class="page-head page-head--display">
+      <p class="eyebrow">{p('nav.cloud')}</p>
+      <h1>{p('cloud.title')}</h1>
+      <p class="lead">{p('cloud.lead')}</p>
+    </section>
+
+    <div class="cloud-shell">
+      <div class="cloud-grid">
+        <article class="cloud-card cloud-card-featured">
+          <div class="cloud-head">
+            <h2>{p('cloud.local.name')}</h2>
+            <span class="cloud-badge cloud-badge-accent">{p('cloud.local.badge')}</span>
+          </div>
+          <p class="cloud-pill">{p('cloud.local.pill')}</p>
+          <p class="cloud-summary">{p('cloud.local.summary')}</p>
+          <ul class="cloud-features">
+            {localFeatures.map((k) => <li>{p(`cloud.local.${k}` as MessageKey)}</li>)}
+          </ul>
+          <p class="cloud-cta">
+            <a class="button" data-fill href={downloadHref}>
+              <span class="btn-fill" aria-hidden="true"></span>
+              <span>{p('cloud.local.cta')}</span>
+            </a>
+          </p>
+        </article>
+
+        <article class="cloud-card cloud-card-hosted">
+          <div class="cloud-head">
+            <h2>{p('cloud.hosted.name')}</h2>
+            <span class="cloud-badge cloud-badge-warm">{p('cloud.hosted.badge')}</span>
+          </div>
+          <p class="cloud-pill cloud-pill-warm">{p('cloud.hosted.pill')}</p>
+          <p class="cloud-summary">{p('cloud.hosted.summary')}</p>
+          <ul class="cloud-features">
+            {hostedFeatures.map((k) => <li>{p(`cloud.hosted.${k}` as MessageKey)}</li>)}
+          </ul>
+          <p class="cloud-note">
+            {p('cloud.hosted.note')}{' '}
+            <a href={termsHref}>{p('cloud.hosted.termsLink')}</a>
+          </p>
+        </article>
+
+        <article class="cloud-card cloud-card-selfhost">
+          <div class="cloud-head">
+            <h2>{p('cloud.selfhost.name')}</h2>
+            <span class="cloud-badge">{p('cloud.selfhost.badge')}</span>
+          </div>
+          <p class="cloud-pill cloud-pill-neutral">{p('cloud.selfhost.pill')}</p>
+          <p class="cloud-summary">{p('cloud.selfhost.summary')}</p>
+          <ul class="cloud-features">
+            {selfhostFeatures.map((k) => <li>{p(`cloud.selfhost.${k}` as MessageKey)}</li>)}
+          </ul>
+          <p class="cloud-cta">
+            <a class="button secondary" data-fill href={site.repo.appRepoUrl} rel="noopener noreferrer">
+              <span class="btn-fill" aria-hidden="true"></span>
+              <span>{p('cloud.selfhost.cta')}</span>
+            </a>
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <section class="support-band" aria-labelledby="support-heading">
+      <div class="support-copy">
+        <p class="eyebrow">{p('cloud.support.eyebrow')}</p>
+        <h2 id="support-heading">{p('cloud.support.title')}</h2>
+        <p class="support-body">{p('cloud.support.body')}</p>
+      </div>
+      <div class="support-actions">
+        <a class="button secondary" data-fill href={cfg.donateUrl} rel="noopener noreferrer">
+          <span class="btn-fill" aria-hidden="true"></span>
+          <span>{p('cloud.support.cta')}</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="cloud-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">{p('cloud.faq.title')}</h2>
+      <p class="section-lead">{p('cloud.faq.lead')}</p>
+
+      <div class="faq-list">
+        {
+          faqs.map((item, idx) => (
+            <details class="faq-item" open={idx === 0}>
+              <summary class="faq-summary">{p(`cloud.faq.${item.id}.q` as MessageKey)}</summary>
+              <div class="faq-body">
+                <p>{p(`cloud.faq.${item.id}.a` as MessageKey)}</p>
+                {item.linkHref && item.linkKey && (
+                  <p class="faq-link">
+                    <a href={item.linkHref} rel={item.external ? 'noopener noreferrer' : undefined}>
+                      {p(item.linkKey)}
+                    </a>
+                  </p>
+                )}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>

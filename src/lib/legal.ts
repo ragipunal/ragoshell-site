@@ -77,7 +77,7 @@ export function legalParams(locale: string): Record<string, string> {
     imprintPath: localizedPath(locale, '/legal/imprint/'),
     trademarkPath: localizedPath(locale, '/trademark/'),
     downloadPath: localizedPath(locale, '/download/'),
-    pricingPath: localizedPath(locale, '/pricing/'),
+    cloudPath: localizedPath(locale, '/cloud/'),
   };
 }
 

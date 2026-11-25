@@ -6,7 +6,7 @@ export const nav: { path: string; key: MessageKey }[] = [
   { path: '/download/', key: 'nav.download' },
   { path: '/docs/', key: 'nav.docs' },
   { path: '/changes/', key: 'nav.changes' },
-  { path: '/pricing/', key: 'nav.pricing' },
+  { path: '/cloud/', key: 'nav.cloud' },
 ];
 
 /** Footer links: the legal pages (their label keys follow `legal.<page>.title`) and the trademark page. */

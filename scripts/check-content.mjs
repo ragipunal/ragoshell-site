@@ -8,7 +8,7 @@ import { appRepoDir, changelogReleases, publishedDocs } from '../src/lib/app-rep
 import { codeSpans, parseChangelog, releaseAnchor } from '../src/lib/changelog.ts';
 import { interpolateLegal, readLegalSource, renderLegalDocument } from '../src/lib/legal.ts';
 import { renderMarkdown, rewriteHref } from '../src/lib/markdown.ts';
-import { validatePricingConfig } from '../src/lib/pricing.ts';
+import { validateCloudConfig } from '../src/lib/cloud.ts';
 import { detectPlatform, parseManifest } from '../src/lib/releases.ts';
 import { indexablePaths } from '../src/lib/routes.ts';
 import { DESCRIPTION_LIMIT, checkDescription, checkVerificationToken, jsonLdDocument, robotsTxt, shorten, siteNodes, sitemapXml, softwareNode } from '../src/lib/seo.ts';
@@ -129,10 +129,10 @@ check('gate: node without type', jsonLdProblems({}, '{"@context":"https://schema
 check('gate: src', jsonLdProblems({ src: '/x.js' }, '{"@context":"https://schema.org","@type":"T"}').some((m) => m.includes('src')));
 check('gate: not an object', jsonLdProblems({}, '[1]').length === 1);
 
-// pricing config invariants
-check('site.pricing passes validation', validatePricingConfig(site.pricing) === site.pricing);
-throws('pricing live mode refused while nothing is on sale', () => validatePricingConfig({ ...site.pricing, mode: 'live' }));
-throws('pricing insecure donateUrl', () => validatePricingConfig({ ...site.pricing, donateUrl: 'http://evil.test/donate' }));
+// cloud config invariants
+check('site.cloud passes validation', validateCloudConfig(site.cloud) === site.cloud);
+throws('cloud live mode refused while nothing is on sale', () => validateCloudConfig({ ...site.cloud, mode: 'live' }));
+throws('cloud insecure donateUrl', () => validateCloudConfig({ ...site.cloud, donateUrl: 'http://evil.test/donate' }));
 
 // the real files
 check('indexable paths list home, pages and docs but no legal page while legal.draft is true', (() => { const paths = indexablePaths(); return paths.includes('/') && paths.includes('/docs/shell/') && paths.length === 1 + site.pages.length + site.docs.publish.length && !paths.some((x) => x.startsWith('/legal/')); })());
@@ -208,4 +208,4 @@ if (problems.length > 0) {
   console.error(`check-content: ${problems.length} problem(s)\n  ${problems.join('\n  ')}`);
   process.exit(1);
 }
-console.log('check-content: changelog parser, markdown renderer, manifest validation, platform detection, pricing invariants and the real published files are fine');
+console.log('check-content: changelog parser, markdown renderer, manifest validation, platform detection, cloud invariants and the real published files are fine');
