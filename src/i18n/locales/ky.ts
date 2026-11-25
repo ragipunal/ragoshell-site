@@ -157,6 +157,8 @@ const ky: Messages = {
   'download.all': 'Бардык релиздер',
   'download.allFor': '{platform} үчүн бардык релиздер',
   'download.get': 'Жүктөө',
+  'download.latestTag': 'Учурдагы белгиленген чыгарылыш: v{version}',
+  'download.verifyCta': 'Текшерүү суммалары жана файлдар',
   'download.unavailable': 'Азырынча жеткиликсиз',
   'download.col.platform': 'Платформа',
   'download.col.requirements': 'Талаптар',

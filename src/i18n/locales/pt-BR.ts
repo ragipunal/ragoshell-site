@@ -157,6 +157,8 @@ const ptBR: Messages = {
   'download.all': 'Todos os lançamentos',
   'download.allFor': 'Todos os lançamentos para {platform}',
   'download.get': 'Baixar',
+  'download.latestTag': 'Versão marcada atual: v{version}',
+  'download.verifyCta': 'Somas de verificação e arquivos',
   'download.unavailable': 'Ainda não disponível',
   'download.col.platform': 'Plataforma',
   'download.col.requirements': 'Requisitos',

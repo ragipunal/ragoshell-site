@@ -157,6 +157,8 @@ const hi: Messages = {
   'download.all': 'सभी रिलीज़',
   'download.allFor': '{platform} के लिए सभी रिलीज़',
   'download.get': 'डाउनलोड',
+  'download.latestTag': 'वर्तमान टैग किया गया संस्करण: v{version}',
+  'download.verifyCta': 'चेकसम और रिलीज़ फ़ाइलें',
   'download.unavailable': 'अभी उपलब्ध नहीं',
   'download.col.platform': 'प्लेटफ़ॉर्म',
   'download.col.requirements': 'आवश्यकताएं',

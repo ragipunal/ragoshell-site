@@ -198,17 +198,14 @@ const platforms = site.download.platforms as string[];
             <span class="screen-led"></span>
             <span class="screen-chrome-label">{t(locale, 'home.surface.desktop.chrome')}<span class="screen-chrome-meta">{t(locale, 'home.surface.desktop.chromeMeta')}</span></span>
           </div>
-          <picture>
-            <source media="(max-width: 40rem)" srcset="/screens/ui-shell-detail.webp" width="660" height="664" />
-            <img
-              src="/screens/ui-shell-desktop.webp"
-              alt={t(locale, 'home.surface.desktop.alt')}
-              width="1600"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
+          <img
+            src="/screens/ui-shell-desktop.webp"
+            alt={t(locale, 'home.surface.desktop.alt')}
+            width="1600"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+          />
           <figcaption>{t(locale, 'home.surface.desktop.caption')}</figcaption>
         </figure>
 

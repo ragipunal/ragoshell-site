@@ -157,6 +157,8 @@ const fr: Messages = {
   'download.all': 'Toutes les versions',
   'download.allFor': 'Toutes les versions pour {platform}',
   'download.get': 'Télécharger',
+  'download.latestTag': 'Version étiquetée actuelle : v{version}',
+  'download.verifyCta': 'Sommes de contrôle et fichiers',
   'download.unavailable': 'Pas encore disponible',
   'download.col.platform': 'Plateforme',
   'download.col.requirements': 'Prérequis',

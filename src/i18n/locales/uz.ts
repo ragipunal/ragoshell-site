@@ -157,6 +157,8 @@ const uz: Messages = {
   'download.all': 'Barcha relizlar',
   'download.allFor': '{platform} uchun barcha relizlar',
   'download.get': 'Yuklab olish',
+  'download.latestTag': 'Joriy teglangan nashr: v{version}',
+  'download.verifyCta': 'Tekshiruv yigʻindilari va fayllar',
   'download.unavailable': 'Hali mavjud emas',
   'download.col.platform': 'Platforma',
   'download.col.requirements': 'Talablar',

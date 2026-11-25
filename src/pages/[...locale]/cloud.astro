@@ -71,10 +71,10 @@ const faqs = [
           <ul class="cloud-features">
             {hostedFeatures.map((k) => <li>{p(`cloud.hosted.${k}` as MessageKey)}</li>)}
           </ul>
-          <p class="cloud-note">
-            {p('cloud.hosted.note')}{' '}
-            <a href={termsHref}>{p('cloud.hosted.termsLink')}</a>
-          </p>
+          <div class="cloud-note">
+            <p class="cloud-note-text">{p('cloud.hosted.note')}</p>
+            <a class="cloud-terms-link" href={termsHref}>{p('cloud.hosted.termsLink')}</a>
+          </div>
         </article>
 
         <article class="cloud-card cloud-card-selfhost">

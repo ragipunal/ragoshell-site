@@ -157,6 +157,8 @@ const zhCN: Messages = {
   'download.all': '所有版本',
   'download.allFor': '{platform}的全部版本',
   'download.get': '下载',
+  'download.latestTag': '当前标记版本：v{version}',
+  'download.verifyCta': '校验和与发行版文件',
   'download.unavailable': '暂未提供',
   'download.col.platform': '平台',
   'download.col.requirements': '系统要求',

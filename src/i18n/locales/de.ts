@@ -157,6 +157,8 @@ const de: Messages = {
   'download.all': 'Alle Versionen',
   'download.allFor': 'Alle Versionen für {platform}',
   'download.get': 'Herunterladen',
+  'download.latestTag': 'Aktuelle markierte Version: v{version}',
+  'download.verifyCta': 'Prüfsummen und Release-Pakete',
   'download.unavailable': 'Noch nicht verfügbar',
   'download.col.platform': 'Plattform',
   'download.col.requirements': 'Anforderungen',

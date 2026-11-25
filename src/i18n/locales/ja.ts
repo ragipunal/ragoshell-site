@@ -157,6 +157,8 @@ const ja: Messages = {
   'download.all': 'すべてのリリース',
   'download.allFor': '{platform}のすべてのリリース',
   'download.get': 'ダウンロード',
+  'download.latestTag': '現在のタグ付きリリース: v{version}',
+  'download.verifyCta': 'チェックサムとリリースファイル',
   'download.unavailable': '準備中',
   'download.col.platform': 'プラットフォーム',
   'download.col.requirements': '動作要件',

@@ -85,7 +85,7 @@ const latinExtLocales = new Set(['tr', 'az', 'de', 'es', 'fr', 'pt-BR', 'uz']);
     <a class="skip-link" href="#content">
       {t(locale, 'a11y.skipToContent')}<span class="sr-only"> (#content)</span>
     </a>
-    <Header locale={locale} path={path} showLanguagePicker={!error} />
+    <Header locale={locale} path={error ? '/' : path} showLanguagePicker={true} />
     <main id="content" class="site-main" tabindex="-1">
       <slot />
     </main>

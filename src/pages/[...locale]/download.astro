@@ -2,6 +2,7 @@
 import site from '../../../site.config.mjs';
 import Base from '../../layouts/Base.astro';
 import { localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
+import { changelogReleases } from '../../lib/app-repo';
 import { jsonLdDocument, softwareNode } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 }
 
 const { locale } = Astro.props;
+const latestVersion = changelogReleases()[0]?.version ?? '';
 const platforms = site.download.platforms as string[];
 const hasPackage = (platform: string) => ['windows', 'macos', 'linux'].includes(platform);
 const note = (platform: string): string | null => {
@@ -67,6 +69,23 @@ const keep = (key: MessageKey, names: string[]) =>
         </p>
       </div>
 
+      <div class="release-ledger">
+        <div class="release-ledger-meta">
+          {
+            latestVersion && (
+              <a class="release-tag-link" href={localeUrl(locale, '/changes/')}>
+                {t(locale, 'download.latestTag', { version: latestVersion })}
+              </a>
+            )
+          }
+          <code class="release-verify-pill">SHA256SUMS.txt · SHA256SUMS.txt.minisig</code>
+        </div>
+        <a class="button secondary" data-fill href={site.download.allDownloadsUrl} rel="noopener noreferrer">
+          <span class="btn-fill" aria-hidden="true"></span>
+          <span>{t(locale, 'download.verifyCta')}</span>
+        </a>
+      </div>
+
       <div class="platforms-wrap">
         <table class="platforms">
           <thead>
@@ -114,17 +133,14 @@ const keep = (key: MessageKey, names: string[]) =>
           <span class="screen-led"></span>
           <span class="screen-chrome-label">{t(locale, 'home.surface.desktop.chrome')}<span class="screen-chrome-meta">{t(locale, 'home.surface.desktop.chromeMeta')}</span></span>
         </div>
-        <picture>
-          <source media="(max-width: 40rem)" srcset="/screens/ui-shell-detail.webp" width="660" height="664" />
-          <img
-            src="/screens/ui-shell-desktop.webp"
-            alt={t(locale, 'home.surface.desktop.alt')}
-            width="1600"
-            height="1000"
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
+        <img
+          src="/screens/ui-shell-desktop.webp"
+          alt={t(locale, 'home.surface.desktop.alt')}
+          width="1600"
+          height="1000"
+          loading="lazy"
+          decoding="async"
+        />
         <figcaption>{t(locale, 'download.preview.caption')}</figcaption>
       </figure>
     </section>

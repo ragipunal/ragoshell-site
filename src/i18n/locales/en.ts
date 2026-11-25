@@ -157,6 +157,8 @@ const en = {
   'download.all': 'All releases',
   'download.allFor': 'All releases for {platform}',
   'download.get': 'Download',
+  'download.latestTag': 'Current tagged release: v{version}',
+  'download.verifyCta': 'Checksums & release assets',
   'download.unavailable': 'Not available yet',
   'download.col.platform': 'Platform',
   'download.col.requirements': 'Requirements',

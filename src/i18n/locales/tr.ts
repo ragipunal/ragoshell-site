@@ -157,6 +157,8 @@ const tr: Messages = {
   'download.all': 'Tüm sürümler',
   'download.allFor': '{platform} için tüm sürümler',
   'download.get': 'İndir',
+  'download.latestTag': 'Güncel etiketli sürüm: v{version}',
+  'download.verifyCta': 'Sağlama toplamları ve sürüm dosyaları',
   'download.unavailable': 'Henüz yok',
   'download.col.platform': 'Platform',
   'download.col.requirements': 'Gereksinimler',

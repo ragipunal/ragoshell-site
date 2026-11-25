@@ -157,6 +157,8 @@ const ru: Messages = {
   'download.all': 'Все выпуски',
   'download.allFor': 'Все выпуски для {platform}',
   'download.get': 'Скачать',
+  'download.latestTag': 'Текущий отмеченный выпуск: v{version}',
+  'download.verifyCta': 'Контрольные суммы и файлы выпуска',
   'download.unavailable': 'Пока недоступно',
   'download.col.platform': 'Платформа',
   'download.col.requirements': 'Требования',

@@ -157,6 +157,8 @@ const az: Messages = {
   'download.all': 'Bütün buraxılışlar',
   'download.allFor': '{platform} üçün bütün buraxılışlar',
   'download.get': 'Yüklə',
+  'download.latestTag': 'Cari etiketli buraxılış: v{version}',
+  'download.verifyCta': 'Yoxlama cəmləri və buraxılış faylları',
   'download.unavailable': 'Hələ mövcud deyil',
   'download.col.platform': 'Platforma',
   'download.col.requirements': 'Tələblər',

@@ -157,6 +157,8 @@ const ar: Messages = {
   'download.all': 'جميع الإصدارات',
   'download.allFor': 'جميع الإصدارات لـ {platform}',
   'download.get': 'تنزيل',
+  'download.latestTag': 'أحدث إصدار موسوم: v{version}',
+  'download.verifyCta': 'المجموعات الاختبارية وملفات الإصدار',
   'download.unavailable': 'غير متاح بعد',
   'download.col.platform': 'المنصة',
   'download.col.requirements': 'المتطلبات',

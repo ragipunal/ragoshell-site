@@ -157,6 +157,8 @@ const kk: Messages = {
   'download.all': 'Барлық шығарылымдар',
   'download.allFor': '{platform} үшін барлық шығарылымдар',
   'download.get': 'Жүктеу',
+  'download.latestTag': 'Ағымдағы белгіленген нұсқа: v{version}',
+  'download.verifyCta': 'Тексеру қосындылары мен файлдар',
   'download.unavailable': 'Әзірше қолжетімсіз',
   'download.col.platform': 'Платформа',
   'download.col.requirements': 'Талаптар',
