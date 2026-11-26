@@ -16,6 +16,7 @@ const az: Messages = {
   'nav.docs': 'Sənədlər',
   'nav.changes': 'Dəyişikliklər',
   'nav.cloud': 'Bulud',
+  'nav.portal': 'Hesab portalı',
   'nav.trademark': 'Ticarət nişanı',
 
   'home.documentTitle': '{productName}: shell ətrafında qurulmuş MongoDB müştərisi',
@@ -227,7 +228,9 @@ const az: Messages = {
   'cloud.hosted.f2': 'Hesab başına 3-ə qədər cihaz',
   'cloud.hosted.f3': 'Barındırılan TLS veb körpüsü ({bridgeHost}): hesab başına bir sessiya, 2 saata qədər, 15 dəqiqə boş qaldıqda bağlanır, ayda 1 GB trafik',
   'cloud.hosted.f4': '12 ay istifadə olunmayan hesabın şifrəli sinxronizasiya məlumatı 30 gün əvvəl e-poçt xəbərdarlığından sonra silinir; hesab qalır',
-  'cloud.hosted.note': 'Hələ açılmayıb. Olduğu kimi, fasiləsizlik zəmanəti olmadan təqdim olunur və limitlər dəyişə bilər; tam təfərrüatlar Xidmət Şərtlərindədir.',
+  'cloud.hosted.note': 'Olduğu kimi, fasiləsizlik zəmanəti olmadan təqdim olunur və limitlər dəyişə bilər; tam təfərrüatlar Xidmət Şərtlərindədir.',
+  'cloud.hosted.cta': 'Pulsuz hesab yarat',
+  'cloud.hosted.signIn': 'Portala daxil ol',
   'cloud.hosted.termsLink': 'Xidmət Şərtlərini oxu',
 
   'cloud.selfhost.name': 'Öz serverində',

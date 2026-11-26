@@ -131,7 +131,9 @@ check('gate: not an object', jsonLdProblems({}, '[1]').length === 1);
 
 // cloud config invariants
 check('site.cloud passes validation', validateCloudConfig(site.cloud) === site.cloud);
-throws('cloud live mode refused while nothing is on sale', () => validateCloudConfig({ ...site.cloud, mode: 'live' }));
+check('cloud soon mode accepted', validateCloudConfig({ ...site.cloud, mode: 'soon' }).mode === 'soon');
+throws('cloud rejects unknown mode', () => validateCloudConfig({ ...site.cloud, mode: 'paid' }));
+throws('cloud live mode requires registerUrl', () => validateCloudConfig({ ...site.cloud, mode: 'live', registerUrl: '' }));
 throws('cloud insecure donateUrl', () => validateCloudConfig({ ...site.cloud, donateUrl: 'http://evil.test/donate' }));
 
 // the real files

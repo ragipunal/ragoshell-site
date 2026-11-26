@@ -46,7 +46,7 @@ const wirePresets: Record<(typeof wireOrder)[number], WirePreset> = {
     ],
   },
   hosted: {
-    cmd: `sync.seal({ api: "${site.urls.api}", bridge: "wss://${site.hosts.bridge}" })`,
+    cmd: `sync.seal({ api: "${site.urls.api}", bridge: "${site.urls.bridge}" })`,
     desc: p('cloud.wire.desc.hosted'),
     status: 'OPT-IN · FREE QUOTA',
     rows: [
@@ -125,6 +125,17 @@ const faqs = [
             <p class="cloud-note-text">{p('cloud.hosted.note')}</p>
             <a class="cloud-terms-link" href={termsHref}>{p('cloud.hosted.termsLink')}</a>
           </div>
+          {
+            cfg.mode === 'live' && cfg.registerUrl && cfg.loginUrl && (
+              <div class="cloud-cta cloud-cta--stack">
+                <a class="button" data-fill href={cfg.registerUrl} rel="noopener">
+                  <span class="btn-fill" aria-hidden="true"></span>
+                  <span>{p('cloud.hosted.cta')}</span>
+                </a>
+                <a class="cloud-signin-link" href={cfg.loginUrl} rel="noopener">{p('cloud.hosted.signIn')}</a>
+              </div>
+            )
+          }
         </article>
 
         <article class="cloud-card cloud-card-selfhost">

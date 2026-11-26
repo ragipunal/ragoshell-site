@@ -16,6 +16,7 @@ const ja: Messages = {
   'nav.docs': 'ドキュメント',
   'nav.changes': '変更履歴',
   'nav.cloud': 'クラウド',
+  'nav.portal': 'クラウドポータル',
   'nav.trademark': '商標',
 
   'home.documentTitle': '{productName}: シェルを中心に構築されたMongoDBクライアント',
@@ -227,7 +228,9 @@ const ja: Messages = {
   'cloud.hosted.f2': '1アカウントあたり最大3台まで',
   'cloud.hosted.f3': 'ホスト型TLS Webブリッジ（{bridgeHost}）：1アカウント1セッション、最大2時間、15分無通信で切断、月間1 GBまで',
   'cloud.hosted.f4': '12か月間利用のないアカウントの暗号化同期データは、30日前のメール通知後に削除されます（アカウントは残ります）',
-  'cloud.hosted.note': 'まだ公開されていません。稼働保証なしの現状有姿で提供され、上限は変更される場合があります。詳細は利用規約をご確認ください。',
+  'cloud.hosted.note': '稼働保証なしの現状有姿で提供され、上限は変更される場合があります。詳細は利用規約をご確認ください。',
+  'cloud.hosted.cta': '無料アカウントを作成',
+  'cloud.hosted.signIn': 'ポータルにサインイン',
   'cloud.hosted.termsLink': '利用規約を読む',
 
   'cloud.selfhost.name': 'セルフホスト',

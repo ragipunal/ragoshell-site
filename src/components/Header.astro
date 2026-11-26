@@ -1,4 +1,5 @@
 ---
+import site from '../../site.config.mjs';
 import BrandMark from './BrandMark.astro';
 import LanguagePicker from './LanguagePicker.astro';
 import Wordmark from './Wordmark.astro';
@@ -41,6 +42,7 @@ const inSection = (item: string) => path.startsWith(item.replace(/\/$/, ''));
     </nav>
 
     <div class="header-actions">
+      <a class="header-portal-link" href={site.urls.app} rel="noopener">{t(locale, 'nav.portal')}</a>
       <span class="header-status">{t(locale, 'nav.status')}</span>
       {showLanguagePicker && <LanguagePicker locale={locale} path={path} />}
       <details class="mobile-menu" data-disclosure>
@@ -63,6 +65,12 @@ const inSection = (item: string) => path.startsWith(item.replace(/\/$/, ''));
                 </li>
               ))
             }
+            <li>
+              <a class="mobile-nav-link" href={site.urls.app} rel="noopener">
+                <span class="mobile-nav-idx" aria-hidden="true">{String(nav.length + 1).padStart(2, '0')}</span>
+                <span class="mobile-nav-text">{t(locale, 'nav.portal')}</span>
+              </a>
+            </li>
           </ul>
         </nav>
       </details>

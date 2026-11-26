@@ -2,11 +2,16 @@
 // Imported by `cloud.astro` at build time and tested in `scripts/check-content.mjs`.
 
 export interface CloudConfig {
-  mode: 'soon';
+  mode: 'soon' | 'live';
+  registerUrl?: string;
+  loginUrl?: string;
   donateUrl: string;
 }
 
-function assertHttpsUrl(raw: string, field: string): void {
+function assertHttpsUrl(raw: unknown, field: string): void {
+  if (typeof raw !== 'string' || raw.trim() === '') {
+    throw new Error(`cloud: missing ${field}`);
+  }
   let parsed: URL;
   try {
     parsed = new URL(raw);
@@ -19,14 +24,18 @@ function assertHttpsUrl(raw: string, field: string): void {
 }
 
 /**
- * Validates `site.cloud`; throws on any misconfiguration. Pure. Only "soon" exists: hosted cloud services are free
- * with fair-use limits and nothing is on sale.
+ * Validates `site.cloud`; throws on any misconfiguration. Pure. Hosted cloud services remain free with fair-use
+ * limits and nothing is on sale.
  */
 export function validateCloudConfig(raw: unknown): CloudConfig {
   if (!raw || typeof raw !== 'object') throw new Error('cloud: missing configuration object');
   const cloud = raw as CloudConfig;
-  if (cloud.mode !== 'soon') {
-    throw new Error(`cloud: mode "${String((raw as { mode?: unknown }).mode)}" must be "soon" (no paid plan is on sale)`);
+  if (cloud.mode !== 'soon' && cloud.mode !== 'live') {
+    throw new Error(`cloud: mode "${String((raw as { mode?: unknown }).mode)}" must be "soon" or "live"`);
+  }
+  if (cloud.mode === 'live') {
+    assertHttpsUrl(cloud.registerUrl, 'registerUrl');
+    assertHttpsUrl(cloud.loginUrl, 'loginUrl');
   }
   assertHttpsUrl(cloud.donateUrl, 'donateUrl');
   return cloud;

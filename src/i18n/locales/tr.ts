@@ -16,6 +16,7 @@ const tr: Messages = {
   'nav.docs': 'Belgeler',
   'nav.changes': 'Değişiklikler',
   'nav.cloud': 'Bulut',
+  'nav.portal': 'Bulut Portalı',
   'nav.trademark': 'Marka',
 
   'home.documentTitle': '{productName}: kabuğun etrafında kurulmuş bir MongoDB istemcisi',
@@ -227,7 +228,9 @@ const tr: Messages = {
   'cloud.hosted.f2': 'Hesap başına en çok 3 cihaz',
   'cloud.hosted.f3': 'Barındırılan TLS web köprüsü ({bridgeHost}): hesap başına bir oturum, en çok 2 saat, 15 dakika boşta kalınca kapanır, ayda 1 GB trafik',
   'cloud.hosted.f4': '12 ay kullanılmayan hesabın şifreli eşitleme verisi, 30 gün önce e-postayla uyarılarak silinir; hesap kalır',
-  'cloud.hosted.note': 'Henüz açılmadı. Olduğu gibi, kesintisizlik garantisi olmadan sunulur ve sınırlar değişebilir; ayrıntılar Kullanım Koşullarında.',
+  'cloud.hosted.note': 'Olduğu gibi, kesintisizlik garantisi olmadan sunulur ve sınırlar değişebilir; ayrıntılar Kullanım Koşullarında.',
+  'cloud.hosted.cta': 'Ücretsiz hesap oluştur',
+  'cloud.hosted.signIn': 'Portala giriş yap',
   'cloud.hosted.termsLink': 'Kullanım Koşullarını oku',
 
   'cloud.selfhost.name': 'Kendi sunucun',

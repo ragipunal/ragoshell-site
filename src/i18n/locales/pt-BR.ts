@@ -16,6 +16,7 @@ const ptBR: Messages = {
   'nav.docs': 'Documentação',
   'nav.changes': 'Alterações',
   'nav.cloud': 'Nuvem',
+  'nav.portal': 'Portal na Nuvem',
   'nav.trademark': 'Marca registrada',
 
   'home.documentTitle': '{productName}: um cliente MongoDB construído em torno do shell',
@@ -227,7 +228,9 @@ const ptBR: Messages = {
   'cloud.hosted.f2': 'Até 3 dispositivos por conta',
   'cloud.hosted.f3': 'Ponte web TLS hospedada ({bridgeHost}): uma sessão por conta, até 2 horas, encerra após 15 min ociosa, 1 GB por mês',
   'cloud.hosted.f4': 'Dados sincronizados de conta sem uso por 12 meses são excluídos após aviso por e-mail 30 dias antes; a conta permanece',
-  'cloud.hosted.note': 'Ainda não aberto. Fornecido no estado em que se encontra, sem garantias de disponibilidade, e os limites podem mudar; veja os Termos de Serviço.',
+  'cloud.hosted.note': 'Fornecido no estado em que se encontra, sem garantias de disponibilidade, e os limites podem mudar; veja os Termos de Serviço.',
+  'cloud.hosted.cta': 'Criar conta gratuita',
+  'cloud.hosted.signIn': 'Entrar no portal',
   'cloud.hosted.termsLink': 'Ler Termos de Serviço',
 
   'cloud.selfhost.name': 'Auto-hospedado',

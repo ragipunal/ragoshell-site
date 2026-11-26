@@ -16,6 +16,7 @@ const de: Messages = {
   'nav.docs': 'Dokumentation',
   'nav.changes': 'Änderungen',
   'nav.cloud': 'Cloud',
+  'nav.portal': 'Kontoportal',
   'nav.trademark': 'Markenhinweis',
 
   'home.documentTitle': '{productName}: ein MongoDB-Client rund um die Shell',
@@ -227,7 +228,9 @@ const de: Messages = {
   'cloud.hosted.f2': 'Bis zu 3 Geräte pro Konto',
   'cloud.hosted.f3': 'Gehostete TLS-Web-Bridge ({bridgeHost}): eine Sitzung pro Konto, bis zu 2 Stunden, nach 15 Minuten Leerlauf getrennt, 1 GB Traffic pro Monat',
   'cloud.hosted.f4': 'Verschlüsselte Sync-Daten eines 12 Monate ungenutzten Kontos werden 30 Tage nach E-Mail-Warnung gelöscht; das Konto bleibt bestehen',
-  'cloud.hosted.note': 'Noch nicht geöffnet. Bereitstellung ohne Verfügbarkeitsgarantie, Limits können sich ändern; Details stehen in den Nutzungsbedingungen.',
+  'cloud.hosted.note': 'Bereitstellung ohne Verfügbarkeitsgarantie, Limits können sich ändern; Details stehen in den Nutzungsbedingungen.',
+  'cloud.hosted.cta': 'Kostenloses Konto erstellen',
+  'cloud.hosted.signIn': 'Im Portal anmelden',
   'cloud.hosted.termsLink': 'Nutzungsbedingungen lesen',
 
   'cloud.selfhost.name': 'Self-Hosting',

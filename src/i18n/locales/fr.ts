@@ -16,6 +16,7 @@ const fr: Messages = {
   'nav.docs': 'Documentation',
   'nav.changes': 'Changements',
   'nav.cloud': 'Cloud',
+  'nav.portal': 'Portail compte',
   'nav.trademark': 'Marque',
 
   'home.documentTitle': '{productName} : un client MongoDB construit autour du Shell',
@@ -227,7 +228,9 @@ const fr: Messages = {
   'cloud.hosted.f2': 'Jusqu’à 3 appareils par compte',
   'cloud.hosted.f3': 'Pont web TLS hébergé ({bridgeHost}) : une session par compte, 2 heures max, fermé après 15 min d’inactivité, 1 GB par mois',
   'cloud.hosted.f4': 'Les données chiffrées d’un compte inactif pendant 12 mois sont supprimées 30 jours après avertissement par e-mail ; le compte reste',
-  'cloud.hosted.note': 'Pas encore ouvert. Fourni en l’état, sans garantie de disponibilité, et les limites peuvent évoluer ; voir les Conditions d’utilisation.',
+  'cloud.hosted.note': 'Fourni en l’état, sans garantie de disponibilité, et les limites peuvent évoluer ; voir les Conditions d’utilisation.',
+  'cloud.hosted.cta': 'Créer un compte gratuit',
+  'cloud.hosted.signIn': 'Se connecter au portail',
   'cloud.hosted.termsLink': 'Lire les Conditions d’utilisation',
 
   'cloud.selfhost.name': 'Auto-hébergé',

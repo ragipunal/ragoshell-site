@@ -16,6 +16,7 @@ const es: Messages = {
   'nav.docs': 'Documentación',
   'nav.changes': 'Cambios',
   'nav.cloud': 'Nube',
+  'nav.portal': 'Portal de cuentas',
   'nav.trademark': 'Marca comercial',
 
   'home.documentTitle': '{productName}: un cliente de MongoDB construido alrededor del shell',
@@ -227,7 +228,9 @@ const es: Messages = {
   'cloud.hosted.f2': 'Hasta 3 dispositivos por cuenta',
   'cloud.hosted.f3': 'Puente web TLS alojado ({bridgeHost}): una sesión por cuenta, hasta 2 horas, cierre tras 15 minutos inactivo, 1 GB al mes',
   'cloud.hosted.f4': 'Los datos cifrados de una cuenta sin uso durante 12 meses se borran tras avisar por correo 30 días antes; la cuenta permanece',
-  'cloud.hosted.note': 'Aún no disponible. Se ofrece tal cual, sin garantías de disponibilidad, y los límites pueden variar; consulta los Términos de Servicio.',
+  'cloud.hosted.note': 'Se ofrece tal cual, sin garantías de disponibilidad, y los límites pueden variar; consulta los Términos de Servicio.',
+  'cloud.hosted.cta': 'Crear cuenta gratuita',
+  'cloud.hosted.signIn': 'Iniciar sesión en el portal',
   'cloud.hosted.termsLink': 'Leer Términos de Servicio',
 
   'cloud.selfhost.name': 'Autoalojado',

@@ -16,6 +16,7 @@ const uz: Messages = {
   'nav.docs': 'Hujjatlar',
   'nav.changes': 'Oʻzgarishlar',
   'nav.cloud': 'Bulut',
+  'nav.portal': 'Bulut portali',
   'nav.trademark': 'Savdo belgisi',
 
   'home.documentTitle': '{productName}: shell atrofida qurilgan MongoDB mijozi',
@@ -227,7 +228,9 @@ const uz: Messages = {
   'cloud.hosted.f2': 'Har bir hisob uchun 3 tagacha qurilma',
   'cloud.hosted.f3': 'Xosting TLS veb-koʻprigi ({bridgeHost}): hisobga bitta sessiya, 2 soatgacha, 15 daqiqa harakatsizlikda yopiladi, oyiga 1 GB trafik',
   'cloud.hosted.f4': '12 oy ishlatilmagan hisobning shifrlangan maʼlumotlari 30 kun oldingi email ogohlantirishidan keyin oʻchiriladi; hisob saqlanadi',
-  'cloud.hosted.note': 'Hali ochilmagan. Uzilishsizlik kafolatisiz boricha taqdim etiladi va cheklovlar oʻzgarishi mumkin; batafsil Xizmat shartlarida.',
+  'cloud.hosted.note': 'Uzilishsizlik kafolatisiz boricha taqdim etiladi va cheklovlar oʻzgarishi mumkin; batafsil Xizmat shartlarida.',
+  'cloud.hosted.cta': 'Bepul hisob ochish',
+  'cloud.hosted.signIn': 'Portalga kirish',
   'cloud.hosted.termsLink': 'Xizmat shartlarini oʻqish',
 
   'cloud.selfhost.name': 'Oʻz serverida',

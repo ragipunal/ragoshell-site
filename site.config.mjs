@@ -54,13 +54,13 @@ const site = {
     app: `app.${domain}`,
     api: `api.${domain}`,
     dl: `dl.${domain}`,
-    bridge: `bridge.${domain}`,
+    bridge: `app.${domain}/ws`,
   },
   urls: {
     app: `https://app.${domain}`,
     api: `https://api.${domain}`,
     dl: `https://dl.${domain}`,
-    bridge: `https://bridge.${domain}`,
+    bridge: `wss://app.${domain}/ws`,
   },
   contacts: {
     support: `support@${domain}`,
@@ -91,8 +91,10 @@ const site = {
    * with fair-use limits, nothing is sold, and self-hosted enterprise servers are supported.
    */
   cloud: {
-    /** @type {'soon'} The only mode: hosted cloud services are free with fair-use limits; nothing is on sale. */
-    mode: 'soon',
+    /** @type {'soon' | 'live'} Hosted cloud services are live and free with fair-use limits; nothing is on sale. */
+    mode: 'live',
+    registerUrl: `https://app.${domain}/register`,
+    loginUrl: `https://app.${domain}/login`,
     donateUrl: `${repoBlobBase}/DONATE.md`,
   },
 

@@ -16,6 +16,7 @@ const zhCN: Messages = {
   'nav.docs': '文档',
   'nav.changes': '更新日志',
   'nav.cloud': '云服务',
+  'nav.portal': '云端门户',
   'nav.trademark': '商标声明',
 
   'home.documentTitle': '{productName}：围绕Shell构建的MongoDB客户端',
@@ -227,7 +228,9 @@ const zhCN: Messages = {
   'cloud.hosted.f2': '每个账号最多3台设备',
   'cloud.hosted.f3': '托管TLS Web网桥（{bridgeHost}）：每账号同时1个会话，最长2小时，空闲15分钟关闭，每月1 GB流量',
   'cloud.hosted.f4': '连续12个月未使用的账号将在提前30天邮件提醒后删除其加密同步数据；账号本身保留',
-  'cloud.hosted.note': '尚未开放。按原样提供，不作可用性保证，限额可能调整；详情请参见服务条款。',
+  'cloud.hosted.note': '按原样提供，不作可用性保证，限额可能调整；详情请参见服务条款。',
+  'cloud.hosted.cta': '创建免费账号',
+  'cloud.hosted.signIn': '登录门户',
   'cloud.hosted.termsLink': '阅读服务条款',
 
   'cloud.selfhost.name': '自托管',

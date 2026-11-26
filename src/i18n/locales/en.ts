@@ -16,6 +16,7 @@ const en = {
   'nav.docs': 'Documentation',
   'nav.changes': 'Changes',
   'nav.cloud': 'Cloud',
+  'nav.portal': 'Cloud Portal',
   'nav.trademark': 'Trademark',
 
   'home.documentTitle': '{productName}: a MongoDB client built around the shell',
@@ -227,7 +228,9 @@ const en = {
   'cloud.hosted.f2': 'Up to 3 devices per account',
   'cloud.hosted.f3': 'Hosted TLS web bridge ({bridgeHost}): one session per account, up to 2 hours, closed after 15 minutes idle, 1 GB of traffic a month',
   'cloud.hosted.f4': 'Encrypted sync data of an account unused for 12 months is deleted after an email warning 30 days ahead; the account stays',
-  'cloud.hosted.note': 'Not open yet. Provided as is, without uptime guarantees, and limits may change; full details are in the Terms of Service.',
+  'cloud.hosted.note': 'Provided as is, without uptime guarantees, and limits may change; full details are in the Terms of Service.',
+  'cloud.hosted.cta': 'Create free account',
+  'cloud.hosted.signIn': 'Sign in to portal',
   'cloud.hosted.termsLink': 'Read Terms of Service',
 
   'cloud.selfhost.name': 'Self-hosted',
