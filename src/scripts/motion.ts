@@ -13,19 +13,75 @@ interface StagePreset {
   desc: string;
 }
 
+interface WireRow {
+  key: string;
+  tag: string;
+  val: string;
+  warm?: boolean;
+}
+
+interface WirePreset {
+  cmd: string;
+  rows: ReadonlyArray<WireRow>;
+  desc: string;
+  status: string;
+}
+
 function initRouteTransition(): void {
   const root = document.documentElement;
   const label = document.querySelector<HTMLElement>('[data-route-label]');
   if (!label) return;
 
+  let leavingLock = false;
   const clearTransition = () => {
-    root.classList.remove('is-entering', 'is-entered');
+    leavingLock = false;
+    root.classList.remove('is-entering', 'is-entered', 'is-leaving');
   };
   window.addEventListener('pageshow', (event: PageTransitionEvent) => {
-    if (event.persisted) clearTransition();
+    if (event.persisted || root.classList.contains('is-leaving')) clearTransition();
   });
 
   if (isReduced || isCoarseOrNarrow()) return;
+
+  document.addEventListener('click', (event: MouseEvent) => {
+    if (
+      leavingLock ||
+      isReduced ||
+      isCoarseOrNarrow() ||
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const anchor = target.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor || anchor.hasAttribute('download')) return;
+    const linkTarget = anchor.getAttribute('target');
+    if (linkTarget && linkTarget !== '_self') return;
+
+    let dest: URL;
+    try {
+      dest = new URL(anchor.href, window.location.href);
+    } catch {
+      return;
+    }
+    if (dest.origin !== window.location.origin) return;
+    if (dest.pathname === window.location.pathname && dest.search === window.location.search) return;
+
+    event.preventDefault();
+    leavingLock = true;
+    label.textContent = `route.eval("${dest.pathname}")`;
+    root.classList.remove('is-entering', 'is-entered');
+    root.classList.add('is-leaving');
+    window.setTimeout(() => {
+      window.location.assign(dest.href);
+    }, 140);
+  });
 
   let sameOriginArrival = false;
   if (document.referrer) {
@@ -67,10 +123,37 @@ function initDropdowns(): void {
   const disclosures = document.querySelectorAll<HTMLDetailsElement>('details[data-disclosure]');
   for (const details of disclosures) {
     const summary = details.querySelector<HTMLElement>('summary');
+    const isMobileMenu = details.classList.contains('mobile-menu');
+    const syncExpanded = () => {
+      if (isMobileMenu && summary) {
+        summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      }
+    };
+    details.addEventListener('toggle', syncExpanded);
+    syncExpanded();
+
     details.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape' && details.open) {
         details.open = false;
         summary?.focus();
+        return;
+      }
+      if (isMobileMenu && details.open && e.key === 'Tab') {
+        const focusables = [
+          ...(summary ? [summary] : []),
+          ...Array.from(details.querySelectorAll<HTMLElement>('.mobile-drawer a[href]')),
+        ];
+        if (focusables.length > 1) {
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       }
     });
     details.addEventListener('click', (e: MouseEvent) => {
@@ -114,6 +197,36 @@ function initReveals(): void {
   );
 
   for (const el of items) observer.observe(el);
+}
+
+function initNarrativeSync(): void {
+  const indicator = document.querySelector<HTMLElement>('[data-narrative-indicator]');
+  const numEl = document.querySelector<HTMLElement>('[data-narrative-num]');
+  const tagEl = document.querySelector<HTMLElement>('[data-narrative-tag]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-narrative-card]'));
+  if (!indicator || !numEl || !tagEl || cards.length === 0 || !('IntersectionObserver' in window)) return;
+
+  const total = String(cards.length).padStart(2, '0');
+  const setActive = (card: HTMLElement) => {
+    const num = card.dataset.narrativeCard ?? '01';
+    const tag = card.dataset.narrativeTag ?? '';
+    numEl.textContent = `${num} / ${total}`;
+    if (tag) tagEl.textContent = tag;
+    for (const item of cards) item.classList.toggle('is-active', item === card);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+          setActive(entry.target);
+        }
+      }
+    },
+    { rootMargin: '-25% 0px -45% 0px', threshold: 0.15 },
+  );
+
+  for (const card of cards) observer.observe(card);
 }
 
 function initShellStage(): void {
@@ -195,7 +308,6 @@ function initShellStage(): void {
     });
   }
 
-  // Single-clock rAF ambient pulse (paused off-screen, on coarse/narrow touch devices, and under reduced motion).
   let rafId = 0;
   let visible = true;
   let lastClockSec = -1;
@@ -260,7 +372,7 @@ function initShellStage(): void {
     isReduced = e.matches;
     if (isReduced) {
       stopClock();
-      document.documentElement.classList.remove('is-entering', 'is-entered');
+      document.documentElement.classList.remove('is-entering', 'is-entered', 'is-leaving');
       for (const el of document.querySelectorAll<HTMLElement>('[data-reveal]')) {
         el.classList.add('is-visible');
       }
@@ -272,6 +384,132 @@ function initShellStage(): void {
 
   renderPreset(keys[activeIndex]);
   startClock();
+}
+
+function initWireStage(): void {
+  const stage = document.querySelector<HTMLElement>('[data-wire-stage]');
+  if (!stage) return;
+
+  const presetsJson = stage.getAttribute('data-presets');
+  if (!presetsJson) return;
+
+  let presets: Record<string, WirePreset>;
+  try {
+    presets = JSON.parse(presetsJson) as Record<string, WirePreset>;
+  } catch {
+    return;
+  }
+
+  const tabs = Array.from(stage.querySelectorAll<HTMLButtonElement>('[data-wire-tab]'));
+  const cmdEl = stage.querySelector<HTMLElement>('[data-wire-cmd]');
+  const bodyEl = stage.querySelector<HTMLElement>('[data-wire-body]');
+  const descEl = stage.querySelector<HTMLElement>('[data-wire-desc]');
+  const statusEl = stage.querySelector<HTMLElement>('[data-wire-status]');
+  const pulseBar = stage.querySelector<HTMLElement>('[data-wire-pulse]');
+
+  if (!cmdEl || !bodyEl || tabs.length === 0) return;
+
+  const renderPreset = (key: string) => {
+    const preset = presets[key];
+    if (!preset) return;
+
+    for (const tab of tabs) {
+      const selected = tab.dataset.wireTab === key;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.classList.toggle('is-active', selected);
+    }
+
+    cmdEl.textContent = preset.cmd;
+    if (descEl) descEl.textContent = preset.desc;
+    if (statusEl) statusEl.textContent = preset.status;
+
+    const frag = document.createDocumentFragment();
+    for (const row of preset.rows) {
+      const line = document.createElement('div');
+      line.className = 'bson-line';
+
+      const k = document.createElement('span');
+      k.className = 'bson-key';
+      k.textContent = row.key;
+
+      const t = document.createElement('span');
+      t.className = 'bson-type';
+      t.textContent = row.tag;
+
+      const v = document.createElement('span');
+      v.className = row.warm ? 'bson-val bson-val--wire-warm' : 'bson-val bson-val--objectid';
+      v.textContent = row.val;
+
+      line.append(k, t, v);
+      frag.append(line);
+    }
+    bodyEl.replaceChildren(frag);
+  };
+
+  for (const tab of tabs) {
+    tab.addEventListener('click', () => {
+      const key = tab.dataset.wireTab;
+      if (key) renderPreset(key);
+    });
+  }
+
+  if (!pulseBar) return;
+
+  let rafId = 0;
+  let visible = true;
+  let lastDraw = 0;
+  const startTime = performance.now();
+
+  const stopWire = () => {
+    if (rafId !== 0) {
+      window.cancelAnimationFrame(rafId);
+      rafId = 0;
+    }
+  };
+
+  const tick = (now: number) => {
+    rafId = 0;
+    if (isReduced || isCoarseOrNarrow() || !visible) return;
+    if (now - lastDraw >= 50) {
+      lastDraw = now;
+      const elapsed = (now - startTime) / 1000;
+      const phase = (elapsed * 0.25) % 1;
+      const scale = 0.18 + phase * 0.82;
+      pulseBar.style.transform = `scaleX(${scale.toFixed(3)})`;
+    }
+    rafId = window.requestAnimationFrame(tick);
+  };
+
+  const startWire = () => {
+    if (!isReduced && !isCoarseOrNarrow() && visible && rafId === 0) {
+      rafId = window.requestAnimationFrame(tick);
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visible = entry.isIntersecting;
+          if (visible) startWire();
+          else stopWire();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(stage);
+  }
+
+  reducedQuery.addEventListener('change', (e: MediaQueryListEvent) => {
+    if (e.matches) {
+      stopWire();
+      pulseBar.style.transform = 'scaleX(1)';
+    } else {
+      startWire();
+    }
+  });
+
+  startWire();
 }
 
 function initRuntimeBus(): void {
@@ -416,6 +654,8 @@ initRouteTransition();
 initDirectionalButtons();
 initDropdowns();
 initReveals();
+initNarrativeSync();
 initShellStage();
+initWireStage();
 initRuntimeBus();
 initTocSpy();

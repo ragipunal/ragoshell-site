@@ -234,6 +234,10 @@ const platforms = site.download.platforms as string[];
         <p class="eyebrow">{t(locale, 'home.narrative.eyebrow')}</p>
         <h2 id="narrative-heading">{t(locale, 'home.narrative.title')}</h2>
         <p>{t(locale, 'home.narrative.body')}</p>
+        <div class="narrative-readout" data-narrative-indicator>
+          <span class="narrative-chapter-num" data-narrative-num>01 / 03</span>
+          <code class="ledger-code-tag" dir="ltr" data-narrative-tag>{t(locale, 'home.shell.codeTag')}</code>
+        </div>
         <div class="actions">
           <a class="button secondary" data-fill href={localeUrl(locale, '/features/')}>
             <span class="btn-fill" aria-hidden="true"></span>
@@ -243,7 +247,7 @@ const platforms = site.download.platforms as string[];
       </div>
 
       <div class="narrative-list ledger-cards">
-        <article class="ledger-card" data-reveal>
+        <article class="ledger-card is-active" data-reveal data-narrative-card="01" data-narrative-tag={t(locale, 'home.shell.codeTag')}>
           <div class="ledger-card-head">
             <span class="ledger-idx">01</span>
             <code class="ledger-code-tag" dir="ltr">{t(locale, 'home.shell.codeTag')}</code>
@@ -252,7 +256,7 @@ const platforms = site.download.platforms as string[];
           <p>{t(locale, 'home.shell.body')}</p>
         </article>
 
-        <article class="ledger-card" data-reveal>
+        <article class="ledger-card" data-reveal data-narrative-card="02" data-narrative-tag={t(locale, 'home.everywhere.codeTag')}>
           <div class="ledger-card-head">
             <span class="ledger-idx">02</span>
             <code class="ledger-code-tag" dir="ltr">{t(locale, 'home.everywhere.codeTag')}</code>
@@ -261,7 +265,7 @@ const platforms = site.download.platforms as string[];
           <p>{t(locale, 'home.everywhere.body')}</p>
         </article>
 
-        <article class="ledger-card" data-reveal>
+        <article class="ledger-card" data-reveal data-narrative-card="03" data-narrative-tag={t(locale, 'home.schema.codeTag')}>
           <div class="ledger-card-head">
             <span class="ledger-idx">03</span>
             <code class="ledger-code-tag" dir="ltr">{t(locale, 'home.schema.codeTag')}</code>

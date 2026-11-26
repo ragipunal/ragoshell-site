@@ -20,6 +20,56 @@ const localFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'] as const;
 const hostedFeatures = ['f1', 'f2', 'f3', 'f4'] as const;
 const selfhostFeatures = ['f1', 'f2', 'f3', 'f4'] as const;
 
+const wireOrder = ['local', 'hosted', 'selfhost'] as const;
+interface WireRow {
+  key: string;
+  tag: string;
+  val: string;
+  warm?: boolean;
+}
+interface WirePreset {
+  cmd: string;
+  desc: string;
+  status: string;
+  rows: ReadonlyArray<WireRow>;
+}
+const wirePresets: Record<(typeof wireOrder)[number], WirePreset> = {
+  local: {
+    cmd: 'mongocxx::client("mongodb://127.0.0.1:27017")',
+    desc: p('cloud.wire.desc.local'),
+    status: 'OFFLINE · ZERO TELEMETRY',
+    rows: [
+      { key: 'auth', tag: 'SCRAM-SHA-256', val: 'direct TCP / TLS to your cluster' },
+      { key: 'cloudAccount', tag: 'Null', val: 'not required' },
+      { key: 'telemetry', tag: 'Bool', val: 'disabled' },
+      { key: 'license', tag: 'SPDX', val: site.license.app.name },
+    ],
+  },
+  hosted: {
+    cmd: `sync.seal({ api: "${site.urls.api}", bridge: "wss://${site.hosts.bridge}" })`,
+    desc: p('cloud.wire.desc.hosted'),
+    status: 'OPT-IN · FREE QUOTA',
+    rows: [
+      { key: 'cipher', tag: 'KDF + AEAD', val: 'Argon2id + AES-256-GCM (device-only key)', warm: true },
+      { key: 'syncQuota', tag: 'Limits', val: '20 collections x 1 MiB, 500 uploads/day', warm: true },
+      { key: 'devices', tag: 'RFC 8628', val: '3 active devices max per account' },
+      { key: 'bridgeCap', tag: 'Relay', val: '1 session, 2h max, 1 GB/month UTC', warm: true },
+    ],
+  },
+  selfhost: {
+    cmd: 'PolicyLock::load("enterprise.json")',
+    desc: p('cloud.wire.desc.selfhost'),
+    status: 'SOVEREIGN · POLICY LOCKED',
+    rows: [
+      { key: 'profile', tag: 'HTTPS', val: `custom endpoints (api.${site.domain} override)` },
+      { key: 'allowExternalCloud', tag: 'Bool', val: 'false (enforced by enterprise.json)' },
+      { key: 'bridge', tag: site.license.bridge.name, val: 'self-hosted relay with private TLS & egress' },
+      { key: 'perSeatFee', tag: 'None', val: 'zero licensing or telemetry callbacks' },
+    ],
+  },
+};
+const initialWire = wirePresets.local;
+
 const faqs = [
   { id: 'open', linkHref: null, linkKey: null, external: false },
   { id: 'limits', linkHref: null, linkKey: null, external: false },
@@ -96,6 +146,68 @@ const faqs = [
         </article>
       </div>
     </div>
+
+    <section class="wire-section" aria-labelledby="wire-heading">
+      <div class="wire-head">
+        <p class="eyebrow">{p('cloud.wire.eyebrow')}</p>
+        <h2 id="wire-heading">{p('cloud.wire.title')}</h2>
+      </div>
+
+      <div class="shell-stage wire-stage" data-wire-stage data-presets={JSON.stringify(wirePresets)}>
+        <div class="stage-topbar">
+          <span class="stage-engine">
+            <span class="stage-beacon" aria-hidden="true"></span>
+            <span>enterprise.json · Zero-Knowledge</span>
+          </span>
+          <div class="stage-clock-wrap">
+            <span class="stage-mode">{p('cloud.wire.footerMode')}</span>
+          </div>
+        </div>
+
+        <div class="stage-telemetry-track" aria-hidden="true">
+          <div class="stage-telemetry-bar" data-wire-pulse></div>
+        </div>
+
+        <div class="stage-tabs wire-tabs" role="tablist" aria-label={p('cloud.wire.title')}>
+          {
+            wireOrder.map((key, idx) => (
+              <button
+                type="button"
+                role="tab"
+                class={`stage-tab${idx === 0 ? ' is-active' : ''}`}
+                data-wire-tab={key}
+                aria-selected={idx === 0 ? 'true' : 'false'}
+              >
+                {p(`cloud.wire.tab.${key}` as MessageKey)}
+              </button>
+            ))
+          }
+        </div>
+
+        <div class="stage-screen">
+          <div class="stage-cmd-row">
+            <span class="stage-prompt" aria-hidden="true">&gt;</span>
+            <code class="stage-cmd" data-wire-cmd>{initialWire.cmd}</code>
+          </div>
+          <div class="bson-tree" data-wire-body>
+            {
+              initialWire.rows.map((row) => (
+                <div class="bson-line">
+                  <span class="bson-key">{row.key}</span>
+                  <span class="bson-type">{row.tag}</span>
+                  <span class={row.warm ? 'bson-val bson-val--wire-warm' : 'bson-val bson-val--objectid'}>{row.val}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="stage-foot">
+          <p class="stage-desc" data-wire-desc>{initialWire.desc}</p>
+          <span class="stage-elapsed" data-wire-status>{initialWire.status}</span>
+        </div>
+      </div>
+    </section>
 
     <section class="support-band" aria-labelledby="support-heading">
       <div class="support-copy">

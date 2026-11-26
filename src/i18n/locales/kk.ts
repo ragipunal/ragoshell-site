@@ -1,7 +1,7 @@
 import type { Messages } from '../types';
 
 const kk: Messages = {
-  'meta.description': '{productName} — кіріктірілген MongoDB shell негізінде жасалған MongoDB клиенті.',
+  'meta.description': '{productName}: кіріктірілген MongoDB shell негізінде жасалған MongoDB клиенті.',
   'meta.ogImageAlt': 'Қараңғы фондағы {productName} сөздік логотипі мен гүл эмблемасы.',
   'a11y.skipToContent': 'Мазмұнға өту',
   'header.homeLabel': '{productName} басты беті',
@@ -83,13 +83,13 @@ const kk: Messages = {
 
   'home.cloud.eyebrow': 'Ашық ядро және қосымша бұлт',
   'home.cloud.title': 'Мәңгі тегін {appLicense} клиенті',
-  'home.cloud.body': 'Жергілікті қосылымдар, shell сценарийлері, MCP және өз кілтіңізбен немесе жергілікті модельмен жұмыс істейтін ЖИ көмекшісі ешқашан шектелмейді. Қосымша бұлттық қызметтер — шифрланған синхрондау мен хостингтегі веб-көпір — әділ пайдалану шегінде тегін болады.',
+  'home.cloud.body': 'Жергілікті қосылымдар, shell сценарийлері, MCP және өз кілтіңізбен немесе жергілікті модельмен жұмыс істейтін ЖИ көмекшісі ешқашан шектелмейді. Қосымша бұлттық қызметтер (шифрланған синхрондау мен хостингтегі веб-көпір) әділ пайдалану шегінде тегін болады.',
   'home.cloud.cta': 'Бұлт және өз серверіңіз',
 
   'features.documentTitle': 'Мүмкіндіктер · {productName}',
   'features.description': '{productName} мүмкіндіктері: кіріктірілген MongoDB shell, схема автотолтыруы, оқуға ғана арналған MCP сервері және 5 ОЖ.',
   'features.title': 'Мүмкіндіктер',
-  'features.lead': '{productName} бүгін не істей алатыны — оның құжаттамасы мен өзгерістер журналынан алынған.',
+  'features.lead': '{productName} бүгін не істей алатыны оның құжаттамасы мен өзгерістер журналынан алынған.',
   'features.indexLabel': 'Мүмкіндіктер',
   'features.diagram.alt': 'Qt Quick UI-дан кіріктірілген QJSEngine, BsonJsConverter және mongocxx C++ арқылы MongoDB-ге ағатын сәулет сызбасы; SchemaCatalog, жергілікті stdio MCP және BYOK немесе Ollama арналары.',
   'features.diagram.caption': 'Біртұтас төл C++ орындалу арнасы: Node.js процесі жоқ, жоғалтусыз BSON типтері және тікелей құрылғыішілік ЖИ мен MCP арналары.',
@@ -139,16 +139,16 @@ const kk: Messages = {
   'features.mcp.title': 'Оқуға ғана арналған MCP сервері',
   'features.mcp.body': 'Қосымша және әдепкіде өшірулі. Claude Code немесе Claude Desktop сияқты ЖИ клиенттеріне тек сіз рұқсат берген сақталған қосылымдар арқылы MongoDB-ні тексеруге мүмкіндік береді.',
   'features.ai.title': 'Өз кілтіңізбен және жергілікті модельмен ЖИ көмекшісі',
-  'features.ai.body': 'Параметрлерде қосқанға дейін өшірулі болады. Қарапайым тілдегі сұраныстарды өз провайдер кілтіңізбен (Anthropic, Gemini, OpenAI үйлесімді) немесе Ollama, LM Studio сияқты жергілікті модельмен тікелей құрылғыңыздан оқуға ғана арналған find не aggregate сұрауларына айналдырады — арада хостингтік ЖИ проксиі жоқ.',
+  'features.ai.body': 'Параметрлерде қосқанға дейін өшірулі болады. Қарапайым тілдегі сұраныстарды өз провайдер кілтіңізбен (Anthropic, Gemini, OpenAI үйлесімді) немесе Ollama, LM Studio сияқты жергілікті модельмен тікелей құрылғыңыздан оқуға ғана арналған find не aggregate сұрауларына айналдырады, арада хостингтік ЖИ проксиі жоқ.',
   'features.platforms.title': 'Телефон, планшет және компьютер',
   'features.platforms.body': 'Басқару элементтері құрылғыға сай өлшенеді, екі бағанды пішіндер тар экранда бірінің астына бірі орналасады, интерфейс оңнан солға жазылатын араб тілін қоса алғанда 15 тілде қолжетімді.',
   'features.compat.title': 'MongoDB үйлесімділігі',
-  'features.compat.body': '3.6-дан 7.x-ке дейінгі MongoDB серверлерімен жұмыс істейді; 4.0 нұсқасы — тексерілген негіз.',
+  'features.compat.body': '3.6-дан 7.x-ке дейінгі MongoDB серверлерімен жұмыс істейді; 4.0 нұсқасы тексерілген негіз болып табылады.',
   'features.open.title': 'Ашық бастапқы код',
   'features.open.body': '{license} лицензиясымен таратылатын ашық бастапқы кодты бағдарлама.',
 
   'download.documentTitle': 'Жүктеп алу · {productName}',
-  'download.description': '{productName} жүктеп алу — кіріктірілген shell-і бар MongoDB клиенті: талаптар және әр платформаға арналған соңғы нұсқа.',
+  'download.description': '{productName} жүктеп алу (кіріктірілген shell-і бар MongoDB клиенті): талаптар және әр платформаға арналған соңғы нұсқа.',
   'download.title': 'Жүктеп алу',
   'download.lead': 'Қолдау көрсетілетін әр платформаға арналған төл пакеттер мен ең төменгі ОЖ талаптары. Тікелей орнатқыштар мен SHA-256 бақылау қосындылары әр тегтелген шығарылыммен бірге жарияланады.',
   'download.primary': '{platform} үшін жүктеу',
@@ -204,7 +204,7 @@ const kk: Messages = {
   'changes.version': '{version} нұсқасы',
 
   'cloud.documentTitle': 'Бұлт және орналастыру · {productName}',
-  'cloud.description': '{productName} — тегін {appLicense} бағдарлама: жергілікті клиент, шектеулі тегін бұлт немесе өз серверіңіз.',
+  'cloud.description': '{productName} ({appLicense} тегін бағдарламасы): жергілікті клиент, шектеулі тегін бұлт немесе өз серверіңіз.',
   'cloud.title': 'Ашық бастапқы кодты клиент, қосымша бұлт немесе өз серверіңіз',
   'cloud.lead': '{productName}-дің барлық үстелдік және мобильді мүмкіндігі мәңгі {appLicense} еркін бағдарламалық жасақтама. Ешнәрсе сатылмайды: қолданбаны тіркелгісіз жергілікті қолданыңыз, әділ пайдалану шегіндегі тегін бұлтымызға қосылыңыз немесе синхрондау мен көпір серверлерін өз инфрақұрылымыңызда іске қосыңыз.',
 
@@ -261,10 +261,20 @@ const kk: Messages = {
   'cloud.faq.sponsor.a': 'Иә. Ерікті ашық код демеушілігі (GitHub Sponsors, Buy Me a Coffee және тікелей қайырымдылық) код қол қою сертификаттарын, шығарылым инфрақұрылымын және тест жабдықтарын қолдайды.',
   'cloud.faq.sponsor.link': 'Ашық код демеушілік опцияларын көру',
 
+  'cloud.wire.eyebrow': 'Желі және саясат күйі',
+  'cloud.wire.title': 'Әр орналастыру үлгісінің желідегі әрекетін тексеріңіз',
+  'cloud.wire.footerMode': 'ОРЫНДАЛУ ІЗІ',
+  'cloud.wire.tab.local': '01 Тікелей жергілікті',
+  'cloud.wire.tab.hosted': '02 E2EE синхрондау',
+  'cloud.wire.tab.selfhost': '03 Саясат құлпы',
+  'cloud.wire.desc.local': 'Есептік жазбасыз және телеметриясыз құрылғыдан тікелей mongocxx TCP/TLS.',
+  'cloud.wire.desc.hosted': 'Қосымша синхрондау немесе көпір алдында құрылғыда Argon2id + AES-256-GCM шифрлау.',
+  'cloud.wire.desc.selfhost': 'enterprise.json арқылы ішкі HTTPS мекенжайларын міндеттеп, сыртқы бұлтты жабу.',
+
   'trademark.documentTitle': 'Сауда белгісі туралы хабарлама · {productName}',
   'trademark.description': '{productName} MongoDB атауын тек қай дерекқорға қосылатынын көрсету үшін қолданады; MongoDB, Inc.-пен байланысы жоқ.',
   'trademark.title': 'Сауда белгісі туралы хабарлама',
-  'trademark.nominative': '{productName} — MongoDB дерекқорларына арналған клиент. MongoDB атауы тек оның қай дерекқорға қосылатынын білдіру үшін қолданылады.',
+  'trademark.nominative': '{productName}: MongoDB дерекқорларына арналған клиент. MongoDB атауы тек оның қай дерекқорға қосылатынын білдіру үшін қолданылады.',
   'trademark.logo': '{productName} MongoDB логотипін немесе түстерін қолданбайды.',
 
   'legal.documentTitle': '{title} · {productName}',
@@ -281,6 +291,7 @@ const kk: Messages = {
   'footer.codeLicense': 'Сайт коды',
   'footer.contentLicense': 'Мазмұн',
   'footer.source': 'Бастапқы код',
+  'footer.stamp': 'QJSEngine · mongocxx · Cookie жоқ · Бөгде скрипттер жоқ',
 
   'notFound.documentTitle': 'Бет табылмады · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

@@ -261,6 +261,16 @@ const tr: Messages = {
   'cloud.faq.sponsor.a': 'Evet. Gönüllü açık kaynak sponsorlukları (GitHub Sponsors, Buy Me a Coffee ve doğrudan bağışlar) kod imzalama sertifikalarını, sürüm barındırma altyapısını ve çok platformlu test donanımlarını destekler.',
   'cloud.faq.sponsor.link': 'Açık kaynak sponsorluk seçeneklerini görün',
 
+  'cloud.wire.eyebrow': 'Bağlantı ve Politika Durumu',
+  'cloud.wire.title': 'Her dağıtım modelinin ağ üzerindeki davranışını inceleyin',
+  'cloud.wire.footerMode': 'ÇALIŞMA İZİ',
+  'cloud.wire.tab.local': '01 Doğrudan Yerel',
+  'cloud.wire.tab.hosted': '02 E2EE Eşitleme',
+  'cloud.wire.tab.selfhost': '03 Politika Kilidi',
+  'cloud.wire.desc.local': 'Hesap veya telemetri olmadan doğrudan cihazınızdan mongocxx TCP/TLS.',
+  'cloud.wire.desc.hosted': 'İsteğe bağlı eşitleme veya köprü öncesi cihazda Argon2id + AES-256-GCM şifreleme.',
+  'cloud.wire.desc.selfhost': 'enterprise.json ile kurum HTTPS uç noktalarını zorunlu kılın, dış bulutu kapatın.',
+
   'trademark.documentTitle': 'Marka bildirimi · {productName}',
   'trademark.description': '{productName}, MongoDB adını yalnızca hangi veritabanına bağlandığını belirtmek için kullanır; MongoDB, Inc. ile bağlantılı değildir.',
   'trademark.title': 'Marka bildirimi',
@@ -281,6 +291,7 @@ const tr: Messages = {
   'footer.codeLicense': 'Site kodu',
   'footer.contentLicense': 'İçerik',
   'footer.source': 'Kaynak kodu',
+  'footer.stamp': 'QJSEngine · mongocxx · Çerez yok · Üçüncü taraf betiği yok',
 
   'notFound.documentTitle': 'Sayfa bulunamadı · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

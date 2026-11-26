@@ -83,7 +83,7 @@ const az: Messages = {
 
   'home.cloud.eyebrow': 'Açıq nüvə və isteğe bağlı bulud',
   'home.cloud.title': 'Ömürlük pulsuz {appLicense} müştəri',
-  'home.cloud.body': 'Yerli bağlantılar, shell skriptləri, MCP və öz açarınızla və ya yerli modellə AI köməkçisi heç vaxt məhdudlaşdırılmır. İsteğe bağlı bulud xidmətləri — şifrələnmiş sinxronizasiya və hostinq edilən veb körpü — ədalətli istifadə limitləri ilə pulsuz olacaq.',
+  'home.cloud.body': 'Yerli bağlantılar, shell skriptləri, MCP və öz açarınızla və ya yerli modellə AI köməkçisi heç vaxt məhdudlaşdırılmır. İsteğe bağlı bulud xidmətləri (şifrələnmiş sinxronizasiya və hostinq edilən veb körpü) ədalətli istifadə limitləri ilə pulsuz olacaq.',
   'home.cloud.cta': 'Bulud və öz serverin',
 
   'features.documentTitle': 'Xüsusiyyətlər · {productName}',
@@ -261,6 +261,16 @@ const az: Messages = {
   'cloud.faq.sponsor.a': 'Bəli. Könüllü açıq mənbə sponsorluqları (GitHub Sponsors, Buy Me a Coffee və birbaşa ianələr) kod imzalama sertifikatlarını, buraxılış hostinqini və çoxplatformalı test avadanlıqlarını maliyyələşdirməyə kömək edir.',
   'cloud.faq.sponsor.link': 'Açıq mənbə sponsorluq seçimlərinə baxın',
 
+  'cloud.wire.eyebrow': 'Şəbəkə və Siyasət Vəziyyəti',
+  'cloud.wire.title': 'Hər yerləşdirmə modelinin şəbəkədə davranışını yoxlayın',
+  'cloud.wire.footerMode': 'İŞLƏMƏ İZİ',
+  'cloud.wire.tab.local': '01 Birbaşa Yerli',
+  'cloud.wire.tab.hosted': '02 E2EE Sinxronizasiya',
+  'cloud.wire.tab.selfhost': '03 Siyasət Kilidi',
+  'cloud.wire.desc.local': 'Hesab və telemetriya olmadan cihazınızdan birbaşa mongocxx TCP/TLS.',
+  'cloud.wire.desc.hosted': 'İsteğe bağlı sinxronizasiya və körpüdən əvvəl cihazda Argon2id + AES-256-GCM şifrələmə.',
+  'cloud.wire.desc.selfhost': 'enterprise.json ilə daxili HTTPS ünvanlarını məcbur edin və xarici buludu bağlayın.',
+
   'trademark.documentTitle': 'Ticarət nişanı bildirişi · {productName}',
   'trademark.description': '{productName} MongoDB adını yalnız hansı verilənlər bazasına qoşulduğunu bildirmək üçün istifadə edir; MongoDB, Inc. ilə əlaqəli deyil.',
   'trademark.title': 'Ticarət nişanı bildirişi',
@@ -281,6 +291,7 @@ const az: Messages = {
   'footer.codeLicense': 'Sayt kodu',
   'footer.contentLicense': 'Məzmun',
   'footer.source': 'Mənbə kodu',
+  'footer.stamp': 'QJSEngine · mongocxx · Kukilər yoxdur · Üçüncü tərəf skriptləri yoxdur',
 
   'notFound.documentTitle': 'Səhifə tapılmadı · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

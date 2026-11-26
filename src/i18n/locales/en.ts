@@ -261,6 +261,16 @@ const en = {
   'cloud.faq.sponsor.a': 'Yes. Voluntary open-source sponsorships (GitHub Sponsors, Buy Me a Coffee, and direct donations) help fund code-signing certificates, release hosting, and multi-platform test hardware.',
   'cloud.faq.sponsor.link': 'See open-source sponsorship options',
 
+  'cloud.wire.eyebrow': 'Wire & Policy State',
+  'cloud.wire.title': 'Inspect how each deployment behaves on the wire',
+  'cloud.wire.footerMode': 'RUNTIME TRACE',
+  'cloud.wire.tab.local': '01 Local Direct',
+  'cloud.wire.tab.hosted': '02 E2EE Sync',
+  'cloud.wire.tab.selfhost': '03 Policy Lock',
+  'cloud.wire.desc.local': 'Direct mongocxx TCP/TLS from your device with zero account or telemetry.',
+  'cloud.wire.desc.hosted': 'Client-side Argon2id + AES-256-GCM sealing before optional sync or relay.',
+  'cloud.wire.desc.selfhost': 'Enforce internal HTTPS profiles and block external cloud via enterprise.json.',
+
   'trademark.documentTitle': 'Trademark notice · {productName}',
   'trademark.description': '{productName} uses the name MongoDB only to say which database it connects to; it is not affiliated with MongoDB, Inc.',
   'trademark.title': 'Trademark notice',
@@ -281,6 +291,7 @@ const en = {
   'footer.codeLicense': 'Site code',
   'footer.contentLicense': 'Content',
   'footer.source': 'Source code',
+  'footer.stamp': 'QJSEngine · mongocxx · Zero cookies · Zero third-party scripts',
 
   'notFound.documentTitle': 'Page not found · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

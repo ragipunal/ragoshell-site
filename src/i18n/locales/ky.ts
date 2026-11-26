@@ -1,7 +1,7 @@
 import type { Messages } from '../types';
 
 const ky: Messages = {
-  'meta.description': '{productName} — орнотулган MongoDB shell-дин тегерегинде курулган MongoDB кардары.',
+  'meta.description': '{productName}: орнотулган MongoDB shell-дин тегерегинде курулган MongoDB кардары.',
   'meta.ogImageAlt': 'Караңгы фондогу {productName} сөз белгиси жана гүл эмблемасы.',
   'a11y.skipToContent': 'Мазмунга өтүү',
   'header.homeLabel': '{productName} башкы бети',
@@ -83,13 +83,13 @@ const ky: Messages = {
 
   'home.cloud.eyebrow': 'Ачык өзөк жана кошумча булут',
   'home.cloud.title': 'Түбөлүк акысыз {appLicense} кардары',
-  'home.cloud.body': 'Жергиликтүү туташуулар, shell скрипттери, MCP жана өз ачкычыңыз же жергиликтүү модель менен иштөөчү ЖИ жардамчысы эч качан чектелбейт. Кошумча булут кызматтары — шифрленген шайкештештирүү жана хостингдеги веб-көпүрө — адилеттүү колдонуу чектери менен акысыз болот.',
+  'home.cloud.body': 'Жергиликтүү туташуулар, shell скрипттери, MCP жана өз ачкычыңыз же жергиликтүү модель менен иштөөчү ЖИ жардамчысы эч качан чектелбейт. Кошумча булут кызматтары (шифрленген шайкештештирүү жана хостингдеги веб-көпүрө) адилеттүү колдонуу чектери менен акысыз болот.',
   'home.cloud.cta': 'Булут жана өз сервериңиз',
 
   'features.documentTitle': 'Мүмкүнчүлүктөр · {productName}',
   'features.description': '{productName} мүмкүнчүлүктөрү: орнотулган MongoDB shell, схема автотолтуруусу, окууга гана MCP сервери жана 5 ОС.',
   'features.title': 'Мүмкүнчүлүктөр',
-  'features.lead': '{productName} бүгүн эмне кыла алары — анын документациясынан жана өзгөрүүлөр журналынан алынды.',
+  'features.lead': '{productName} бүгүн эмне кыла алары анын документациясынан жана өзгөрүүлөр журналынан алынды.',
   'features.indexLabel': 'Мүмкүнчүлүктөр',
   'features.diagram.alt': 'Qt Quick UI-дан орнотулган QJSEngine, BsonJsConverter жана mongocxx C++ аркылуу MongoDB-ге өтүүчү архитектура диаграммасы; SchemaCatalog, жергиликтүү stdio MCP жана BYOK же Ollama каналдары.',
   'features.diagram.caption': 'Бирдиктүү төл C++ иштөө тизмеги: Node.js кошумча процесси жок, жоготуусуз BSON типтери жана түзмөктүн өзүндөгү түз ЖИ менен MCP каналдары.',
@@ -139,7 +139,7 @@ const ky: Messages = {
   'features.mcp.title': 'Окууга гана арналган MCP сервери',
   'features.mcp.body': 'Кошумча жана демейки боюнча өчүк. Claude Code же Claude Desktop сыяктуу ЖИ кардарларына сиз ачык уруксат берген сакталган туташуулар аркылуу гана MongoDB-ни текшерүүгө мүмкүндүк берет.',
   'features.ai.title': 'Өз ачкычыңыз жана жергиликтүү моделиңиз менен ЖИ жардамчысы',
-  'features.ai.body': 'Жөндөөлөрдө күйгүзгөнгө чейин өчүк. Жөнөкөй тилдеги суроо-талаптарды өз провайдер ачкычыңыз (Anthropic, Gemini, OpenAI-шайкеш) же Ollama, LM Studio сыяктуу жергиликтүү модель аркылуу түздөн-түз түзмөгүңүздөн окууга гана арналган find же aggregate суроолоруна айлантат — ортодо хостингдик ЖИ проксиси жок.',
+  'features.ai.body': 'Жөндөөлөрдө күйгүзгөнгө чейин өчүк. Жөнөкөй тилдеги суроо-талаптарды өз провайдер ачкычыңыз (Anthropic, Gemini, OpenAI-шайкеш) же Ollama, LM Studio сыяктуу жергиликтүү модель аркылуу түздөн-түз түзмөгүңүздөн окууга гана арналган find же aggregate суроолоруна айлантат, ортодо хостингдик ЖИ проксиси жок.',
   'features.platforms.title': 'Телефондор, планшеттер жана компьютерлер',
   'features.platforms.body': 'Башкаруу элементтеринин өлчөмү түзмөккө ылайыкталат, эки тилкелүү формалар кууш экранда биринин астына бири тизилет жана интерфейс оңдон солго араб тилин кошкондо 15 тилде берилет.',
   'features.compat.title': 'MongoDB шайкештиги',
@@ -148,7 +148,7 @@ const ky: Messages = {
   'features.open.body': '{license} лицензиясы астындагы ачык булактуу программа.',
 
   'download.documentTitle': 'Жүктөп алуу · {productName}',
-  'download.description': '{productName} жүктөп алыңыз — орнотулган shell-и бар MongoDB кардары: талаптар жана ар бир платформа үчүн акыркы версия.',
+  'download.description': '{productName} жүктөп алыңыз (орнотулган shell-и бар MongoDB кардары): талаптар жана ар бир платформа үчүн акыркы версия.',
   'download.title': 'Жүктөп алуу',
   'download.lead': 'Колдоого алынган ар бир платформа үчүн төл пакеттер жана минималдуу ОС талаптары. Түз орноткучтар жана SHA-256 текшерүү суммалары ар бир тегделген релиз менен жарыяланат.',
   'download.primary': '{platform} үчүн жүктөп алуу',
@@ -204,7 +204,7 @@ const ky: Messages = {
   'changes.version': '{version} версиясы',
 
   'cloud.documentTitle': 'Булут жана жайгаштыруу · {productName}',
-  'cloud.description': '{productName} — акысыз {appLicense} программа: жергиликтүү кардар, чектелген акысыз булут же өз сервериңизде хостинг.',
+  'cloud.description': '{productName} ({appLicense} акысыз программасы): жергиликтүү кардар, чектелген акысыз булут же өз сервериңизде хостинг.',
   'cloud.title': 'Ачык булактуу кардар, кошумча булут же өз сервериңиз',
   'cloud.lead': '{productName}-дин ар бир рабочий жана мобилдик мүмкүнчүлүгү түбөлүк {appLicense} эркин программасы. Сатыла турган эч нерсе жок: колдонмону эсепсиз жергиликтүү колдонуңуз, адилеттүү колдонуу чектөөлөрү бар акысыз булутубузду тандаңыз, же шайкештештирүү жана көпүрө серверлерин өз инфраструктураңызда иштетиңиз.',
 
@@ -261,10 +261,20 @@ const ky: Messages = {
   'cloud.faq.sponsor.a': 'Ооба. Ыктыярдуу ачык булак демөөрчүлүгү (GitHub Sponsors, Buy Me a Coffee жана түз кайрымдуулук) код кол коюу сертификаттарын, релиз хостингин жана тест жабдууларын колдойт.',
   'cloud.faq.sponsor.link': 'Ачык булак демөөрчүлүк жолдорун көрүү',
 
+  'cloud.wire.eyebrow': 'Тармак жана саясат абалы',
+  'cloud.wire.title': 'Ар бир жайгаштыруу моделинин тармактагы ишин текшериңиз',
+  'cloud.wire.footerMode': 'ИШТӨӨ ИЗИ',
+  'cloud.wire.tab.local': '01 Түз жергиликтүү',
+  'cloud.wire.tab.hosted': '02 E2EE шайкештешүү',
+  'cloud.wire.tab.selfhost': '03 Саясат кулпусу',
+  'cloud.wire.desc.local': 'Каттоо эсеби же телеметриясыз түзмөгүңүздөн түз mongocxx TCP/TLS.',
+  'cloud.wire.desc.hosted': 'Кошумча шайкештешүү же көпүрө алдында түзмөктө Argon2id + AES-256-GCM шифрлөө.',
+  'cloud.wire.desc.selfhost': 'enterprise.json аркылуу ички HTTPS даректерин милдеттендирип, тышкы булутту жабуу.',
+
   'trademark.documentTitle': 'Соода белгиси жөнүндө билдирүү · {productName}',
   'trademark.description': '{productName} MongoDB аталышын кайсы маалымат базасына туташарын көрсөтүү үчүн гана колдонот; MongoDB, Inc. менен байланышы жок.',
   'trademark.title': 'Соода белгиси жөнүндө билдирүү',
-  'trademark.nominative': '{productName} — MongoDB маалымат базалары үчүн кардар. MongoDB аталышы ал кайсы маалымат базасына туташарын айтуу үчүн гана колдонулат.',
+  'trademark.nominative': '{productName}: MongoDB маалымат базалары үчүн кардар. MongoDB аталышы ал кайсы маалымат базасына туташарын айтуу үчүн гана колдонулат.',
   'trademark.logo': '{productName} MongoDB-нин логотибин же түстөрүн колдонбойт.',
 
   'legal.documentTitle': '{title} · {productName}',
@@ -281,6 +291,7 @@ const ky: Messages = {
   'footer.codeLicense': 'Сайт коду',
   'footer.contentLicense': 'Мазмун',
   'footer.source': 'Баштапкы код',
+  'footer.stamp': 'QJSEngine · mongocxx · Cookie жок · Үчүнчү тараптын скрипттери жок',
 
   'notFound.documentTitle': 'Бет табылган жок · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

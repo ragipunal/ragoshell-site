@@ -1,7 +1,7 @@
 import type { Messages } from '../types';
 
 const ru: Messages = {
-  'meta.description': '{productName} — клиент MongoDB, построенный вокруг встроенной оболочки MongoDB Shell.',
+  'meta.description': '{productName}: клиент MongoDB, построенный вокруг встроенной оболочки MongoDB Shell.',
   'meta.ogImageAlt': 'Текстовый логотип {productName} и эмблема цветка на тёмном фоне.',
   'a11y.skipToContent': 'Перейти к содержимому',
   'header.homeLabel': 'Главная страница {productName}',
@@ -83,13 +83,13 @@ const ru: Messages = {
 
   'home.cloud.eyebrow': 'Открытое ядро и необязательное облако',
   'home.cloud.title': 'Бесплатный клиент {appLicense} навсегда',
-  'home.cloud.body': 'Локальные подключения, скрипты Shell, MCP и ИИ-помощник со своим ключом или локальной моделью никогда не истекают. Необязательные облачные сервисы — зашифрованная синхронизация и веб-мост — будут бесплатны в рамках разумных лимитов.',
+  'home.cloud.body': 'Локальные подключения, скрипты Shell, MCP и ИИ-помощник со своим ключом или локальной моделью никогда не истекают. Необязательные облачные сервисы (зашифрованная синхронизация и веб-мост) будут бесплатны в рамках разумных лимитов.',
   'home.cloud.cta': 'Облако и свой сервер',
 
   'features.documentTitle': 'Возможности · {productName}',
   'features.description': 'Возможности {productName}: встроенная оболочка MongoDB Shell, автодополнение по схеме, сервер MCP и 5 платформ.',
   'features.title': 'Возможности',
-  'features.lead': 'Что {productName} умеет сегодня — на основе документации и списка изменений.',
+  'features.lead': 'Что {productName} умеет сегодня, на основе документации и списка изменений.',
   'features.indexLabel': 'Функциональность',
   'features.diagram.alt': 'Схема архитектуры: интерфейс Qt Quick через встроенный QJSEngine, BsonJsConverter и mongocxx C++ обращается к MongoDB, с боковыми каналами SchemaCatalog, локального stdio MCP и BYOK или Ollama.',
   'features.diagram.caption': 'Единый нативный конвейер C++: без дочернего процесса Node.js, без потерь типов BSON и с локальными каналами ИИ и MCP.',
@@ -204,7 +204,7 @@ const ru: Messages = {
   'changes.version': 'Версия {version}',
 
   'cloud.documentTitle': 'Облако и развёртывание · {productName}',
-  'cloud.description': '{productName} — свободное ПО {appLicense}: локальный клиент, бесплатное облако с лимитами или свой сервер.',
+  'cloud.description': '{productName}, свободное ПО {appLicense}: локальный клиент, бесплатное облако с лимитами или свой сервер.',
   'cloud.title': 'Клиент с открытым кодом, необязательное облако или свой сервер',
   'cloud.lead': 'Все функции {productName} для компьютеров и мобильных устройств остаются свободным ПО {appLicense} навсегда. Ничего не продаётся: работайте локально без учётной записи, пользуйтесь бесплатным облаком с разумными лимитами или разверните серверы у себя.',
 
@@ -261,10 +261,20 @@ const ru: Messages = {
   'cloud.faq.sponsor.a': 'Да. Добровольное спонсорство (GitHub Sponsors, Buy Me a Coffee и прямые пожертвования) помогает оплачивать сертификаты подписи, хостинг сборок и тестовые устройства.',
   'cloud.faq.sponsor.link': 'Смотреть варианты спонсорства',
 
+  'cloud.wire.eyebrow': 'Сеть и политика',
+  'cloud.wire.title': 'Проверьте поведение каждого режима в сети',
+  'cloud.wire.footerMode': 'ТРАССА ВЫПОЛНЕНИЯ',
+  'cloud.wire.tab.local': '01 Напрямую локально',
+  'cloud.wire.tab.hosted': '02 E2EE-синхронизация',
+  'cloud.wire.tab.selfhost': '03 Блокировка политик',
+  'cloud.wire.desc.local': 'Прямое соединение mongocxx TCP/TLS с вашего устройства без аккаунта и телеметрии.',
+  'cloud.wire.desc.hosted': 'Шифрование Argon2id + AES-256-GCM на устройстве перед синхронизацией или мостом.',
+  'cloud.wire.desc.selfhost': 'Задайте внутренние HTTPS-профили и заблокируйте внешнее облако через enterprise.json.',
+
   'trademark.documentTitle': 'Уведомление о товарном знаке · {productName}',
   'trademark.description': '{productName} использует имя MongoDB лишь для указания целевой БД и не связан с MongoDB, Inc.',
   'trademark.title': 'Уведомление о товарном знаке',
-  'trademark.nominative': '{productName} — клиент для баз данных MongoDB. Название MongoDB используется исключительно для указания того, к какой базе он подключается.',
+  'trademark.nominative': '{productName} является клиентом для баз данных MongoDB. Название MongoDB используется исключительно для указания того, к какой базе он подключается.',
   'trademark.logo': '{productName} не использует логотип или цвета MongoDB.',
 
   'legal.documentTitle': '{title} · {productName}',
@@ -281,6 +291,7 @@ const ru: Messages = {
   'footer.codeLicense': 'Код сайта',
   'footer.contentLicense': 'Материалы',
   'footer.source': 'Исходный код',
+  'footer.stamp': 'QJSEngine · mongocxx · Без cookie · Без сторонних скриптов',
 
   'notFound.documentTitle': 'Страница не найдена · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

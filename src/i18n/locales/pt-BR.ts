@@ -83,7 +83,7 @@ const ptBR: Messages = {
 
   'home.cloud.eyebrow': 'Núcleo aberto e nuvem opcional',
   'home.cloud.title': 'Cliente {appLicense} grátis para sempre',
-  'home.cloud.body': 'Conexões locais, scripts do shell, MCP e o assistente de IA com sua própria chave ou modelo local nunca expiram. Serviços opcionais em nuvem — sincronização criptografada e ponte web hospedada — serão gratuitos dentro de limites de uso justo.',
+  'home.cloud.body': 'Conexões locais, scripts do shell, MCP e o assistente de IA com sua própria chave ou modelo local nunca expiram. Serviços opcionais em nuvem (sincronização criptografada e ponte web hospedada) serão gratuitos dentro de limites de uso justo.',
   'home.cloud.cta': 'Nuvem e auto-hospedagem',
 
   'features.documentTitle': 'Recursos · {productName}',
@@ -261,6 +261,16 @@ const ptBR: Messages = {
   'cloud.faq.sponsor.a': 'Sim. Patrocínios voluntários de código aberto (GitHub Sponsors, Buy Me a Coffee e doações diretas) ajudam a financiar certificados de assinatura, hospedagem e equipamentos de teste.',
   'cloud.faq.sponsor.link': 'Ver opções de patrocínio open source',
 
+  'cloud.wire.eyebrow': 'Estado de rede e política',
+  'cloud.wire.title': 'Inspecione como cada implantação atua na rede',
+  'cloud.wire.footerMode': 'RASTRO DE EXECUÇÃO',
+  'cloud.wire.tab.local': '01 Local Direto',
+  'cloud.wire.tab.hosted': '02 Sincronização E2EE',
+  'cloud.wire.tab.selfhost': '03 Bloqueio de Política',
+  'cloud.wire.desc.local': 'Conexão mongocxx TCP/TLS direta do seu dispositivo sem conta ou telemetria.',
+  'cloud.wire.desc.hosted': 'Criptografia Argon2id + AES-256-GCM no cliente antes da sincronização ou ponte opcional.',
+  'cloud.wire.desc.selfhost': 'Imponha perfis HTTPS internos e bloqueie a nuvem externa via enterprise.json.',
+
   'trademark.documentTitle': 'Aviso de marca · {productName}',
   'trademark.description': 'O {productName} usa o nome MongoDB apenas para indicar a qual banco se conecta; não é afiliado à MongoDB, Inc.',
   'trademark.title': 'Aviso de marca registrada',
@@ -281,6 +291,7 @@ const ptBR: Messages = {
   'footer.codeLicense': 'Código do site',
   'footer.contentLicense': 'Conteúdo',
   'footer.source': 'Código-fonte',
+  'footer.stamp': 'QJSEngine · mongocxx · Sem cookies · Sem scripts de terceiros',
 
   'notFound.documentTitle': 'Página não encontrada · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

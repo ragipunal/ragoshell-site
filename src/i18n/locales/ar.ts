@@ -261,6 +261,16 @@ const ar: Messages = {
   'cloud.faq.sponsor.a': 'نعم. تساعد الرعايات الطوعية مفتوحة المصدر (GitHub Sponsors وBuy Me a Coffee والتبرعات المباشرة) في تمويل شهادات توقيع الشيفرة واستضافة الإصدارات وأجهزة الاختبار.',
   'cloud.faq.sponsor.link': 'عرض خيارات الرعاية مفتوحة المصدر',
 
+  'cloud.wire.eyebrow': 'حالة الاتصال والسياسة',
+  'cloud.wire.title': 'افحص سلوك كل وضع نشر على الشبكة',
+  'cloud.wire.footerMode': 'تتبع التشغيل',
+  'cloud.wire.tab.local': '01 محلي مباشر',
+  'cloud.wire.tab.hosted': '02 مزامنة E2EE',
+  'cloud.wire.tab.selfhost': '03 قفل السياسة',
+  'cloud.wire.desc.local': 'اتصال mongocxx TCP/TLS مباشر من جهازك بلا حساب أو قياس عن بُعد.',
+  'cloud.wire.desc.hosted': 'تشفير Argon2id + AES-256-GCM على الجهاز قبل المزامنة أو الجسر الاختياري.',
+  'cloud.wire.desc.selfhost': 'فرض نقاط HTTPS الداخلية وحظر السحابة الخارجية عبر enterprise.json.',
+
   'trademark.documentTitle': 'إشعار العلامة التجارية · {productName}',
   'trademark.description': 'يستخدم {productName} اسم MongoDB فقط لتوضيح قاعدة البيانات التي يتصل بها؛ وهو غير مرتبط بـ MongoDB, Inc.',
   'trademark.title': 'إشعار العلامة التجارية',
@@ -281,6 +291,7 @@ const ar: Messages = {
   'footer.codeLicense': 'شيفرة الموقع',
   'footer.contentLicense': 'المحتوى',
   'footer.source': 'الشيفرة المصدرية',
+  'footer.stamp': 'QJSEngine · mongocxx · بلا ملفات ارتباط · بلا نصوص خارجية',
 
   'notFound.documentTitle': 'الصفحة غير موجودة · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

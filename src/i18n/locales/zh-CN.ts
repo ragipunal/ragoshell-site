@@ -1,7 +1,7 @@
 import type { Messages } from '../types';
 
 const zhCN: Messages = {
-  'meta.description': '{productName}是一款围绕嵌入式MongoDB Shell构建的MongoDB客户端。',
+  'meta.description': '{productName}是一款围绕嵌入式MongoDB Shell构建的原生C++与Qt Quick客户端，支持直连本地和自托管数据库及可选端到端加密同步。',
   'meta.ogImageAlt': '深色背景上的{productName}文字标识与花朵徽标。',
   'a11y.skipToContent': '跳至正文',
   'header.homeLabel': '{productName}首页',
@@ -261,6 +261,16 @@ const zhCN: Messages = {
   'cloud.faq.sponsor.a': '可以。自愿开源赞助（GitHub Sponsors、Buy Me a Coffee和直接捐赠）有助于承担代码签名证书、分发托管及多平台测试硬件的开销。',
   'cloud.faq.sponsor.link': '查看开源赞助方式',
 
+  'cloud.wire.eyebrow': '网络与策略状态',
+  'cloud.wire.title': '查看每种部署模式在网络上的实际行为',
+  'cloud.wire.footerMode': '运行跟踪',
+  'cloud.wire.tab.local': '01 本地直连',
+  'cloud.wire.tab.hosted': '02 端到端加密同步',
+  'cloud.wire.tab.selfhost': '03 策略锁定',
+  'cloud.wire.desc.local': '从您的设备直连 mongocxx TCP/TLS，无需账户与遥测。',
+  'cloud.wire.desc.hosted': '在可选同步或网桥前于本地通过 Argon2id + AES-256-GCM 加密。',
+  'cloud.wire.desc.selfhost': '通过 enterprise.json 强制使用内部 HTTPS 配置并禁用外部云端。',
+
   'trademark.documentTitle': '商标声明 · {productName}',
   'trademark.description': '{productName}仅在说明所连接的数据库时使用MongoDB名称，与MongoDB, Inc.没有任何关联。',
   'trademark.title': '商标声明',
@@ -281,6 +291,7 @@ const zhCN: Messages = {
   'footer.codeLicense': '网站代码',
   'footer.contentLicense': '内容许可',
   'footer.source': '源代码',
+  'footer.stamp': 'QJSEngine · mongocxx · 无 Cookie · 无第三方脚本',
 
   'notFound.documentTitle': '页面未找到 · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

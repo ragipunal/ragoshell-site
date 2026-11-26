@@ -83,7 +83,7 @@ const es: Messages = {
 
   'home.cloud.eyebrow': 'Núcleo abierto y nube opcional',
   'home.cloud.title': 'Cliente {appLicense} gratis para siempre',
-  'home.cloud.body': 'Las conexiones locales, scripts del shell, MCP y el asistente de IA con tu propia clave o un modelo local nunca caducan. Los servicios opcionales en la nube — sincronización cifrada y puente web alojado — serán gratuitos con límites de uso justo.',
+  'home.cloud.body': 'Las conexiones locales, scripts del shell, MCP y el asistente de IA con tu propia clave o un modelo local nunca caducan. Los servicios opcionales en la nube (sincronización cifrada y puente web alojado) serán gratuitos con límites de uso justo.',
   'home.cloud.cta': 'Nube y autoalojamiento',
 
   'features.documentTitle': 'Funciones · {productName}',
@@ -261,6 +261,16 @@ const es: Messages = {
   'cloud.faq.sponsor.a': 'Sí. Los patrocinios voluntarios de código abierto (GitHub Sponsors, Buy Me a Coffee y donaciones directas) ayudan a financiar certificados de firma, alojamiento de descargas y equipos de prueba.',
   'cloud.faq.sponsor.link': 'Ver opciones de patrocinio de código abierto',
 
+  'cloud.wire.eyebrow': 'Estado de red y políticas',
+  'cloud.wire.title': 'Inspecciona cómo opera cada despliegue en la red',
+  'cloud.wire.footerMode': 'TRAZA DE EJECUCIÓN',
+  'cloud.wire.tab.local': '01 Local Directo',
+  'cloud.wire.tab.hosted': '02 Sincronización E2EE',
+  'cloud.wire.tab.selfhost': '03 Bloqueo de Política',
+  'cloud.wire.desc.local': 'Conexión mongocxx TCP/TLS directa desde tu dispositivo sin cuenta ni telemetría.',
+  'cloud.wire.desc.hosted': 'Cifrado Argon2id + AES-256-GCM en el cliente antes de la sincronización o puente opcional.',
+  'cloud.wire.desc.selfhost': 'Impón perfiles HTTPS internos y bloquea la nube externa con enterprise.json.',
+
   'trademark.documentTitle': 'Aviso de marca · {productName}',
   'trademark.description': '{productName} usa el nombre MongoDB solo para indicar a qué base se conecta; no está afiliado a MongoDB, Inc.',
   'trademark.title': 'Aviso de marca',
@@ -281,6 +291,7 @@ const es: Messages = {
   'footer.codeLicense': 'Código del sitio',
   'footer.contentLicense': 'Contenido',
   'footer.source': 'Código fuente',
+  'footer.stamp': 'QJSEngine · mongocxx · Sin cookies · Sin scripts de terceros',
 
   'notFound.documentTitle': 'Página no encontrada · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

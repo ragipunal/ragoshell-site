@@ -83,7 +83,7 @@ const fr: Messages = {
 
   'home.cloud.eyebrow': 'Cœur libre & cloud optionnel',
   'home.cloud.title': 'Client {appLicense} gratuit à vie',
-  'home.cloud.body': 'Les connexions locales, scripts Shell, MCP et l’assistant IA avec votre clé ou un modèle local n’expirent jamais. Les services cloud optionnels — synchronisation chiffrée et pont web hébergé — resteront gratuits dans les limites d’usage raisonnable.',
+  'home.cloud.body': 'Les connexions locales, scripts Shell, MCP et l’assistant IA avec votre clé ou un modèle local n’expirent jamais. Les services cloud optionnels (synchronisation chiffrée et pont web hébergé) resteront gratuits dans les limites d’usage raisonnable.',
   'home.cloud.cta': 'Cloud & auto-hébergement',
 
   'features.documentTitle': 'Fonctionnalités · {productName}',
@@ -261,6 +261,16 @@ const fr: Messages = {
   'cloud.faq.sponsor.a': 'Oui. Les parrainages volontaires open source (GitHub Sponsors, Buy Me a Coffee et dons directs) contribuent aux certificats de signature, à l’hébergement et aux équipements de test.',
   'cloud.faq.sponsor.link': 'Voir les options de parrainage open source',
 
+  'cloud.wire.eyebrow': 'État réseau et politiques',
+  'cloud.wire.title': 'Inspectez le comportement réseau de chaque déploiement',
+  'cloud.wire.footerMode': 'TRACE EXÉCUTION',
+  'cloud.wire.tab.local': '01 Local Direct',
+  'cloud.wire.tab.hosted': '02 Synchro E2EE',
+  'cloud.wire.tab.selfhost': '03 Verrouillage',
+  'cloud.wire.desc.local': 'Connexion mongocxx TCP/TLS directe depuis votre appareil sans compte ni télémétrie.',
+  'cloud.wire.desc.hosted': 'Chiffrement Argon2id + AES-256-GCM côté client avant la synchro ou passerelle.',
+  'cloud.wire.desc.selfhost': 'Imposez des profils HTTPS internes et bloquez le cloud externe via enterprise.json.',
+
   'trademark.documentTitle': 'Avis de marque · {productName}',
   'trademark.description': '{productName} utilise le nom MongoDB uniquement pour indiquer la base ciblée ; il n’est pas affilié à MongoDB, Inc.',
   'trademark.title': 'Avis de marque',
@@ -281,6 +291,7 @@ const fr: Messages = {
   'footer.codeLicense': 'Code du site',
   'footer.contentLicense': 'Contenu',
   'footer.source': 'Code source',
+  'footer.stamp': 'QJSEngine · mongocxx · Aucun cookie · Aucun script tiers',
 
   'notFound.documentTitle': 'Page introuvable · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

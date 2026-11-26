@@ -44,7 +44,7 @@ const inSection = (item: string) => path.startsWith(item.replace(/\/$/, ''));
       <span class="header-status">{t(locale, 'nav.status')}</span>
       {showLanguagePicker && <LanguagePicker locale={locale} path={path} />}
       <details class="mobile-menu" data-disclosure>
-        <summary class="menu-toggle" aria-label={t(locale, 'nav.menu')}>
+        <summary class="menu-toggle" aria-label={t(locale, 'nav.menu')} aria-expanded="false">
           <span class="menu-label">{t(locale, 'nav.menu')}</span>
         </summary>
         <nav class="mobile-drawer" aria-label={t(locale, 'nav.label')}>

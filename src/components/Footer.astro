@@ -13,15 +13,20 @@ const { code, content } = site.license;
 ---
 
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-hero-col">
+  <div class="container">
+    <div class="footer-finale">
       <p class="footer-brand">
-        <BrandMark size={28} />
+        <BrandMark size={34} />
         <Wordmark />
       </p>
-      <div class="footer-notice">{trademarkNotice(locale)}</div>
-      <div class="footer-notice">{t(locale, 'footer.noCookies')}</div>
+      <p class="footer-stamp">{t(locale, 'footer.stamp')}</p>
     </div>
+
+    <div class="footer-grid">
+      <div class="footer-hero-col">
+        <div class="footer-notice">{trademarkNotice(locale)}</div>
+        <div class="footer-notice">{t(locale, 'footer.noCookies')}</div>
+      </div>
 
     <div class="footer-links-col">
       <nav aria-label={t(locale, 'footer.legal')}>
@@ -58,6 +63,7 @@ const { code, content } = site.license;
           <a class="utility-link" href={site.repo.siteRepoUrl} rel="noopener">{t(locale, 'footer.source')}</a>
         </li>
       </ul>
+      </div>
     </div>
   </div>
 </footer>

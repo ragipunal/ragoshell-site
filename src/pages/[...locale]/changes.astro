@@ -32,23 +32,42 @@ const isFallback = locale !== site.docs.language;
     <!-- The change log body is English: it is shown as written, in an English LTR block. -->
     <div class="changelog-list">
       {
-        releases.map((release) => (
-          <article class="changelog-entry" id={releaseAnchor(release.version)}>
-            <div class="changelog-ver">
-              <h2>{t(locale, 'changes.version', { version: release.version })}</h2>
-            </div>
-            <div class="changelog-body" lang="en" dir="ltr">
-              {release.intro !== '' && <p>{release.intro}</p>}
-              <ul>
-                {release.items.map((item) => (
-                  <li>
-                    {codeSpans(item).map((part) => (part.code ? <code>{part.text}</code> : part.text))}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))
+        releases.map((release, idx) =>
+          idx < 2 ? (
+            <article class="changelog-entry" id={releaseAnchor(release.version)}>
+              <div class="changelog-ver">
+                <h2>{t(locale, 'changes.version', { version: release.version })}</h2>
+              </div>
+              <div class="changelog-body" lang="en" dir="ltr">
+                {release.intro !== '' && <p>{release.intro}</p>}
+                <ul>
+                  {release.items.map((item) => (
+                    <li>
+                      {codeSpans(item).map((part) => (part.code ? <code>{part.text}</code> : part.text))}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ) : (
+            <details class="changelog-entry changelog-fold" id={releaseAnchor(release.version)}>
+              <summary class="changelog-fold-summary">
+                <span class="changelog-ver-tag">{t(locale, 'changes.version', { version: release.version })}</span>
+                <span class="changelog-fold-meta">v{release.version} ({release.items.length})</span>
+              </summary>
+              <div class="changelog-body" lang="en" dir="ltr">
+                {release.intro !== '' && <p>{release.intro}</p>}
+                <ul>
+                  {release.items.map((item) => (
+                    <li>
+                      {codeSpans(item).map((part) => (part.code ? <code>{part.text}</code> : part.text))}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
+          ),
+        )
       }
     </div>
   </div>

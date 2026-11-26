@@ -1,7 +1,7 @@
 import type { Messages } from '../types';
 
 const uz: Messages = {
-  'meta.description': '{productName} — ichki MongoDB shell atrofida qurilgan MongoDB mijozi.',
+  'meta.description': '{productName}: ichki MongoDB shell atrofida qurilgan MongoDB mijozi.',
   'meta.ogImageAlt': 'Toʻq fonda {productName} soʻz logotipi va gul belgisi.',
   'a11y.skipToContent': 'Mazmunga oʻtish',
   'header.homeLabel': '{productName} bosh sahifasi',
@@ -83,13 +83,13 @@ const uz: Messages = {
 
   'home.cloud.eyebrow': 'Ochiq yadro va ixtiyoriy bulut',
   'home.cloud.title': 'Umrbod bepul {appLicense} mijozi',
-  'home.cloud.body': 'Mahalliy ulanishlar, shell skriptlari, MCP va oʻz kalitingiz yoki mahalliy model bilan SI yordamchisi hech qachon tugamaydi. Ixtiyoriy bulut xizmatlari — shifrlangan sinxronlash va xosting veb-koʻprigi — adolatli foydalanish chegaralarida bepul boʻladi.',
+  'home.cloud.body': 'Mahalliy ulanishlar, shell skriptlari, MCP va oʻz kalitingiz yoki mahalliy model bilan SI yordamchisi hech qachon tugamaydi. Ixtiyoriy bulut xizmatlari (shifrlangan sinxronlash va xosting veb-koʻprigi) adolatli foydalanish chegaralarida bepul boʻladi.',
   'home.cloud.cta': 'Bulut va oʻz serveringiz',
 
   'features.documentTitle': 'Imkoniyatlar · {productName}',
   'features.description': '{productName} imkoniyatlari: oʻrnatilgan MongoDB shell, sxema avtotoʻldirishi, faqat-oʻqish MCP serveri va 5 OT.',
   'features.title': 'Imkoniyatlar',
-  'features.lead': '{productName} bugun nima qilishi — hujjatlari va oʻzgarishlar jurnalidan olingan.',
+  'features.lead': '{productName} bugun nima qilishi hujjatlari va oʻzgarishlar jurnalidan olingan.',
   'features.indexLabel': 'Imkoniyatlar',
   'features.diagram.alt': 'Qt Quick UI dan oʻrnatilgan QJSEngine, BsonJsConverter va mongocxx C++ orqali MongoDB ga oʻtuvchi arxitektura chizmasi; SchemaCatalog, mahalliy stdio MCP va BYOK yoki Ollama kanallari.',
   'features.diagram.caption': 'Yagona mahalliy C++ ishlash liniyasi: Node.js quyi jarayoni yoʻq, yoʻqotishsiz BSON turlari va qurilmadagi toʻgʻridan-toʻgʻri SI hamda MCP kanallari.',
@@ -139,7 +139,7 @@ const uz: Messages = {
   'features.mcp.title': 'Faqat-oʻqish MCP serveri',
   'features.mcp.body': 'Ixtiyoriy va sukut boʻyicha oʻchiq. Claude Code yoki Claude Desktop kabi SI mijozlariga faqat siz ochiq ruxsat bergan saqlangan ulanishlar orqali MongoDB ni tekshirish imkonini beradi.',
   'features.ai.title': 'Oʻz kalitingiz va mahalliy model bilan SI yordamchisi',
-  'features.ai.body': 'Sozlamalarda yoqmaguningizcha oʻchiq. Oddiy tildagi soʻrovlarni oʻz provayder kalitingiz (Anthropic, Gemini, OpenAI-mos) yoki Ollama va LM Studio kabi mahalliy model orqali bevosita qurilmangizdan faqat-oʻqish find yoki aggregate soʻrovlariga aylantiradi — orada xosting SI proksisi yoʻq.',
+  'features.ai.body': 'Sozlamalarda yoqmaguningizcha oʻchiq. Oddiy tildagi soʻrovlarni oʻz provayder kalitingiz (Anthropic, Gemini, OpenAI-mos) yoki Ollama va LM Studio kabi mahalliy model orqali bevosita qurilmangizdan faqat-oʻqish find yoki aggregate soʻrovlariga aylantiradi, orada xosting SI proksisi yoʻq.',
   'features.platforms.title': 'Telefonlar, planshetlar va ish stollari',
   'features.platforms.body': 'Boshqaruv oʻlchamlari qurilmaga moslashadi, ikki ustunli shakllar tor ekranda ustma-ust tiziladi va interfeys oʻngdan chapga arab tilini qoʻshgan holda 15 tilda taqdim etiladi.',
   'features.compat.title': 'MongoDB mosligi',
@@ -148,7 +148,7 @@ const uz: Messages = {
   'features.open.body': '{license} litsenziyasi ostidagi ochiq manbali dasturiy taʼminot.',
 
   'download.documentTitle': 'Yuklab olish · {productName}',
-  'download.description': '{productName} yuklab oling — oʻrnatilgan shell-li MongoDB mijozi: talablar va har bir platforma uchun joriy versiya.',
+  'download.description': '{productName} yuklab oling (oʻrnatilgan shell-li MongoDB mijozi): talablar va har bir platforma uchun joriy versiya.',
   'download.title': 'Yuklab olish',
   'download.lead': 'Qoʻllab-quvvatlanadigan har bir platforma uchun mahalliy paketlar va minimal OT talablari. Toʻgʻridan-toʻgʻri oʻrnatuvchilar va SHA-256 nazorat yigʻindilari har bir teglangan reliz bilan chop etiladi.',
   'download.primary': '{platform} uchun yuklab olish',
@@ -204,7 +204,7 @@ const uz: Messages = {
   'changes.version': '{version}-versiya',
 
   'cloud.documentTitle': 'Bulut va joylashtirish · {productName}',
-  'cloud.description': '{productName} — bepul {appLicense} dasturi: mahalliy mijoz, cheklangan bepul bulut yoki oʻz serveringizda xosting.',
+  'cloud.description': '{productName} ({appLicense} bepul dasturi): mahalliy mijoz, cheklangan bepul bulut yoki oʻz serveringizda xosting.',
   'cloud.title': 'Ochiq manbali mijoz, ixtiyoriy bulut yoki oʻz serveringiz',
   'cloud.lead': '{productName} ning barcha ish stoli va mobil imkoniyatlari umrbod {appLicense} erkin dasturiy taʼminotidir. Hech narsa sotilmaydi: ilovani hisobsiz mahalliy ishlating, adolatli foydalanish chegaralari bilan bepul bulutimizni tanlang yoki sinxronlash va koʻprik serverlarini oʻz infratuzilmangizda ishga tushiring.',
 
@@ -261,10 +261,20 @@ const uz: Messages = {
   'cloud.faq.sponsor.a': 'Ha. Ixtiyoriy ochiq manba homiyliklari (GitHub Sponsors, Buy Me a Coffee va toʻgʻridan-toʻgʻri xayriyalar) kod imzolash sertifikatlari, reliz xostingi va test uskunalarini moliyalashtiradi.',
   'cloud.faq.sponsor.link': 'Ochiq manba homiylik variantlarini koʻrish',
 
+  'cloud.wire.eyebrow': 'Tarmoq va siyosat holati',
+  'cloud.wire.title': 'Har bir joylashtirish modelining tarmoqdagi ishlashini koʻring',
+  'cloud.wire.footerMode': 'ISHLASH IZI',
+  'cloud.wire.tab.local': '01 Toʻgʻridan-toʻgʻri mahalliy',
+  'cloud.wire.tab.hosted': '02 E2EE sinxronlash',
+  'cloud.wire.tab.selfhost': '03 Siyosat qulfi',
+  'cloud.wire.desc.local': 'Hisob va telemetriyasiz qurilmangizdan toʻgʻridan-toʻgʻri mongocxx TCP/TLS.',
+  'cloud.wire.desc.hosted': 'Ixtiyoriy sinxronlash yoki koʻprikdan oldin qurilmada Argon2id + AES-256-GCM shifrlash.',
+  'cloud.wire.desc.selfhost': 'enterprise.json orqali ichki HTTPS manzillarini majburiy qiling va tashqi bulutni yoping.',
+
   'trademark.documentTitle': 'Savdo belgisi bildirishnomasi · {productName}',
   'trademark.description': '{productName} MongoDB nomini faqat qaysi maʼlumotlar bazasiga ulanishini aytish uchun ishlatadi; MongoDB, Inc. bilan bogʻliq emas.',
   'trademark.title': 'Savdo belgisi bildirishnomasi',
-  'trademark.nominative': '{productName} — MongoDB maʼlumotlar bazalari uchun mijoz. MongoDB nomi faqat qaysi maʼlumotlar bazasiga ulanishini bildirish uchun ishlatiladi.',
+  'trademark.nominative': '{productName}: MongoDB maʼlumotlar bazalari uchun mijoz. MongoDB nomi faqat qaysi maʼlumotlar bazasiga ulanishini bildirish uchun ishlatiladi.',
   'trademark.logo': '{productName} MongoDB logotipi yoki ranglaridan foydalanmaydi.',
 
   'legal.documentTitle': '{title} · {productName}',
@@ -281,6 +291,7 @@ const uz: Messages = {
   'footer.codeLicense': 'Sayt kodi',
   'footer.contentLicense': 'Mazmun',
   'footer.source': 'Manba kodi',
+  'footer.stamp': 'QJSEngine · mongocxx · Cookie yoʻq · Uchinchi tomon skriptlari yoʻq',
 
   'notFound.documentTitle': 'Sahifa topilmadi · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

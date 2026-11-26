@@ -83,7 +83,7 @@ const de: Messages = {
 
   'home.cloud.eyebrow': 'Open Core & optionale Cloud',
   'home.cloud.title': 'Für immer kostenloser {appLicense}-Client',
-  'home.cloud.body': 'Lokale Verbindungen, Shell-Skripte, MCP und der KI-Assistent mit eigenem Schlüssel oder lokalem Modell laufen niemals ab. Optionale Cloud-Dienste — verschlüsselte Synchronisierung und gehostete Web-Bridge — bleiben im Fair-Use-Rahmen kostenlos.',
+  'home.cloud.body': 'Lokale Verbindungen, Shell-Skripte, MCP und der KI-Assistent mit eigenem Schlüssel oder lokalem Modell laufen niemals ab. Optionale Cloud-Dienste (verschlüsselte Synchronisierung und gehostete Web-Bridge) bleiben im Fair-Use-Rahmen kostenlos.',
   'home.cloud.cta': 'Cloud & Self-Hosting',
 
   'features.documentTitle': 'Funktionen · {productName}',
@@ -139,7 +139,7 @@ const de: Messages = {
   'features.mcp.title': 'Ein Nur-Lese-MCP-Server',
   'features.mcp.body': 'Optional und standardmäßig deaktiviert. Er erlaubt KI-Clients wie Claude Code oder Claude Desktop, MongoDB über ausdrücklich freigegebene gespeicherte Verbindungen zu inspizieren.',
   'features.ai.title': 'KI-Assistent mit eigenem Schlüssel und lokalem Modell',
-  'features.ai.body': 'Deaktiviert, bis Sie ihn in den Einstellungen einschalten. Wandelt natürlichsprachliche Anfragen mit Ihrem eigenen Anbieter-Schlüssel (Anthropic, Gemini, OpenAI-kompatibel) oder einem lokalen Modell wie Ollama oder LM Studio direkt von Ihrem Gerät aus in schreibgeschützte find- oder aggregate-Abfragen um — ohne gehosteten KI-Proxy.',
+  'features.ai.body': 'Deaktiviert, bis Sie ihn in den Einstellungen einschalten. Wandelt natürlichsprachliche Anfragen mit Ihrem eigenen Anbieter-Schlüssel (Anthropic, Gemini, OpenAI-kompatibel) oder einem lokalen Modell wie Ollama oder LM Studio direkt von Ihrem Gerät aus in schreibgeschützte find- oder aggregate-Abfragen um, ohne gehosteten KI-Proxy.',
   'features.platforms.title': 'Telefone, Tablets und Desktops',
   'features.platforms.body': 'Steuerelemente passen sich dem Gerät an, zweispaltige Formulare werden auf schmalen Bildschirmen gestapelt und die Oberfläche erscheint in 15 Sprachen inklusive rechtsläufigem Arabisch.',
   'features.compat.title': 'MongoDB-Kompatibilität',
@@ -195,7 +195,7 @@ const de: Messages = {
   'docs.card.platforms.title': '{productName}-Plattformen und Build-Ziele',
   'docs.card.platforms.desc': 'Unterstützte Desktop-, Tablet- und Smartphone-Systeme, responsive Dichteregeln und Plattform-Paketierung.',
   'docs.card.ai-assistant.title': 'Der KI-Abfrageassistent',
-  'docs.card.ai-assistant.desc': 'Wandelt Anfragen in Alltagssprache in Nur-Lese-Abfragen um — mit eigenem Schlüssel oder lokalem Modell wie Ollama.',
+  'docs.card.ai-assistant.desc': 'Wandelt Anfragen in Alltagssprache in Nur-Lese-Abfragen um, mit eigenem Schlüssel oder lokalem Modell wie Ollama.',
 
   'changes.documentTitle': 'Änderungen · {productName}',
   'changes.description': 'Was sich in jeder Version von {productName} geändert hat, neueste zuerst.',
@@ -261,6 +261,16 @@ const de: Messages = {
   'cloud.faq.sponsor.a': 'Ja. Freiwillige Open-Source-Sponsorings (GitHub Sponsors, Buy Me a Coffee und direkte Spenden) helfen bei der Finanzierung von Code-Signing-Zertifikaten, Release-Hosting und Testhardware.',
   'cloud.faq.sponsor.link': 'Open-Source-Sponsoring-Optionen ansehen',
 
+  'cloud.wire.eyebrow': 'Netzwerk- und Richtlinienstatus',
+  'cloud.wire.title': 'Prüfen Sie das Verhalten jedes Bereitstellungsmodells',
+  'cloud.wire.footerMode': 'LAUFZEITSPUR',
+  'cloud.wire.tab.local': '01 Lokal Direkt',
+  'cloud.wire.tab.hosted': '02 E2EE-Sync',
+  'cloud.wire.tab.selfhost': '03 Richtliniensperre',
+  'cloud.wire.desc.local': 'Direktes mongocxx TCP/TLS vom Gerät ohne Konto oder Telemetrie.',
+  'cloud.wire.desc.hosted': 'Clientseitige Argon2id + AES-256-GCM Verschlüsselung vor optionalem Sync oder Bridge.',
+  'cloud.wire.desc.selfhost': 'Interne HTTPS-Profile erzwingen und externe Cloud über enterprise.json sperren.',
+
   'trademark.documentTitle': 'Markenhinweis · {productName}',
   'trademark.description': '{productName} nennt MongoDB nur zur Angabe der Zieldatenbank und ist nicht mit MongoDB, Inc. verbunden.',
   'trademark.title': 'Markenhinweis',
@@ -281,6 +291,7 @@ const de: Messages = {
   'footer.codeLicense': 'Site-Code',
   'footer.contentLicense': 'Inhalt',
   'footer.source': 'Quellcode',
+  'footer.stamp': 'QJSEngine · mongocxx · Keine Cookies · Keine Drittanbieter-Skripte',
 
   'notFound.documentTitle': 'Seite nicht gefunden · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

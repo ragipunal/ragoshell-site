@@ -83,7 +83,7 @@ const hi: Messages = {
 
   'home.cloud.eyebrow': 'ओपन कोर और वैकल्पिक क्लाउड',
   'home.cloud.title': 'हमेशा के लिए मुफ्त {appLicense} क्लाइंट',
-  'home.cloud.body': 'स्थानीय कनेक्शन, शेल स्क्रिप्ट, MCP और आपकी अपनी कुंजी या स्थानीय मॉडल वाला AI सहायक कभी समाप्त नहीं होते। वैकल्पिक क्लाउड सेवाएं — एन्क्रिप्टेड सिंक और होस्टेड वेब ब्रिज — उचित उपयोग सीमाओं के साथ मुफ्त रहेंगी।',
+  'home.cloud.body': 'स्थानीय कनेक्शन, शेल स्क्रिप्ट, MCP और आपकी अपनी कुंजी या स्थानीय मॉडल वाला AI सहायक कभी समाप्त नहीं होते। वैकल्पिक क्लाउड सेवाएं (एन्क्रिप्टेड सिंक और होस्टेड वेब ब्रिज) उचित उपयोग सीमाओं के साथ मुफ्त रहेंगी।',
   'home.cloud.cta': 'क्लाउड और सेल्फ़-होस्टिंग',
 
   'features.documentTitle': 'विशेषताएं · {productName}',
@@ -139,7 +139,7 @@ const hi: Messages = {
   'features.mcp.title': 'रीड-ओनली MCP सर्वर',
   'features.mcp.body': 'वैकल्पिक और डिफ़ॉल्ट रूप से बंद। यह Claude Code या Claude Desktop जैसे AI क्लाइंट्स को केवल आपके द्वारा स्पष्ट रूप से अनुमत सहेजे गए कनेक्शनों से MongoDB जांचने देता है।',
   'features.ai.title': 'अपनी कुंजी और स्थानीय मॉडल वाला AI सहायक',
-  'features.ai.body': 'प्राथमिकताएं में चालू करने तक निष्क्रिय रहता है। आपकी अपनी प्रदाता कुंजी (Anthropic, Gemini, OpenAI-संगत) या Ollama व LM Studio जैसे स्थानीय मॉडल का उपयोग करके सामान्य भाषा के अनुरोधों को सीधे आपके डिवाइस से रीड-ओनली find या aggregate क्वेरी में बदलता है — बिना किसी होस्टेड AI प्रॉक्सी के।',
+  'features.ai.body': 'प्राथमिकताएं में चालू करने तक निष्क्रिय रहता है। आपकी अपनी प्रदाता कुंजी (Anthropic, Gemini, OpenAI-संगत) या Ollama व LM Studio जैसे स्थानीय मॉडल का उपयोग करके सामान्य भाषा के अनुरोधों को सीधे आपके डिवाइस से रीड-ओनली find या aggregate क्वेरी में बदलता है, बिना किसी होस्टेड AI प्रॉक्सी के।',
   'features.platforms.title': 'फ़ोन, टैबलेट और डेस्कटॉप',
   'features.platforms.body': 'नियंत्रणों का आकार डिवाइस के अनुसार बदलता है, दो-कॉलम फ़ॉर्म संकरी स्क्रीन पर एक के नीचे एक आते हैं, और इंटरफ़ेस दाएं से बाएं अरबी सहित 15 भाषाओं में उपलब्ध है।',
   'features.compat.title': 'MongoDB संगतता',
@@ -261,6 +261,16 @@ const hi: Messages = {
   'cloud.faq.sponsor.a': 'हां। स्वैच्छिक ओपन-सोर्स प्रायोजन (GitHub Sponsors, Buy Me a Coffee और सीधे दान) कोड-साइनिंग प्रमाणपत्र, रिलीज़ होस्टिंग और टेस्ट हार्डवेयर में मदद करते हैं।',
   'cloud.faq.sponsor.link': 'ओपन-सोर्स प्रायोजन विकल्प देखें',
 
+  'cloud.wire.eyebrow': 'वायर और नीति स्थिति',
+  'cloud.wire.title': 'प्रत्येक परिनियोजन का नेटवर्क व्यवहार देखें',
+  'cloud.wire.footerMode': 'रनटाइम ट्रेस',
+  'cloud.wire.tab.local': '01 सीधा लोकल',
+  'cloud.wire.tab.hosted': '02 E2EE सिंक',
+  'cloud.wire.tab.selfhost': '03 नीति लॉक',
+  'cloud.wire.desc.local': 'बिना खाते या टेलीमेट्री के आपके डिवाइस से सीधा mongocxx TCP/TLS.',
+  'cloud.wire.desc.hosted': 'वैकल्पिक सिंक या ब्रिज से पहले डिवाइस पर Argon2id + AES-256-GCM एन्क्रिप्शन.',
+  'cloud.wire.desc.selfhost': 'enterprise.json के माध्यम से आंतरिक HTTPS लागू करें और बाहरी क्लाउड ब्लॉक करें.',
+
   'trademark.documentTitle': 'ट्रेडमार्क सूचना · {productName}',
   'trademark.description': '{productName} MongoDB नाम का उपयोग केवल लक्ष्य डेटाबेस बताने के लिए करता है; यह MongoDB, Inc. से संबद्ध नहीं है।',
   'trademark.title': 'ट्रेडमार्क सूचना',
@@ -281,6 +291,7 @@ const hi: Messages = {
   'footer.codeLicense': 'साइट कोड',
   'footer.contentLicense': 'सामग्री',
   'footer.source': 'स्रोत कोड',
+  'footer.stamp': 'QJSEngine · mongocxx · कोई कुकी नहीं · कोई तृतीय-पक्ष स्क्रिप्ट नहीं',
 
   'notFound.documentTitle': 'पृष्ठ नहीं मिला · {productName}',
   'notFound.code': 'ERR_ROUTE_404',

@@ -261,6 +261,16 @@ const ja: Messages = {
   'cloud.faq.sponsor.a': 'はい。任意のオープンソース支援（GitHub Sponsors、Buy Me a Coffee、直接寄付）がコード署名証明書や配布サーバー、検証機材の費用を支えています。',
   'cloud.faq.sponsor.link': 'オープンソース支援の選択肢を見る',
 
+  'cloud.wire.eyebrow': '通信とポリシー状態',
+  'cloud.wire.title': '各デプロイ構成のネットワーク動作を確認',
+  'cloud.wire.footerMode': '実行トレース',
+  'cloud.wire.tab.local': '01 ローカル直接接続',
+  'cloud.wire.tab.hosted': '02 E2EE 同期',
+  'cloud.wire.tab.selfhost': '03 ポリシーロック',
+  'cloud.wire.desc.local': 'アカウントやテレメトリなしで端末から直接 mongocxx TCP/TLS 接続。',
+  'cloud.wire.desc.hosted': '任意の同期やブリッジの前に端末上で Argon2id + AES-256-GCM 暗号化。',
+  'cloud.wire.desc.selfhost': 'enterprise.json で社内 HTTPS エンドポイントを強制し外部クラウドを遮断。',
+
   'trademark.documentTitle': '商標に関するお知らせ · {productName}',
   'trademark.description': '{productName}は接続先データベースを示す目的に限りMongoDBの名称を使用しており、MongoDB, Inc.とは無関係です。',
   'trademark.title': '商標に関するお知らせ',
@@ -281,6 +291,7 @@ const ja: Messages = {
   'footer.codeLicense': 'サイトコード',
   'footer.contentLicense': 'コンテンツ',
   'footer.source': 'ソースコード',
+  'footer.stamp': 'QJSEngine · mongocxx · Cookie なし · サードパーティスクリプトなし',
 
   'notFound.documentTitle': 'ページが見つかりません · {productName}',
   'notFound.code': 'ERR_ROUTE_404',
