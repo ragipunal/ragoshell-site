@@ -5,11 +5,11 @@ Bu Gizlilik Politikası ve Aydınlatma Metni; [{domain}]({siteUrl}) web sitesini
 ## 1. Veri Sorumlusu ve İletişim Kanalları
 
 - **Veri Sorumlusu:** {legalEntity}
-- **Yasal Tebligat ve Merkez Adresi:** {legalAddress}
+- **Konum:** {legalAddress}
 - **Gizlilik, KVKK ve GDPR Başvuruları:** {privacyContact}
 - **Genel Destek:** {supportContact}
 - **Güvenlik Açığı Bildirimi:** [{securityTxtPath}]({securityTxtPath})
-- **Taslak Sürüm Tarihi:** {draftDate} (VERBİS kayıt yükümlülüğü eşik analizi ve kesin kurumsal sicil bilgileri, bulut hizmetleri açılmadan önce tamamlanır.)
+- **Son Güncelleme Tarihi:** {draftDate}
 
 ## 2. Bu Web Sitesi ve Çerezsiz Bildirim
 
@@ -91,9 +91,9 @@ Kişisel verilerinizi hiçbir üçüncü tarafa satmayız ve reklam ağlarıyla 
 
 | Sağlayıcı / Kategori | Görev ve İşlenen Veri Kapsamı | Bölge | Veri Koruma Güvenceleri |
 | --- | --- | --- | --- |
-| **Cloudflare, Inc.** | Yetkili DNS, Anycast WAF/DDoS koruması, Origin mTLS ve Cloudflare R2 nesne depolama (`{dlHost}` üzerindeki açık kurulum paketleri + yükleme öncesi `restic` ile şifrelenmiş yedekler) | Küresel / AB | EU-US Data Privacy Framework, GDPR DPA ve Standart Sözleşme Maddeleri (SCC); yedekler istemci tarafında şifrelenir |
-| **Birincil VPS Barındırma Sağlayıcısı** | Kenar `nginx`, Go API/portal (`{apiHost}`, `{appHost}`) ve izole PostgreSQL container'larını barındıran sanal sunucu altyapısı | AB / Türkiye | ISO 27001 fiziksel/ağ güvenliği, GDPR DPA, izole iç Docker ağları |
-| **İşlemsel E-posta Sağlayıcısı (Faz `0.7`: Amazon SES / Postmark / Resend)** | E-posta doğrulama, parola sıfırlama, pasiflik uyarıları ve hesap silme bildirimleri (`0` pazarlama bülteni) | AB / ABD | Aktarımda TLS, SPF/DKIM/DMARC, GDPR DPA ve SCC |
+| **Cloudflare, Inc.** | Yetkili DNS, Anycast WAF/DDoS koruması, Origin mTLS, Cloudflare Email Routing (destek/gizlilik/güvenlik gelen e-posta yönlendirmesi) ve `{dlHost}` üzerindeki açık kurulum paketleri | Küresel / AB | EU-US Data Privacy Framework, GDPR DPA ve Standart Sözleşme Maddeleri (SCC) |
+| **Birincil VPS Barındırma Sağlayıcısı** | Kenar `nginx`, Go API/portal (`{apiHost}`, `{appHost}`), barındırılan köprü (`{bridgeHost}`), izole PostgreSQL container'ları ve şifreli yerel `restic` yedeklerini barındıran sunucu altyapısı | AB / Türkiye | ISO 27001 fiziksel/ağ güvenliği, GDPR DPA, izole iç Docker ağları |
+| **Resend** | Giden işlemsel e-postalar: e-posta doğrulama, parola sıfırlama, 2FA kurtarma, pasiflik uyarıları ve hesap silme bildirimleri (`0` pazarlama bülteni) | AB / ABD | Aktarımda TLS, SPF/DKIM/DMARC, GDPR DPA ve SCC |
 
 Türkiye dışına veri aktarımları 6698 sayılı KVKK m. 9 (2024 değişikliği uyarınca yeterlilik kararları veya Kuruma bildirilen standart sözleşme güvenceleri) kapsamında; AEA/BK kaynaklı aktarımlar ise GDPR Bölüm V (m. 45-46 yeterlilik kararları ve Standart Sözleşme Maddeleri) uyarınca yürütülür.
 
@@ -107,11 +107,11 @@ Tabi olduğunuz mevzuata göre aşağıdaki haklara sahipsiniz:
 **Self-servis araçlar ve başvuru yöntemi:**
 
 - **Anında Veri Dışa Aktarma (`POST /v1/account/export`):** `{appUrl}` üzerinden hesap profilinizi, eşleştirilmiş cihazlarınızı, yetki meta verilerinizi ve şifreli `sync_blobs` kayıtlarınızı içeren JSON arşivini indirebilirsiniz.
-- **Hesap Silme (`DELETE /v1/account`):** `{appUrl}` üzerinden hesabınızın tamamen silinmesini başlatabilirsiniz. Yanlışlıkla yapılan işlemleri veya ele geçirilmiş oturumları geri alabilmeniz için **30 takvim günü geri alınabilir bekleme süresi** uygulanır; 30. günün sonunda hesabınız, cihaz belirteçleriniz ve şifreli eşitleme verileriniz canlı veritabanlarından kalıcı olarak silinir (şifreli felaket kurtarma yedekleri döner saklama takvimi sonunda otomatik düşer).
+- **Hesap Silme (`DELETE /v1/account`):** `{appUrl}` üzerinden hesabınızın tamamen silinmesini başlatabilirsiniz. Yanlışlıkla yapılan işlemleri veya ele geçirilmiş oturumları geri alabilmeniz için **30 takvim günü geri alınabilir bekleme süresi** uygulanır; 30. günün sonunda hesabınız, cihaz belirteçleriniz ve şifreli eşitleme verileriniz canlı veritabanlarından kalıcı olarak silinir (şifreli yerel `restic` yedekleri döner saklama takvimi sonunda otomatik düşer).
 - **Yazılı Başvurular:** Taleplerinizi {privacyContact} kanalı üzerinden de iletebilirsiniz. Doğrulanmış başvurular Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ ve GDPR m. 12(3) uyarınca ücretsiz olarak en geç **30 gün** içinde sonuçlandırılır.
 
 ## 7. Güvenlik Önlemleri ve 72 Saat Veri İhlali Bildirimi
 
-Hesap ve servis altyapımız; `Argon2id` parola özetleme, istemci tarafı `AES-256-GCM` eşitleme şifrelemesi, kısa ömürlü `ES256` belirteçleri, Cloudflare Authenticated Origin Pulls (`mTLS`), güvenlik duvarı IP kısıtlamaları, Linux yetkileri düşürülmüş salt-okunur root olmayan container mimarisi, otomatik güvenlik açığı taramaları (`govulncheck`, `npm audit`, OSV-Scanner, Trivy) ve sunucu dışı şifreli `restic` yedekleriyle korunur.
+Hesap ve servis altyapımız; `Argon2id` parola özetleme, istemci tarafı `AES-256-GCM` eşitleme şifrelemesi, kısa ömürlü `ES256` belirteçleri, Cloudflare Authenticated Origin Pulls (`mTLS`), güvenlik duvarı IP kısıtlamaları, Linux yetkileri düşürülmüş salt-okunur root olmayan container mimarisi, otomatik güvenlik açığı taramaları (`govulncheck`, `npm audit`, OSV-Scanner, Trivy) ve şifreli yerel `restic` yedekleriyle korunur.
 
 Kişisel verilerin kanuni olmayan yollarla başkaları tarafından elde edilmesi veya bireylerin hak ve özgürlükleri açısından risk doğuran bir veri ihlali yaşanması hâlinde, durumun öğrenilmesinden itibaren **72 saat içinde** yetkili denetim makamlarına (Kişisel Verileri Koruma Kurulu ve/veya ilgili GDPR veri koruma otoritesi) ve gecikmeksizin etkilenen kullanıcılara KVKK m. 12/5 ve GDPR m. 33-34 uyarınca bildirim yapılır.

@@ -5,11 +5,11 @@ This Privacy Policy and Illumination Notice explains what data is (and is not) p
 ## 1. Data Controller and Contact Channels
 
 - **Data Controller:** {legalEntity}
-- **Registered Address:** {legalAddress}
+- **Location:** {legalAddress}
 - **Privacy, KVKK & GDPR Requests:** {privacyContact}
 - **General Support:** {supportContact}
 - **Security Vulnerability Disclosure:** [{securityTxtPath}]({securityTxtPath})
-- **Draft Revision Date:** {draftDate} (VERBİS registration threshold assessment and statutory corporate identifiers are finalized before the cloud services open.)
+- **Last Updated:** {draftDate}
 
 ## 2. This Web Site and Cookie-Free Notice
 
@@ -91,9 +91,9 @@ We never sell personal data or share it with advertisers. We engage only the inf
 
 | Provider / Category | Purpose and Data Scope | Region | Data Protection Safeguards |
 | --- | --- | --- | --- |
-| **Cloudflare, Inc.** | Authoritative DNS, Anycast WAF/DDoS protection, Origin mTLS, and Cloudflare R2 object storage (public installers on `{dlHost}` + client-side `restic`-encrypted database backups) | Global / EU | EU-US Data Privacy Framework, GDPR DPA & Standard Contractual Clauses (SCCs); backups encrypted prior to upload |
-| **Primary VPS Infrastructure Provider** | Dedicated Linux compute hosting edge `nginx`, Go API/portal (`{apiHost}`, `{appHost}`), and internal PostgreSQL containers | EU / Türkiye | ISO 27001 physical/network security, GDPR DPA, isolated internal Docker networks |
-| **Transactional Email Provider (Phase `0.7`: Amazon SES / Postmark / Resend)** | Account verification, password reset, inactivity warnings, and deletion notices (`0` marketing newsletters) | EU / US | TLS encryption in transit, SPF/DKIM/DMARC, GDPR DPA & SCCs |
+| **Cloudflare, Inc.** | Authoritative DNS, Anycast WAF/DDoS protection, Origin mTLS, Cloudflare Email Routing (inbound support/privacy/security mail forwarding), and public installers on `{dlHost}` | Global / EU | EU-US Data Privacy Framework, GDPR DPA & Standard Contractual Clauses (SCCs) |
+| **Primary VPS Infrastructure Provider** | Dedicated Linux compute hosting edge `nginx`, Go API/portal (`{apiHost}`, `{appHost}`), hosted bridge (`{bridgeHost}`), internal PostgreSQL containers, and encrypted local `restic` backups | EU / Türkiye | ISO 27001 physical/network security, GDPR DPA, isolated internal Docker networks |
+| **Resend** | Outbound transactional email: account verification, password reset, 2FA recovery, inactivity warnings, and deletion notices (`0` marketing newsletters) | EU / US | TLS encryption in transit, SPF/DKIM/DMARC, GDPR DPA & SCCs |
 
 Cross-border transfers from Türkiye are conducted in compliance with Article 9 of KVKK (as amended in 2024, relying on adequacy decisions or KVKK standard contractual safeguards) and from the EEA/UK under GDPR Chapter V (Articles 45-46 adequacy decisions and Standard Contractual Clauses).
 
@@ -107,11 +107,11 @@ Depending on your jurisdiction, you have the right to:
 **Self-service tools and request procedure:**
 
 - **Instant Data Export (`POST /v1/account/export`):** From `{appUrl}`, export a machine-readable JSON archive containing your account profile, paired devices, entitlement metadata, and encrypted `sync_blobs`.
-- **Account Deletion (`DELETE /v1/account`):** Trigger full account deletion directly from `{appUrl}`. Deletion enters a **30-calendar-day reversible cooling-off period** so accidental deletions or hijacked sessions can be aborted; after 30 days, your account, device tokens, and encrypted sync blobs are permanently purged from live databases (encrypted off-site disaster-recovery backups age out automatically on their rolling retention schedule).
+- **Account Deletion (`DELETE /v1/account`):** Trigger full account deletion directly from `{appUrl}`. Deletion enters a **30-calendar-day reversible cooling-off period** so accidental deletions or hijacked sessions can be aborted; after 30 days, your account, device tokens, and encrypted sync blobs are permanently purged from live databases (encrypted local `restic` backups age out automatically on their rolling retention schedule).
 - **Written Applications:** You may also submit requests via {privacyContact}. Validated requests are answered free of charge within **30 days** (KVKK Communiqué on Application Procedures to the Data Controller; GDPR Art. 12(3)).
 
 ## 7. Security Measures and 72-Hour Data Breach Notification
 
-We protect account and service infrastructure through `Argon2id` password hashing, client-side `AES-256-GCM` sync encryption, short-lived `ES256` tokens, Cloudflare Authenticated Origin Pulls (`mTLS`), firewall allowlisting, read-only rootless/non-root containers with dropped Linux capabilities, automated vulnerability scanning (`govulncheck`, `npm audit`, OSV-Scanner, Trivy), and encrypted off-site `restic` backups.
+We protect account and service infrastructure through `Argon2id` password hashing, client-side `AES-256-GCM` sync encryption, short-lived `ES256` tokens, Cloudflare Authenticated Origin Pulls (`mTLS`), firewall allowlisting, read-only rootless/non-root containers with dropped Linux capabilities, automated vulnerability scanning (`govulncheck`, `npm audit`, OSV-Scanner, Trivy), and encrypted local `restic` backups.
 
 If a personal data breach occurs that is likely to pose a risk to the rights and freedoms of individuals, we will notify the competent supervisory authorities (the KVKK Board and/or relevant GDPR supervisory authority) **within 72 hours** of becoming aware of the incident and inform affected users without undue delay in accordance with KVKK Article 12/5 and GDPR Articles 33-34.

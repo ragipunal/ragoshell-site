@@ -6,11 +6,11 @@ Bu Künye ve Yasal Bildirim sayfası; 5651 sayılı Kanun, 6563 sayılı Elektro
 
 | Alan | Bilgi |
 | --- | --- |
-| **Hizmet Sağlayıcı / Ticari Unvan** | {legalEntity} |
-| **Yasal Tebligat ve Merkez Adresi** | {legalAddress} |
-| **Vergi Dairesi & VKN / MERSİS** | Yasal sicil tescili tamamlandığında yayımlanacaktır |
+| **Hizmet Sağlayıcı / İşletmeci** | {legalEntity} |
+| **Konum** | {legalAddress} |
+| **Ticari Durum** | Ticari faaliyet / ücretli satış yoktur (ücretsiz bireysel açık kaynak proje) |
 | **Birincil Alan Adları** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{bridgeHost}` |
-| **Taslak Sürüm Tarihi** | {draftDate} |
+| **Son Güncelleme Tarihi** | {draftDate} |
 
 ## 2. Resmi İletişim Kanalları
 

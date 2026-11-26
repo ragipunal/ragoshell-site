@@ -6,11 +6,11 @@ This Imprint (*Künye*) provides statutory operator identification, official com
 
 | Field | Details |
 | --- | --- |
-| **Operator / Legal Entity** | {legalEntity} |
-| **Registered Business Address** | {legalAddress} |
-| **Tax Office & Tax ID / MERSİS** | Published upon completion of statutory registration |
+| **Operator** | {legalEntity} |
+| **Location** | {legalAddress} |
+| **Commercial Status** | No commercial sales or paid plans (free individual open-source project) |
 | **Primary Web Domains** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{bridgeHost}` |
-| **Draft Revision Date** | {draftDate} |
+| **Last Updated** | {draftDate} |
 
 ## 2. Official Contact Channels
 

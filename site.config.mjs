@@ -129,15 +129,15 @@ const site = {
    * While `draft` is true, legal pages display the counsel-review banner, emit `noindex`, and stay out of sitemap.xml.
    */
   legal: {
-    draft: true,
-    draftDate: '2026-11-22',
+    draft: false,
+    draftDate: '2026-11-26',
     entity: {
-      en: '[Pending statutory commercial registration: Legal entity name, tax office/ID and MERSİS]',
-      tr: '[Yasal ticari sicil tescili bekleniyor: Ticari unvan, vergi dairesi/VKN ve MERSİS kaydı]',
+      en: 'Ragıp Ünal (Independent Open-Source Maintainer)',
+      tr: 'Ragıp Ünal (Bireysel Açık Kaynak Proje İşletmecisi)',
     },
     address: {
-      en: '[Pending statutory commercial registration: Registered business address in the Republic of Türkiye]',
-      tr: '[Yasal ticari sicil tescili bekleniyor: Türkiye Cumhuriyeti yasal tebligat ve merkez adresi]',
+      en: 'Balıkesir, Republic of Türkiye',
+      tr: 'Balıkesir, Türkiye',
     },
     supportContact: {
       en: `[support@${domain}](mailto:support@${domain})`,

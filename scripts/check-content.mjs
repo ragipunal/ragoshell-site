@@ -137,7 +137,16 @@ throws('cloud live mode requires registerUrl', () => validateCloudConfig({ ...si
 throws('cloud insecure donateUrl', () => validateCloudConfig({ ...site.cloud, donateUrl: 'http://evil.test/donate' }));
 
 // the real files
-check('indexable paths list home, pages and docs but no legal page while legal.draft is true', (() => { const paths = indexablePaths(); return paths.includes('/') && paths.includes('/docs/shell/') && paths.length === 1 + site.pages.length + site.docs.publish.length && !paths.some((x) => x.startsWith('/legal/')); })());
+check(
+  'indexable paths match legal.draft',
+  (() => {
+    const paths = indexablePaths();
+    const expectedCount = 1 + site.pages.length + site.docs.publish.length + (site.legal.draft ? 0 : site.legalPages.length);
+    const hasLegal = site.legalPages.every((p) => paths.includes(`/legal/${p}/`));
+    const noLegal = !paths.some((x) => x.startsWith('/legal/'));
+    return paths.includes('/') && paths.includes('/docs/shell/') && paths.length === expectedCount && (site.legal.draft ? noLegal : hasLegal);
+  })(),
+);
 
 // legal documents
 check('legalSourceLocale keeps tr for tr', legalSourceLocale('tr', 'terms') === 'tr');
