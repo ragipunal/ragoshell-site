@@ -102,10 +102,10 @@ const site = {
 
   /**
    * Static in-browser WebAssembly Live Playground (`demo.<domain>`).
-   * Entry-point CTAs stay hidden on the home and download pages while `enabled` is `false` (flipped in `W7` once live).
+   * Live on `demo.<domain>`; home and download pages render localized entry-point CTAs when `enabled` is `true`.
    */
   demo: {
-    enabled: false,
+    enabled: true,
     url: demoUrl,
   },
 
