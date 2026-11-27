@@ -8,7 +8,7 @@ import { appRepoDir, changelogReleases, publishedDocs } from '../src/lib/app-rep
 import { codeSpans, parseChangelog, releaseAnchor } from '../src/lib/changelog.ts';
 import { interpolateLegal, legalSourceLocale, readLegalSource, renderLegalDocument } from '../src/lib/legal.ts';
 import { renderMarkdown, rewriteHref } from '../src/lib/markdown.ts';
-import { validateCloudConfig } from '../src/lib/cloud.ts';
+import { validateCloudConfig, validateDemoConfig } from '../src/lib/cloud.ts';
 import { detectPlatform, parseManifest } from '../src/lib/releases.ts';
 import { indexablePaths } from '../src/lib/routes.ts';
 import { DESCRIPTION_LIMIT, checkDescription, checkVerificationToken, jsonLdDocument, robotsTxt, shorten, siteNodes, sitemapXml, softwareNode } from '../src/lib/seo.ts';
@@ -129,12 +129,18 @@ check('gate: node without type', jsonLdProblems({}, '{"@context":"https://schema
 check('gate: src', jsonLdProblems({ src: '/x.js' }, '{"@context":"https://schema.org","@type":"T"}').some((m) => m.includes('src')));
 check('gate: not an object', jsonLdProblems({}, '[1]').length === 1);
 
-// cloud config invariants
+// cloud & demo config invariants
 check('site.cloud passes validation', validateCloudConfig(site.cloud) === site.cloud);
 check('cloud soon mode accepted', validateCloudConfig({ ...site.cloud, mode: 'soon' }).mode === 'soon');
 throws('cloud rejects unknown mode', () => validateCloudConfig({ ...site.cloud, mode: 'paid' }));
 throws('cloud live mode requires registerUrl', () => validateCloudConfig({ ...site.cloud, mode: 'live', registerUrl: '' }));
 throws('cloud insecure donateUrl', () => validateCloudConfig({ ...site.cloud, donateUrl: 'http://evil.test/donate' }));
+check('site.demo passes validation', validateDemoConfig(site.demo) === site.demo && site.demo.url === site.urls.demo);
+check('demo enabled mode accepted', validateDemoConfig({ ...site.demo, enabled: true }).enabled === true);
+throws('demo rejects missing object', () => validateDemoConfig(null));
+throws('demo rejects non-boolean enabled', () => validateDemoConfig({ ...site.demo, enabled: 'yes' }));
+throws('demo rejects insecure url', () => validateDemoConfig({ ...site.demo, url: 'http://demo.example.test' }));
+throws('demo rejects credentialed url', () => validateDemoConfig({ ...site.demo, url: 'https://u:p@demo.example.test' }));
 
 // the real files
 check(
@@ -152,11 +158,22 @@ check(
 check('legalSourceLocale keeps tr for tr', legalSourceLocale('tr', 'terms') === 'tr');
 check('legalSourceLocale falls back to en for ar', legalSourceLocale('ar', 'terms') === 'en');
 const legalRequiredTokens = {
-  privacy: ['KVKK', 'GDPR', 'AES-256-GCM', 'Argon2id', '/v1/account/export', '/v1/account', '72', 'Cloudflare', 'shareAnonymousUsage', 'disableHttpsFeatures'],
-  terms: ['RFC 8628', '127.0.0.0/8', site.license.app.name],
-  imprint: ['/.well-known/security.txt', site.repo.appRepoUrl, site.repo.siteRepoUrl],
+  privacy: ['KVKK', 'GDPR', 'AES-256-GCM', 'Argon2id', '/v1/account/export', '/v1/account', '72', 'Cloudflare', 'shareAnonymousUsage', 'disableHttpsFeatures', site.hosts.demo],
+  terms: ['RFC 8628', '127.0.0.0/8', site.license.app.name, site.hosts.demo],
+  imprint: ['/.well-known/security.txt', site.repo.appRepoUrl, site.repo.siteRepoUrl, site.hosts.demo],
 };
-const legalForbiddenTokens = ['Paddle', 'iyzico', 'refundsPath', '/legal/refunds/'];
+const legalForbiddenTokens = [
+  'Paddle',
+  'iyzico',
+  'refundsPath',
+  '/legal/refunds/',
+  'bridgeHost',
+  'bridgeUrl',
+  'wss://',
+  `${site.hosts.app}/ws`,
+  'Hosted WebSocket Bridge',
+  'Barındırılan WebSocket Köprüsü',
+];
 const legalHeadingsByPage = new Map();
 for (const page of site.legalPages) {
   for (const { code } of site.enabledLocales) {
@@ -167,7 +184,7 @@ for (const page of site.legalPages) {
         check(`${label} does not hardcode domain`, !raw.includes(site.domain));
         check(`${label} does not hardcode repo host`, !raw.includes(site.repo.base));
         for (const token of legalForbiddenTokens) {
-          check(`${label} source does not mention "${token}" (card sales were dropped)`, !raw.includes(token));
+          check(`${label} source does not mention "${token}" (dropped or dormant feature)`, !raw.includes(token));
         }
       }
       const rendered = renderLegalDocument(code, page);
@@ -184,7 +201,7 @@ for (const page of site.legalPages) {
         check(`${label} (${code}) matches ${ref.locale} section structure`, depths === ref.depths, `${depths} !== ${ref.depths}`);
       }
       for (const token of legalForbiddenTokens) {
-        check(`${label} (${code}) does not mention "${token}" (card sales were dropped)`, !rendered.html.includes(token));
+        check(`${label} (${code}) does not mention "${token}" (dropped or dormant feature)`, !rendered.html.includes(token));
       }
       for (const token of legalRequiredTokens[page] ?? []) {
         check(`${label} (${code}) covers "${token}"`, rendered.html.includes(token));

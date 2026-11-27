@@ -9,7 +9,7 @@ Bu Künye ve Yasal Bildirim sayfası; 5651 sayılı Kanun, 6563 sayılı Elektro
 | **Hizmet Sağlayıcı / İşletmeci** | {legalEntity} |
 | **Konum** | {legalAddress} |
 | **Ticari Durum** | Ticari faaliyet / ücretli satış yoktur (ücretsiz bireysel açık kaynak proje) |
-| **Birincil Alan Adları** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{bridgeHost}` |
+| **Birincil Alan Adları** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{demoHost}` |
 | **Son Güncelleme Tarihi** | {draftDate} |
 
 ## 2. Resmi İletişim Kanalları
@@ -30,10 +30,10 @@ Lütfen herkese açık hata kayıtlarında veritabanı parolası, SSH anahtarı,
 
 ## 4. Açık Kaynak Depoları ve Lisans Bilgileri
 
-- **{productName} Masaüstü ve Mobil İstemci (`{productId}` ve `{productId}-mcp`):**
+- **{productName} Masaüstü, Mobil ve WebAssembly İstemci (`{productId}`, `{productId}-mcp` ve `{demoHost}`):**
   - Kaynak kodu deposu: [{appRepoUrl}]({appRepoUrl})
   - Lisans: **[{appLicenseName}]({appLicenseUrl})** (GNU Genel Kamu Lisansı Sürüm 3.0)
-  - Atıf: {productName} açık kaynaklıdır; tüm üçüncü taraf lisans bildirimleri ve Qt LGPLv3 yükümlülükleri her kurulum paketinin içinde (`THIRD-PARTY-NOTICES.txt` ve `licenses/`) sunulur.
+  - Atıf: {productName} açık kaynaklıdır; tüm üçüncü taraf lisans bildirimleri ve Qt LGPLv3/GPLv3 yükümlülükleri her kurulum paketinin ve WebAssembly paketinin içinde (`THIRD-PARTY-NOTICES.txt` ve `licenses/`) sunulur.
 - **{productName} Web Sitesi (`{domain}`):**
   - Kaynak kodu deposu: [{siteRepoUrl}]({siteRepoUrl})
   - Kod lisansı: **[{siteCodeLicenseName}]({siteCodeLicenseUrl})**

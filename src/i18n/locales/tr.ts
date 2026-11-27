@@ -24,6 +24,7 @@ const tr: Messages = {
   'home.title': 'Kabuğun etrafında kurulmuş bir MongoDB istemcisi',
   'home.lead': '{productName}, MongoDB kabuğunu aracın merkezine koyar ve geri kalanını onun çevresinde kurar.',
   'home.cta.download': 'İndir',
+  'home.cta.demo': 'Tarayıcıda dene',
   'home.cta.features': 'Özelliklere bak',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const tr: Messages = {
 
   'home.cloud.eyebrow': 'Özgür çekirdek ve isteğe bağlı bulut',
   'home.cloud.title': 'Sonsuza dek ücretsiz {appLicense} istemci',
-  'home.cloud.body': 'Yerel bağlantılar, kabuk betikleri, MCP ve kendi anahtarınızla ya da yerel modelle yapay zekâ asistanı asla kısıtlanmaz. İsteğe bağlı bulut hizmetleri (şifreli eşitleme ve barındırılan web köprüsü) adil kullanım sınırlarıyla ücretsiz olacak.',
+  'home.cloud.body': 'Yerel bağlantılar, kabuk betikleri, MCP ve kendi anahtarınızla ya da yerel modelle yapay zekâ asistanı asla kısıtlanmaz. Sıfır-bilgi şifreli eşitleme gibi isteğe bağlı bulut hizmetleri adil kullanım sınırlarıyla ücretsizdir.',
   'home.cloud.cta': 'Bulut ve kendi sunucun',
 
   'features.documentTitle': 'Özellikler · {productName}',
@@ -159,6 +160,7 @@ const tr: Messages = {
   'download.allFor': '{platform} için tüm sürümler',
   'download.get': 'İndir',
   'download.latestTag': 'Güncel etiketli sürüm: v{version}',
+  'download.demoCta': 'Tarayıcıda dene',
   'download.verifyCta': 'Sağlama toplamları ve sürüm dosyaları',
   'download.unavailable': 'Henüz yok',
   'download.col.platform': 'Platform',
@@ -217,7 +219,7 @@ const tr: Messages = {
   'cloud.local.f2': 'Gömülü JavaScript kabuğu, Şema Zekâsı ve 15 arayüz dili',
   'cloud.local.f3': 'İsteğe bağlı salt okunur yerel MCP sunucusu ve minisign doğrulamalı güncellemeler',
   'cloud.local.f4': 'Kendi anahtarınızla (Anthropic, Gemini, OpenAI uyumlu) ya da yerel modelle (Ollama, LM Studio) AI sorgu asistanı',
-  'cloud.local.f5': 'Web Mod A Playground ve Mod C yerel ajan',
+  'cloud.local.f5': 'Gömülü JavaScript kabuklu tarayıcı içi WebAssembly deneme alanı',
   'cloud.local.cta': 'Ücretsiz {appLicense} uygulamasını indir',
 
   'cloud.hosted.name': 'Barındırılan bulut',
@@ -226,7 +228,7 @@ const tr: Messages = {
   'cloud.hosted.summary': 'Sizin için ücretsiz işlettiğimiz isteğe bağlı hizmetler. Uygulamadaki hiçbir şey bunlara bağlı değildir.',
   'cloud.hosted.f1': 'Sıfır-bilgi şifreli eşitleme (Argon2id + AES-256-GCM): her biri en çok 1 MiB olan 20 koleksiyon, günde 500 yükleme',
   'cloud.hosted.f2': 'Hesap başına en çok 3 cihaz',
-  'cloud.hosted.f3': 'Barındırılan TLS web köprüsü ({bridgeHost}): hesap başına bir oturum, en çok 2 saat, 15 dakika boşta kalınca kapanır, ayda 1 GB trafik',
+  'cloud.hosted.f3': 'İsteğe bağlı TOTP 2FA, anında KVKK ve GDPR JSON veri dışa aktarma ve 30 gün geri alınabilir hesap silme',
   'cloud.hosted.f4': '12 ay kullanılmayan hesabın şifreli eşitleme verisi, 30 gün önce e-postayla uyarılarak silinir; hesap kalır',
   'cloud.hosted.note': 'Olduğu gibi, kesintisizlik garantisi olmadan sunulur ve sınırlar değişebilir; ayrıntılar Kullanım Koşullarında.',
   'cloud.hosted.cta': 'Ücretsiz hesap oluştur',
@@ -271,7 +273,7 @@ const tr: Messages = {
   'cloud.wire.tab.hosted': '02 E2EE Eşitleme',
   'cloud.wire.tab.selfhost': '03 Politika Kilidi',
   'cloud.wire.desc.local': 'Hesap veya telemetri olmadan doğrudan cihazınızdan mongocxx TCP/TLS.',
-  'cloud.wire.desc.hosted': 'İsteğe bağlı eşitleme veya köprü öncesi cihazda Argon2id + AES-256-GCM şifreleme.',
+  'cloud.wire.desc.hosted': 'İsteğe bağlı bulut eşitlemesi öncesi cihazda Argon2id + AES-256-GCM şifreleme.',
   'cloud.wire.desc.selfhost': 'enterprise.json ile kurum HTTPS uç noktalarını zorunlu kılın, dış bulutu kapatın.',
 
   'trademark.documentTitle': 'Marka bildirimi · {productName}',

@@ -13,6 +13,8 @@
 const productName = 'RagoShell';
 const productId = 'ragoshell';
 const domain = 'ragoshell.com.tr';
+const demoHost = `demo.${domain}`;
+const demoUrl = `https://${demoHost}`;
 
 const repoBase = 'https://github.com';
 const repoOwner = 'ragipunal';
@@ -54,13 +56,13 @@ const site = {
     app: `app.${domain}`,
     api: `api.${domain}`,
     dl: `dl.${domain}`,
-    bridge: `app.${domain}/ws`,
+    demo: demoHost,
   },
   urls: {
     app: `https://app.${domain}`,
     api: `https://api.${domain}`,
     dl: `https://dl.${domain}`,
-    bridge: `wss://app.${domain}/ws`,
+    demo: demoUrl,
   },
   contacts: {
     support: `support@${domain}`,
@@ -96,6 +98,15 @@ const site = {
     registerUrl: `https://app.${domain}/register`,
     loginUrl: `https://app.${domain}/login`,
     donateUrl: `${repoBlobBase}/DONATE.md`,
+  },
+
+  /**
+   * Static in-browser WebAssembly Live Playground (`demo.<domain>`).
+   * Entry-point CTAs stay hidden on the home and download pages while `enabled` is `false` (flipped in `W7` once live).
+   */
+  demo: {
+    enabled: false,
+    url: demoUrl,
   },
 
   /**

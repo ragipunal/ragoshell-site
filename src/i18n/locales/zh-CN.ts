@@ -24,6 +24,7 @@ const zhCN: Messages = {
   'home.title': '围绕Shell构建的MongoDB客户端',
   'home.lead': '{productName}将MongoDB Shell置于工具核心，其余一切都围绕它构建。',
   'home.cta.download': '下载',
+  'home.cta.demo': '在浏览器中试用',
   'home.cta.features': '查看功能',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const zhCN: Messages = {
 
   'home.cloud.eyebrow': '开源核心与可选云服务',
   'home.cloud.title': '永久免费的{appLicense}客户端',
-  'home.cloud.body': '本地连接、Shell脚本、MCP以及使用您自有密钥或本地模型的AI助手永不过期。可选云服务（加密同步与托管Web网桥）将在合理使用限额内免费提供。',
+  'home.cloud.body': '本地连接、Shell脚本、MCP以及使用您自有密钥或本地模型的AI助手永不过期。零知识加密同步等可选云服务在合理使用限额内免费提供。',
   'home.cloud.cta': '云服务与自托管',
 
   'features.documentTitle': '功能 · {productName}',
@@ -159,6 +160,7 @@ const zhCN: Messages = {
   'download.allFor': '{platform}的全部版本',
   'download.get': '下载',
   'download.latestTag': '当前标记版本：v{version}',
+  'download.demoCta': '在浏览器中试用',
   'download.verifyCta': '校验和与发行版文件',
   'download.unavailable': '暂未提供',
   'download.col.platform': '平台',
@@ -217,7 +219,7 @@ const zhCN: Messages = {
   'cloud.local.f2': '嵌入式JavaScript Shell、架构智能与15种界面语言',
   'cloud.local.f3': '可选的只读本地MCP服务器与minisign签名校验更新',
   'cloud.local.f4': '使用自有密钥（Anthropic、Gemini、OpenAI兼容）或本地模型（Ollama、LM Studio）的AI查询助手',
-  'cloud.local.f5': 'Web模式A演练场与模式C本地代理',
+  'cloud.local.f5': '内置嵌入式JavaScript Shell的浏览器端WebAssembly演练场',
   'cloud.local.cta': '下载免费{appLicense}应用',
 
   'cloud.hosted.name': '托管云服务',
@@ -226,7 +228,7 @@ const zhCN: Messages = {
   'cloud.hosted.summary': '我们为您免费运行的可选服务。应用中的任何核心功能都不依赖它们。',
   'cloud.hosted.f1': '零知识加密同步（Argon2id + AES-256-GCM）：最多20个集合（每个上限1 MiB），每日500次上传',
   'cloud.hosted.f2': '每个账号最多3台设备',
-  'cloud.hosted.f3': '托管TLS Web网桥（{bridgeHost}）：每账号同时1个会话，最长2小时，空闲15分钟关闭，每月1 GB流量',
+  'cloud.hosted.f3': '可选TOTP双因素认证、即时KVKK与GDPR JSON数据导出，以及30天可撤销账号删除',
   'cloud.hosted.f4': '连续12个月未使用的账号将在提前30天邮件提醒后删除其加密同步数据；账号本身保留',
   'cloud.hosted.note': '按原样提供，不作可用性保证，限额可能调整；详情请参见服务条款。',
   'cloud.hosted.cta': '创建免费账号',
@@ -271,7 +273,7 @@ const zhCN: Messages = {
   'cloud.wire.tab.hosted': '02 端到端加密同步',
   'cloud.wire.tab.selfhost': '03 策略锁定',
   'cloud.wire.desc.local': '从您的设备直连 mongocxx TCP/TLS，无需账户与遥测。',
-  'cloud.wire.desc.hosted': '在可选同步或网桥前于本地通过 Argon2id + AES-256-GCM 加密。',
+  'cloud.wire.desc.hosted': '在可选云同步前于本地通过 Argon2id + AES-256-GCM 加密。',
   'cloud.wire.desc.selfhost': '通过 enterprise.json 强制使用内部 HTTPS 配置并禁用外部云端。',
 
   'trademark.documentTitle': '商标声明 · {productName}',

@@ -2,6 +2,7 @@
 import site from '../../../site.config.mjs';
 import Base from '../../layouts/Base.astro';
 import { localeCodes, localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
+import { validateDemoConfig } from '../../lib/cloud';
 import { jsonLdDocument, siteNodes } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 }
 
 const { locale } = Astro.props;
+const demo = validateDemoConfig(site.demo);
 const siteJsonLd = jsonLdDocument(
   siteNodes({
     name: site.productName,
@@ -96,6 +98,14 @@ const platforms = site.download.platforms as string[];
             <span class="btn-fill" aria-hidden="true"></span>
             <span>{t(locale, 'home.cta.download')}</span>
           </a>
+          {
+            demo.enabled && (
+              <a class="button secondary" data-fill href={demo.url} rel="noopener">
+                <span class="btn-fill" aria-hidden="true"></span>
+                <span>{t(locale, 'home.cta.demo')}</span>
+              </a>
+            )
+          }
           <a class="button secondary" data-fill href={localeUrl(locale, '/features/')}>
             <span class="btn-fill" aria-hidden="true"></span>
             <span>{t(locale, 'home.cta.features')}</span>

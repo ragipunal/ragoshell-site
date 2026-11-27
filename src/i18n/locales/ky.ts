@@ -24,6 +24,7 @@ const ky: Messages = {
   'home.title': 'Shell-дин тегерегинде курулган MongoDB кардары',
   'home.lead': '{productName} MongoDB shell-ди куралдын борборуна коюп, калганынын баарын анын айланасына курат.',
   'home.cta.download': 'Жүктөп алуу',
+  'home.cta.demo': 'Браузерде сынап көрүү',
   'home.cta.features': 'Мүмкүнчүлүктөрдү көрүү',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const ky: Messages = {
 
   'home.cloud.eyebrow': 'Ачык өзөк жана кошумча булут',
   'home.cloud.title': 'Түбөлүк акысыз {appLicense} кардары',
-  'home.cloud.body': 'Жергиликтүү туташуулар, shell скрипттери, MCP жана өз ачкычыңыз же жергиликтүү модель менен иштөөчү ЖИ жардамчысы эч качан чектелбейт. Кошумча булут кызматтары (шифрленген шайкештештирүү жана хостингдеги веб-көпүрө) адилеттүү колдонуу чектери менен акысыз болот.',
+  'home.cloud.body': 'Жергиликтүү туташуулар, shell скрипттери, MCP жана өз ачкычыңыз же жергиликтүү модель менен иштөөчү ЖИ жардамчысы эч качан чектелбейт. Нөл-билим шифрленген шайкештештирүү сыяктуу кошумча булут кызматтары адилеттүү колдонуу чектери менен акысыз.',
   'home.cloud.cta': 'Булут жана өз сервериңиз',
 
   'features.documentTitle': 'Мүмкүнчүлүктөр · {productName}',
@@ -159,6 +160,7 @@ const ky: Messages = {
   'download.allFor': '{platform} үчүн бардык релиздер',
   'download.get': 'Жүктөө',
   'download.latestTag': 'Учурдагы белгиленген чыгарылыш: v{version}',
+  'download.demoCta': 'Браузерде сынап көрүү',
   'download.verifyCta': 'Текшерүү суммалары жана файлдар',
   'download.unavailable': 'Азырынча жеткиликсиз',
   'download.col.platform': 'Платформа',
@@ -217,7 +219,7 @@ const ky: Messages = {
   'cloud.local.f2': 'Орнотулган JavaScript shell, Схема интеллекти жана 15 UI тили',
   'cloud.local.f3': 'Кошумча окууга гана арналган жергиликтүү MCP сервери жана minisign менен текшерилген жаңыртуулар',
   'cloud.local.f4': 'Өз ачкычыңыз (Anthropic, Gemini, OpenAI-шайкеш) же жергиликтүү модель (Ollama, LM Studio) менен ЖИ суроо жардамчысы',
-  'cloud.local.f5': 'Web Mode A Playground жана Mode C жергиликтүү агенти',
+  'cloud.local.f5': 'Орнотулган JavaScript shell-и бар браузер ичиндеги WebAssembly сыноо аянтчасы',
   'cloud.local.cta': 'Акысыз {appLicense} колдонмосун жүктөө',
 
   'cloud.hosted.name': 'Хостингдеги булут',
@@ -226,7 +228,7 @@ const ky: Messages = {
   'cloud.hosted.summary': 'Биз сиз үчүн акысыз иштеткен кошумча кызматтар. Колдонмодогу эч нерсе буларга көз каранды эмес.',
   'cloud.hosted.f1': 'Нөл-билим шифрленген шайкештештирүү (Argon2id + AES-256-GCM): ар бири 1 MiB чейинки 20 коллекция, күнүнө 500 жүктөө',
   'cloud.hosted.f2': 'Ар бир эсепке 3 түзмөккө чейин',
-  'cloud.hosted.f3': 'Хостингдеги TLS веб-көпүрөсү ({bridgeHost}): эсепке бир сессия, 2 саатка чейин, 15 мүнөт аракетсиздиктен кийин жабылат, айына 1 GB трафик',
+  'cloud.hosted.f3': 'Кошумча TOTP 2FA, KVKK жана GDPR боюнча дароо JSON маалымат экспорту жана 30 күн ичинде кайтарылуучу эсепти өчүрүү',
   'cloud.hosted.f4': '12 ай колдонулбаган эсептин шифрленген маалыматы 30 күн мурун email эскертүүсүнөн кийин өчүрүлөт; эсеп калат',
   'cloud.hosted.note': 'Үзгүлтүксүздүк кепилдигисиз бар боюнча берилет жана чектөөлөр өзгөрүшү мүмкүн; толук маалымат Тейлөө шарттарында.',
   'cloud.hosted.cta': 'Акысыз эсеп ачуу',
@@ -271,7 +273,7 @@ const ky: Messages = {
   'cloud.wire.tab.hosted': '02 E2EE шайкештешүү',
   'cloud.wire.tab.selfhost': '03 Саясат кулпусу',
   'cloud.wire.desc.local': 'Каттоо эсеби же телеметриясыз түзмөгүңүздөн түз mongocxx TCP/TLS.',
-  'cloud.wire.desc.hosted': 'Кошумча шайкештешүү же көпүрө алдында түзмөктө Argon2id + AES-256-GCM шифрлөө.',
+  'cloud.wire.desc.hosted': 'Кошумча булут шайкештешүүсү алдында түзмөктө Argon2id + AES-256-GCM шифрлөө.',
   'cloud.wire.desc.selfhost': 'enterprise.json аркылуу ички HTTPS даректерин милдеттендирип, тышкы булутту жабуу.',
 
   'trademark.documentTitle': 'Соода белгиси жөнүндө билдирүү · {productName}',

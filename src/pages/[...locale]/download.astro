@@ -3,6 +3,7 @@ import site from '../../../site.config.mjs';
 import Base from '../../layouts/Base.astro';
 import { localeStaticPaths, localeUrl, t, type MessageKey } from '../../i18n';
 import { changelogReleases } from '../../lib/app-repo';
+import { validateDemoConfig } from '../../lib/cloud';
 import { jsonLdDocument, softwareNode } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -10,6 +11,7 @@ export function getStaticPaths() {
 }
 
 const { locale } = Astro.props;
+const demo = validateDemoConfig(site.demo);
 const latestVersion = changelogReleases()[0]?.version ?? '';
 const platforms = site.download.platforms as string[];
 const hasPackage = (platform: string) => ['windows', 'macos', 'linux'].includes(platform);
@@ -80,10 +82,20 @@ const keep = (key: MessageKey, names: string[]) =>
           }
           <code class="release-verify-pill">SHA256SUMS.txt · SHA256SUMS.txt.minisig</code>
         </div>
-        <a class="button secondary" data-fill href={site.download.allDownloadsUrl} rel="noopener noreferrer">
-          <span class="btn-fill" aria-hidden="true"></span>
-          <span>{t(locale, 'download.verifyCta')}</span>
-        </a>
+        <div class="release-ledger-actions">
+          {
+            demo.enabled && (
+              <a class="button secondary" data-fill href={demo.url} rel="noopener">
+                <span class="btn-fill" aria-hidden="true"></span>
+                <span>{t(locale, 'download.demoCta')}</span>
+              </a>
+            )
+          }
+          <a class="button secondary" data-fill href={site.download.allDownloadsUrl} rel="noopener noreferrer">
+            <span class="btn-fill" aria-hidden="true"></span>
+            <span>{t(locale, 'download.verifyCta')}</span>
+          </a>
+        </div>
       </div>
 
       <div class="platforms-wrap">

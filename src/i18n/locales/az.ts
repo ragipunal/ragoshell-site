@@ -24,6 +24,7 @@ const az: Messages = {
   'home.title': 'Shell ətrafında qurulmuş MongoDB müştərisi',
   'home.lead': '{productName} MongoDB shell-i alətin mərkəzinə qoyur və qalan hər şeyi onun ətrafında qurur.',
   'home.cta.download': 'Yüklə',
+  'home.cta.demo': 'Brauzerdə sına',
   'home.cta.features': 'Xüsusiyyətlərə bax',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const az: Messages = {
 
   'home.cloud.eyebrow': 'Açıq nüvə və isteğe bağlı bulud',
   'home.cloud.title': 'Ömürlük pulsuz {appLicense} müştəri',
-  'home.cloud.body': 'Yerli bağlantılar, shell skriptləri, MCP və öz açarınızla və ya yerli modellə AI köməkçisi heç vaxt məhdudlaşdırılmır. İsteğe bağlı bulud xidmətləri (şifrələnmiş sinxronizasiya və hostinq edilən veb körpü) ədalətli istifadə limitləri ilə pulsuz olacaq.',
+  'home.cloud.body': 'Yerli bağlantılar, shell skriptləri, MCP və öz açarınızla və ya yerli modellə AI köməkçisi heç vaxt məhdudlaşdırılmır. Sıfır-bilgi şifrəli sinxronizasiya kimi isteğe bağlı bulud xidmətləri ədalətli istifadə limitləri ilə pulsuzdur.',
   'home.cloud.cta': 'Bulud və öz serverin',
 
   'features.documentTitle': 'Xüsusiyyətlər · {productName}',
@@ -159,6 +160,7 @@ const az: Messages = {
   'download.allFor': '{platform} üçün bütün buraxılışlar',
   'download.get': 'Yüklə',
   'download.latestTag': 'Cari etiketli buraxılış: v{version}',
+  'download.demoCta': 'Brauzerdə sına',
   'download.verifyCta': 'Yoxlama cəmləri və buraxılış faylları',
   'download.unavailable': 'Hələ mövcud deyil',
   'download.col.platform': 'Platforma',
@@ -217,7 +219,7 @@ const az: Messages = {
   'cloud.local.f2': 'Daxili JavaScript shell, Sxem Zəkası və 15 interfeys dili',
   'cloud.local.f3': 'İstəyə bağlı yalnız-oxunan yerli MCP serveri və minisign təsdiqli yeniləmələr',
   'cloud.local.f4': 'Öz açarınızla (Anthropic, Gemini, OpenAI uyğun) və ya yerli modellə (Ollama, LM Studio) AI sorğu köməkçisi',
-  'cloud.local.f5': 'Web Mod A Playground və Mod C yerli agent',
+  'cloud.local.f5': 'Daxili JavaScript shell ilə brauzerdaxili WebAssembly sınaq mühiti',
   'cloud.local.cta': 'Pulsuz {appLicense} tətbiqini yüklə',
 
   'cloud.hosted.name': 'Barındırılan bulud',
@@ -226,7 +228,7 @@ const az: Messages = {
   'cloud.hosted.summary': 'Sizin üçün ödənişsiz işlətdiyimiz isteğe bağlı xidmətlər. Tətbiqdəki heç nə bunlardan asılı deyil.',
   'cloud.hosted.f1': 'Sıfır-bilgi şifrəli sinxronizasiya (Argon2id + AES-256-GCM): hər biri 1 MiB-a qədər 20 kolleksiya, gündə 500 yükləmə',
   'cloud.hosted.f2': 'Hesab başına 3-ə qədər cihaz',
-  'cloud.hosted.f3': 'Barındırılan TLS veb körpüsü ({bridgeHost}): hesab başına bir sessiya, 2 saata qədər, 15 dəqiqə boş qaldıqda bağlanır, ayda 1 GB trafik',
+  'cloud.hosted.f3': 'İstəyə bağlı TOTP 2FA, dərhal KVKK və GDPR JSON məlumat ixracı və 30 gün geri qaytarıla bilən hesab silinməsi',
   'cloud.hosted.f4': '12 ay istifadə olunmayan hesabın şifrəli sinxronizasiya məlumatı 30 gün əvvəl e-poçt xəbərdarlığından sonra silinir; hesab qalır',
   'cloud.hosted.note': 'Olduğu kimi, fasiləsizlik zəmanəti olmadan təqdim olunur və limitlər dəyişə bilər; tam təfərrüatlar Xidmət Şərtlərindədir.',
   'cloud.hosted.cta': 'Pulsuz hesab yarat',
@@ -271,7 +273,7 @@ const az: Messages = {
   'cloud.wire.tab.hosted': '02 E2EE Sinxronizasiya',
   'cloud.wire.tab.selfhost': '03 Siyasət Kilidi',
   'cloud.wire.desc.local': 'Hesab və telemetriya olmadan cihazınızdan birbaşa mongocxx TCP/TLS.',
-  'cloud.wire.desc.hosted': 'İsteğe bağlı sinxronizasiya və körpüdən əvvəl cihazda Argon2id + AES-256-GCM şifrələmə.',
+  'cloud.wire.desc.hosted': 'İstəyə bağlı bulud sinxronizasiyasından əvvəl cihazda Argon2id + AES-256-GCM şifrələmə.',
   'cloud.wire.desc.selfhost': 'enterprise.json ilə daxili HTTPS ünvanlarını məcbur edin və xarici buludu bağlayın.',
 
   'trademark.documentTitle': 'Ticarət nişanı bildirişi · {productName}',

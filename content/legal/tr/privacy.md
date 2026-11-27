@@ -1,6 +1,6 @@
 # Gizlilik Politikası, KVKK / GDPR Aydınlatma Metni ve Çerezsiz Bildirim
 
-Bu Gizlilik Politikası ve Aydınlatma Metni; [{domain}]({siteUrl}) web sitesini ziyaret ettiğinizde, {productName} masaüstü ve mobil uygulamalarını kurup çalıştırdığınızda veya `{appHost}`, `{apiHost}`, `{dlHost}` ve `{bridgeHost}` üzerindeki isteğe bağlı {productName} Cloud hizmetlerini kullandığınızda hangi verilerin işlendiğini ve **hangi verilerin kesinlikle toplanmadığını** açıklar. Metin, **6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)** m. 10 ile Avrupa Birliği / AEA / Birleşik Krallık **Genel Veri Koruma Tüzüğü (GDPR)** m. 13-14 hükümlerine uyumlu olarak hazırlanmıştır.
+Bu Gizlilik Politikası ve Aydınlatma Metni; [{domain}]({siteUrl}) web sitesini ziyaret ettiğinizde, `{demoHost}` üzerindeki tarayıcı içi deneme alanını kullandığınızda, {productName} masaüstü ve mobil uygulamalarını kurup çalıştırdığınızda veya `{appHost}`, `{apiHost}` ve `{dlHost}` üzerindeki isteğe bağlı {productName} Cloud hizmetlerini kullandığınızda hangi verilerin işlendiğini ve **hangi verilerin kesinlikle toplanmadığını** açıklar. Metin, **6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)** m. 10 ile Avrupa Birliği / AEA / Birleşik Krallık **Genel Veri Koruma Tüzüğü (GDPR)** m. 13-14 hükümlerine uyumlu olarak hazırlanmıştır.
 
 ## 1. Veri Sorumlusu ve İletişim Kanalları
 
@@ -29,6 +29,13 @@ Gelen HTTPS trafiği Cloudflare TLS/WAF koruması ve karşılıklı kimlik doğr
 
 - **Maskelenmiş web erişim günlükleri:** Kenar `nginx` sunucumuz erişim günlüklerine yazmadan önce URL sorgu dizgelerini ve tam `User-Agent` başlıklarını çıkarır; ziyaretçi IPv4 adreslerini `/24` düzeyine (son oktet sıfırlanır, ör. `203.0.113.0`), IPv6 adreslerini ise `/48` düzeyine kısaltır.
 - **Güvenlik ve oran sınırı (rate-limit) günlükleri:** Tam IP adresleri hız sınırlaması için geçici olarak bellekte işlenir; kimlik doğrulama kaba kuvvet denemeleri, geçersiz belirteç denemeleri veya ağ kötüye kullanımı gibi güvenlik olaylarında ise bilgi güvenliği meşru menfaati hukuki sebebine (KVKK m. 5/2-f; GDPR m. 6(1)(f)) dayanarak güvenlik günlüklerinde **en fazla 30 gün** saklanır ve ardından silinir.
+
+### 2.4 Tarayıcı İçi WebAssembly Deneme Alanı (`{demoHost}`)
+
+Ayrı canlı deneme alanı (`{demoHost}`), gömülü örnek veri kümesiyle birlikte {productName} uygulamasının statik WebAssembly derlemesini sunar. Çalıştırdığınız her sorgu, belge düzenlemesi ve JavaScript kabuk komutu **yalnızca tarayıcı sekmenizin içinde** işlenir:
+
+- **Yalnızca tarayıcı içi depolama:** Deneme alanındaki örnek veritabanı değişiklikleri yalnızca geçici tarayıcı belleğinde tutulur (örnek veri kümesini sıfırladığınızda veya sekmeyi yenileyip kapattığınızda silinir). Yalnızca talep ettiğiniz çalışma alanı tercihlerini ve kayıtlı betikleri cihazınızda tutmak için teknik olarak zorunlu olan tarayıcı içi `IndexedDB` (`{demoHost}` alan adına izole `IDBFS`; KVKK Çerez Uygulamaları Rehberi ve ePrivacy kuralları uyarınca açık rıza şartından muaftır) verilerini dilediğiniz an tarayıcınızın `{demoHost}` site verilerini temizleme ayarıyla silebilirsiniz.
+- **Sunucuya sıfır veritabanı trafiği:** `{demoHost}` **hiçbir HTTP çerezi bırakmaz**, **telemetri veya sürüm denetimi isteği göndermez** ve **sunucu taraflı bir veritabanı köprüsü çalıştırmaz**; yazdığınız sorgular ya da deneme belgeleri {productName} sunucularına aktarılmaz. Statik `.wasm` ve `.js` varlıkları indirilirken yalnızca Madde 2.3'teki maskelenmiş kenar erişim günlükleri geçerlidir.
 
 ## 3. Masaüstü ve Mobil Uygulama
 
@@ -76,15 +83,6 @@ Yapay zekâ sorgu asistanı siz açana kadar kapalıdır ve {productName}'in ken
 - **Günlük yükleme sayacı:** Günde 500 yükleme sınırını uygulamak için hesap, UTC tarihi ve o gün yapılan yükleme sayısı saklanır (`sync_write_days`). Önceki günler bir sonraki yüklemede silinir; sayaç eşitleme verinizle ya da hesabınızla birlikte silinir. İşletimsel bir sayaçtır ve veri dışa aktarımına dâhil değildir. Hukuki sebep: kötüye kullanımı önlemede meşru menfaat (KVKK m. 5/2-f; GDPR m. 6(1)(f)).
 - **Pasif hesaplar:** Bir hesapta 12 ay boyunca etkinlik olmazsa (şunların en yenisi: hesaba bağlı bir cihazda uygulamanın kullanılması, portala giriş, yükleme ya da hesabın açılışı), 11 ayın sonunda doğrulanmış e-posta adresine uyarı gönderilir. Bu arada hesap kullanılmazsa, uyarının teslim edilmesinden 30 gün sonra şifreli eşitleme verileri ve günlük sayaç silinir. Hesap silinmez; silmenin yapıldığına dair e-posta adresi ya da içerik barındırmayan bir iç kayıt tutulur. Hukuki sebep: saklama sınırlaması ilkesi (KVKK m. 4/2-d; GDPR m. 5(1)(e)).
 
-### 4.3 Barındırılan WebSocket Köprüsü
-
-İsteğe bağlı barındırılan köprüyü (`{bridgeHost}`) kullandığınızda istemciniz MongoDB bağlantı adresinizi (içindeki kimlik bilgileriyle) ve her komutu şifreli `wss://` üzerinden gönderir. Köprü sunucunuza TLS ile bağlanır, komutları çalıştırır ve sonuçları döndürür. Bunlar yalnızca oturum sürerken bellekte tutulur, diske yazılmaz. Yalnızca TLS kullanan herkese açık hedeflere izin verilir.
-
-- **İşletim günlükleri:** Hatalar ve reddedilen hedefler (alan adı ve sebep); asla kimlik bilgileri, tam bağlantı adresleri veya veritabanı içerikleri değil. **En fazla 30 gün** saklanır.
-- **Aylık trafik sayacı:** Aylık 1 GB sınırını uygulamak için köprü bir dosya tutar: içinde geçerli takvim ayı ve o ay köprüyü kullanan her hesap için hesap kimliğinin SHA-256 özeti ile aktarılan bayt sayısı bulunur. Özet takma adlıdır, anonim değildir: onu bir hesap kimliğiyle eşleştirebiliriz. Sayaçlar her ayın başında sıfırlanır; bir değer en fazla kendi ayının sonuna kadar saklanır.
-- **Kısıtlama listesi:** Kötüye kullanım nedeniyle bir hesabın köprü erişimini kapatırsak, hesap kimliği kısıtlama sürdüğü sürece iç bir listede tutulur.
-- **Hukuki sebep:** Güvenlik ve kötüye kullanımı önlemede meşru menfaat (KVKK m. 5/2-f; GDPR m. 6(1)(f)).
-
 ## 5. Alt İşleyiciler ve Yurt Dışı Veri Aktarımı
 
 Kişisel verilerinizi hiçbir üçüncü tarafa satmayız ve reklam ağlarıyla paylaşmayız. Yalnızca aşağıdaki altyapı alt işleyicilerinden yararlanılır:
@@ -92,7 +90,7 @@ Kişisel verilerinizi hiçbir üçüncü tarafa satmayız ve reklam ağlarıyla 
 | Sağlayıcı / Kategori | Görev ve İşlenen Veri Kapsamı | Bölge | Veri Koruma Güvenceleri |
 | --- | --- | --- | --- |
 | **Cloudflare, Inc.** | Yetkili DNS, Anycast WAF/DDoS koruması, Origin mTLS, Cloudflare Email Routing (destek/gizlilik/güvenlik gelen e-posta yönlendirmesi) ve `{dlHost}` üzerindeki açık kurulum paketleri | Küresel / AB | EU-US Data Privacy Framework, GDPR DPA ve Standart Sözleşme Maddeleri (SCC) |
-| **Birincil VPS Barındırma Sağlayıcısı** | Kenar `nginx`, Go API/portal (`{apiHost}`, `{appHost}`), barındırılan köprü (`{bridgeHost}`), izole PostgreSQL container'ları ve şifreli yerel `restic` yedeklerini barındıran sunucu altyapısı | AB / Türkiye | ISO 27001 fiziksel/ağ güvenliği, GDPR DPA, izole iç Docker ağları |
+| **Birincil VPS Barındırma Sağlayıcısı** | Kenar `nginx`, statik deneme alanı (`{demoHost}`), Go API/portal (`{apiHost}`, `{appHost}`), izole PostgreSQL container'ları ve şifreli yerel `restic` yedeklerini barındıran sunucu altyapısı | AB / Türkiye | ISO 27001 fiziksel/ağ güvenliği, GDPR DPA, izole iç Docker ağları |
 | **Resend** | Giden işlemsel e-postalar: e-posta doğrulama, parola sıfırlama, 2FA kurtarma, pasiflik uyarıları ve hesap silme bildirimleri (`0` pazarlama bülteni) | AB / ABD | Aktarımda TLS, SPF/DKIM/DMARC, GDPR DPA ve SCC |
 
 Türkiye dışına veri aktarımları 6698 sayılı KVKK m. 9 (2024 değişikliği uyarınca yeterlilik kararları veya Kuruma bildirilen standart sözleşme güvenceleri) kapsamında; AEA/BK kaynaklı aktarımlar ise GDPR Bölüm V (m. 45-46 yeterlilik kararları ve Standart Sözleşme Maddeleri) uyarınca yürütülür.

@@ -24,6 +24,7 @@ const fr: Messages = {
   'home.title': 'Un client MongoDB construit autour du Shell',
   'home.lead': '{productName} place le MongoDB shell au cœur de l’outil et construit tout le reste autour.',
   'home.cta.download': 'Télécharger',
+  'home.cta.demo': 'Essayer dans le navigateur',
   'home.cta.features': 'Voir les fonctionnalités',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const fr: Messages = {
 
   'home.cloud.eyebrow': 'Cœur libre & cloud optionnel',
   'home.cloud.title': 'Client {appLicense} gratuit à vie',
-  'home.cloud.body': 'Les connexions locales, scripts Shell, MCP et l’assistant IA avec votre clé ou un modèle local n’expirent jamais. Les services cloud optionnels (synchronisation chiffrée et pont web hébergé) resteront gratuits dans les limites d’usage raisonnable.',
+  'home.cloud.body': 'Les connexions locales, scripts Shell, MCP et l’assistant IA avec votre clé ou un modèle local n’expirent jamais. Les services cloud optionnels comme la synchronisation chiffrée à connaissance nulle sont gratuits dans les limites d’usage raisonnable.',
   'home.cloud.cta': 'Cloud & auto-hébergement',
 
   'features.documentTitle': 'Fonctionnalités · {productName}',
@@ -159,6 +160,7 @@ const fr: Messages = {
   'download.allFor': 'Toutes les versions pour {platform}',
   'download.get': 'Télécharger',
   'download.latestTag': 'Version étiquetée actuelle : v{version}',
+  'download.demoCta': 'Essayer dans le navigateur',
   'download.verifyCta': 'Sommes de contrôle et fichiers',
   'download.unavailable': 'Pas encore disponible',
   'download.col.platform': 'Plateforme',
@@ -217,7 +219,7 @@ const fr: Messages = {
   'cloud.local.f2': 'Shell JavaScript intégré, intelligence de schéma et 15 langues d’interface',
   'cloud.local.f3': 'Serveur MCP local en lecture seule optionnel et mises à jour vérifiées par minisign',
   'cloud.local.f4': 'Assistant de requêtes IA avec votre clé (Anthropic, Gemini, compatible OpenAI) ou modèle local (Ollama, LM Studio)',
-  'cloud.local.f5': 'Playground Web Mode A et agent local Mode C',
+  'cloud.local.f5': 'Playground WebAssembly dans le navigateur avec Shell JavaScript intégré',
   'cloud.local.cta': 'Télécharger l’app {appLicense} gratuite',
 
   'cloud.hosted.name': 'Cloud hébergé',
@@ -226,7 +228,7 @@ const fr: Messages = {
   'cloud.hosted.summary': 'Services optionnels que nous gérons gratuitement pour vous. Rien dans l’application n’en dépend.',
   'cloud.hosted.f1': 'Synchronisation chiffrée à connaissance nulle (Argon2id + AES-256-GCM) : 20 collections jusqu’à 1 MiB, 500 envois par jour',
   'cloud.hosted.f2': 'Jusqu’à 3 appareils par compte',
-  'cloud.hosted.f3': 'Pont web TLS hébergé ({bridgeHost}) : une session par compte, 2 heures max, fermé après 15 min d’inactivité, 1 GB par mois',
+  'cloud.hosted.f3': '2FA TOTP optionnelle, export JSON instantané (KVKK et RGPD) et suppression de compte réversible pendant 30 jours',
   'cloud.hosted.f4': 'Les données chiffrées d’un compte inactif pendant 12 mois sont supprimées 30 jours après avertissement par e-mail ; le compte reste',
   'cloud.hosted.note': 'Fourni en l’état, sans garantie de disponibilité, et les limites peuvent évoluer ; voir les Conditions d’utilisation.',
   'cloud.hosted.cta': 'Créer un compte gratuit',
@@ -271,7 +273,7 @@ const fr: Messages = {
   'cloud.wire.tab.hosted': '02 Synchro E2EE',
   'cloud.wire.tab.selfhost': '03 Verrouillage',
   'cloud.wire.desc.local': 'Connexion mongocxx TCP/TLS directe depuis votre appareil sans compte ni télémétrie.',
-  'cloud.wire.desc.hosted': 'Chiffrement Argon2id + AES-256-GCM côté client avant la synchro ou passerelle.',
+  'cloud.wire.desc.hosted': 'Chiffrement Argon2id + AES-256-GCM côté client avant la synchronisation cloud optionnelle.',
   'cloud.wire.desc.selfhost': 'Imposez des profils HTTPS internes et bloquez le cloud externe via enterprise.json.',
 
   'trademark.documentTitle': 'Avis de marque · {productName}',

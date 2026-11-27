@@ -1,6 +1,6 @@
 # Privacy Policy, Data Protection Notice (GDPR & KVKK) & Cookie-Free Statement
 
-This Privacy Policy and Illumination Notice explains what data is (and is not) processed when you visit [{domain}]({siteUrl}), install or run the {productName} desktop and mobile applications, or use the optional {productName} Cloud services across `{appHost}`, `{apiHost}`, `{dlHost}`, and `{bridgeHost}`. It is drafted to satisfy both Article 10 of the Turkish Personal Data Protection Law No. 6698 (**KVKK**) and Articles 13-14 of the EU/EEA/UK General Data Protection Regulation (**GDPR**).
+This Privacy Policy and Illumination Notice explains what data is (and is not) processed when you visit [{domain}]({siteUrl}), use the in-browser playground at `{demoHost}`, install or run the {productName} desktop and mobile applications, or use the optional {productName} Cloud services across `{appHost}`, `{apiHost}`, and `{dlHost}`. It is drafted to satisfy both Article 10 of the Turkish Personal Data Protection Law No. 6698 (**KVKK**) and Articles 13-14 of the EU/EEA/UK General Data Protection Regulation (**GDPR**).
 
 ## 1. Data Controller and Contact Channels
 
@@ -29,6 +29,13 @@ Incoming HTTPS connections are protected by Cloudflare TLS/WAF and forwarded ove
 
 - **Truncated web access logs:** Our edge `nginx` server strips URL query strings and full `User-Agent` headers, and truncates visitor IPv4 addresses to `/24` (the last octet is zeroed, e.g. `203.0.113.0`) and IPv6 addresses to `/48` before writing access logs.
 - **Security and rate-limiting logs:** Full IP addresses are processed transiently in memory for rate limiting and, when security events occur (authentication brute-force attempts, invalid token attempts, or network abuse), retained in security/audit logs for **at most 30 days** on the legal basis of legitimate interest in system security (GDPR Art. 6(1)(f); KVKK Art. 5/2-f).
+
+### 2.4 In-Browser WebAssembly Playground (`{demoHost}`)
+
+The separate live playground (`{demoHost}`) serves a static WebAssembly build of {productName} with an embedded sample dataset. Every query, document edit, and JavaScript shell command runs **exclusively inside your browser tab**:
+
+- **Client-only storage:** Sample database edits inside the playground stay in transient browser memory (cleared when you reset the dataset or close/reload the tab). Strictly necessary local workspace preferences and saved snippets use your browser's origin-isolated `IndexedDB` (`IDBFS` under `{demoHost}`, exempt from prior consent under ePrivacy rules and KVKK Cookie Guidelines because they store only user-initiated interface state on your device) and can be cleared at any time from your browser's site-data settings for `{demoHost}`.
+- **Zero server database traffic:** `{demoHost}` sets **zero HTTP cookies**, sends **no telemetry or release-check requests**, and operates **no server-side database relay**; neither your queries nor playground documents are transmitted to {productName} servers. Standard truncated edge access logs (Section 2.3) apply when loading the static `.wasm` and `.js` assets.
 
 ## 3. Desktop and Mobile Application
 
@@ -76,15 +83,6 @@ Using {productName} Cloud is completely optional and free of charge; no paid pla
 - **Daily upload counter:** To enforce the limit of 500 uploads per day, we store the account, the UTC date, and the number of uploads made that day (`sync_write_days`). Earlier days are removed at the next upload, and the counter is deleted together with your sync data or account. It is an operational counter and is not part of the data export. Legal basis: legitimate interest in preventing abuse (GDPR Art. 6(1)(f); KVKK Art. 5/2-f).
 - **Inactive accounts:** If an account shows no activity for 12 months (the latest of: a device signed in to it using the app, a portal sign-in, an upload, or the account's creation), we send a warning to its verified email address after 11 months. Unless the account is used in the meantime, its encrypted sync data and daily counter are deleted 30 days after the warning was delivered. The account itself is kept, and we keep an internal record that the deletion happened, without the email address or any content. Legal basis: the storage limitation principle (GDPR Art. 5(1)(e); KVKK Art. 4/2-d).
 
-### 4.3 Hosted WebSocket Bridge
-
-When you use the optional hosted bridge (`{bridgeHost}`), your client sends your MongoDB connection URI (with any credentials in it) and each command over encrypted `wss://`. The bridge connects to your server over TLS, runs the commands, and returns the results. These are held in memory only while the session runs and are never written to disk. Only public targets that use TLS are allowed.
-
-- **Operational logs:** errors and denied targets (host name and reason), never credentials, full connection URIs, or database payloads; kept for **at most 30 days**.
-- **Monthly traffic counter:** To enforce the 1 GB monthly limit, the bridge keeps a file with the current calendar month and, for each account that used the bridge that month, a SHA-256 hash of the account ID and the number of bytes transferred. The hash is pseudonymous, not anonymous: we can match it to an account ID. The counters are reset at the start of each month, so a value is kept until the end of its month at most.
-- **Restriction list:** If we switch off bridge access for an account because of abuse, its account ID is kept on an internal list while the restriction lasts.
-- **Legal basis:** legitimate interest in security and preventing abuse (GDPR Art. 6(1)(f); KVKK Art. 5/2-f).
-
 ## 5. Subprocessors and International Data Transfers
 
 We never sell personal data or share it with advertisers. We engage only the infrastructure subprocessors listed below:
@@ -92,7 +90,7 @@ We never sell personal data or share it with advertisers. We engage only the inf
 | Provider / Category | Purpose and Data Scope | Region | Data Protection Safeguards |
 | --- | --- | --- | --- |
 | **Cloudflare, Inc.** | Authoritative DNS, Anycast WAF/DDoS protection, Origin mTLS, Cloudflare Email Routing (inbound support/privacy/security mail forwarding), and public installers on `{dlHost}` | Global / EU | EU-US Data Privacy Framework, GDPR DPA & Standard Contractual Clauses (SCCs) |
-| **Primary VPS Infrastructure Provider** | Dedicated Linux compute hosting edge `nginx`, Go API/portal (`{apiHost}`, `{appHost}`), hosted bridge (`{bridgeHost}`), internal PostgreSQL containers, and encrypted local `restic` backups | EU / Türkiye | ISO 27001 physical/network security, GDPR DPA, isolated internal Docker networks |
+| **Primary VPS Infrastructure Provider** | Dedicated Linux compute hosting edge `nginx`, static playground (`{demoHost}`), Go API/portal (`{apiHost}`, `{appHost}`), internal PostgreSQL containers, and encrypted local `restic` backups | EU / Türkiye | ISO 27001 physical/network security, GDPR DPA, isolated internal Docker networks |
 | **Resend** | Outbound transactional email: account verification, password reset, 2FA recovery, inactivity warnings, and deletion notices (`0` marketing newsletters) | EU / US | TLS encryption in transit, SPF/DKIM/DMARC, GDPR DPA & SCCs |
 
 Cross-border transfers from Türkiye are conducted in compliance with Article 9 of KVKK (as amended in 2024, relying on adequacy decisions or KVKK standard contractual safeguards) and from the EEA/UK under GDPR Chapter V (Articles 45-46 adequacy decisions and Standard Contractual Clauses).

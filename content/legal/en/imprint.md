@@ -9,7 +9,7 @@ This Imprint (*Künye*) provides statutory operator identification, official com
 | **Operator** | {legalEntity} |
 | **Location** | {legalAddress} |
 | **Commercial Status** | No commercial sales or paid plans (free individual open-source project) |
-| **Primary Web Domains** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{bridgeHost}` |
+| **Primary Web Domains** | `{domain}`, `{appHost}`, `{apiHost}`, `{dlHost}`, `{demoHost}` |
 | **Last Updated** | {draftDate} |
 
 ## 2. Official Contact Channels
@@ -30,10 +30,10 @@ We welcome coordinated security research across the {productName} client, MCP se
 
 ## 4. Open-Source Repositories and Licenses
 
-- **{productName} Desktop & Mobile Client (`{productId}` & `{productId}-mcp`):**
+- **{productName} Desktop, Mobile & WebAssembly Client (`{productId}`, `{productId}-mcp` & `{demoHost}`):**
   - Source repository: [{appRepoUrl}]({appRepoUrl})
   - License: **[{appLicenseName}]({appLicenseUrl})** (GNU General Public License v3.0)
-  - Attribution: {productName} is open-source software; full third-party notices and Qt LGPLv3 obligations are shipped inside every release archive (`THIRD-PARTY-NOTICES.txt` and `licenses/`).
+  - Attribution: {productName} is open-source software; full third-party notices and Qt LGPLv3/GPLv3 obligations are shipped inside every release archive and WebAssembly bundle (`THIRD-PARTY-NOTICES.txt` and `licenses/`).
 - **{productName} Web Site (`{domain}`):**
   - Source repository: [{siteRepoUrl}]({siteRepoUrl})
   - Code license: **[{siteCodeLicenseName}]({siteCodeLicenseUrl})**

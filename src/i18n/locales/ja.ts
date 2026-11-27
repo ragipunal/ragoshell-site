@@ -24,6 +24,7 @@ const ja: Messages = {
   'home.title': 'シェルを中心に構築されたMongoDBクライアント',
   'home.lead': '{productName}はMongoDBシェルをツールの中心に据え、その周囲にすべての機能を組み立てています。',
   'home.cta.download': 'ダウンロード',
+  'home.cta.demo': 'ブラウザで試す',
   'home.cta.features': '機能を見る',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const ja: Messages = {
 
   'home.cloud.eyebrow': 'オープンコアと任意のクラウド',
   'home.cloud.title': '永久無料の{appLicense}クライアント',
-  'home.cloud.body': 'ローカル接続、シェルスクリプト、MCP、ご自身のAPIキーやローカルモデルを使うAIアシスタントに期限はありません。暗号化同期やホスト型Webブリッジなどの任意クラウド機能も、公正利用枠内で無料提供されます。',
+  'home.cloud.body': 'ローカル接続、シェルスクリプト、MCP、ご自身のAPIキーやローカルモデルを使うAIアシスタントに期限はありません。ゼロ知識暗号化同期などの任意クラウド機能は公正利用枠内で無料提供されます。',
   'home.cloud.cta': 'クラウドとセルフホスト',
 
   'features.documentTitle': '機能 · {productName}',
@@ -159,6 +160,7 @@ const ja: Messages = {
   'download.allFor': '{platform}のすべてのリリース',
   'download.get': 'ダウンロード',
   'download.latestTag': '現在のタグ付きリリース: v{version}',
+  'download.demoCta': 'ブラウザで試す',
   'download.verifyCta': 'チェックサムとリリースファイル',
   'download.unavailable': '準備中',
   'download.col.platform': 'プラットフォーム',
@@ -217,7 +219,7 @@ const ja: Messages = {
   'cloud.local.f2': '組み込みJavaScriptシェル、スキーマインテリジェンス、15のUI言語',
   'cloud.local.f3': '任意の読み取り専用ローカルMCPサーバーとminisign検証済みアップデート',
   'cloud.local.f4': 'ご自身のキー（Anthropic、Gemini、OpenAI互換）またはローカルモデル（Ollama、LM Studio）を使うAIクエリアシスタント',
-  'cloud.local.f5': 'WebモードAプレイグラウンドとモードCローカルエージェント',
+  'cloud.local.f5': '組み込みJavaScriptシェルを備えたブラウザ内WebAssemblyプレイグラウンド',
   'cloud.local.cta': '無料の{appLicense}アプリを入手',
 
   'cloud.hosted.name': 'ホスト型クラウド',
@@ -226,7 +228,7 @@ const ja: Messages = {
   'cloud.hosted.summary': '私たちが無償で運用する任意サービスです。アプリのどの機能もこれに依存しません。',
   'cloud.hosted.f1': 'ゼロ知識暗号化同期（Argon2id + AES-256-GCM）：各最大1 MiBのコレクション20個、1日500回までアップロード',
   'cloud.hosted.f2': '1アカウントあたり最大3台まで',
-  'cloud.hosted.f3': 'ホスト型TLS Webブリッジ（{bridgeHost}）：1アカウント1セッション、最大2時間、15分無通信で切断、月間1 GBまで',
+  'cloud.hosted.f3': '任意のTOTP 2要素認証、KVKK・GDPR準拠の即時JSONデータエクスポート、30日間取り消し可能なアカウント削除',
   'cloud.hosted.f4': '12か月間利用のないアカウントの暗号化同期データは、30日前のメール通知後に削除されます（アカウントは残ります）',
   'cloud.hosted.note': '稼働保証なしの現状有姿で提供され、上限は変更される場合があります。詳細は利用規約をご確認ください。',
   'cloud.hosted.cta': '無料アカウントを作成',
@@ -271,7 +273,7 @@ const ja: Messages = {
   'cloud.wire.tab.hosted': '02 E2EE 同期',
   'cloud.wire.tab.selfhost': '03 ポリシーロック',
   'cloud.wire.desc.local': 'アカウントやテレメトリなしで端末から直接 mongocxx TCP/TLS 接続。',
-  'cloud.wire.desc.hosted': '任意の同期やブリッジの前に端末上で Argon2id + AES-256-GCM 暗号化。',
+  'cloud.wire.desc.hosted': '任意のクラウド同期の前に端末上で Argon2id + AES-256-GCM 暗号化。',
   'cloud.wire.desc.selfhost': 'enterprise.json で社内 HTTPS エンドポイントを強制し外部クラウドを遮断。',
 
   'trademark.documentTitle': '商標に関するお知らせ · {productName}',

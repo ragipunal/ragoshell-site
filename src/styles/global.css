@@ -2024,6 +2024,13 @@ details:not([open]) > .mobile-drawer {
   gap: 0.55rem 0.85rem;
 }
 
+.release-ledger-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
 .release-tag-link {
   display: inline-flex;
   align-items: center;
@@ -3357,6 +3364,7 @@ details:not([open]) > .mobile-drawer {
 [dir='rtl'] .pair-right,
 [dir='rtl'] .bus-node--mint,
 [dir='rtl'] .primary,
+[dir='rtl'] .release-ledger,
 [dir='rtl'] .cloud-card-featured,
 [dir='rtl'] .cloud-pill {
   box-shadow: inset -3px 0 0 var(--accent);

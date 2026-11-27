@@ -24,6 +24,7 @@ const ar: Messages = {
   'home.title': 'عميل MongoDB مبني حول الـ shell',
   'home.lead': 'يضع {productName} أداة MongoDB shell في قلب التطبيق ويبني الباقي حولها.',
   'home.cta.download': 'تنزيل',
+  'home.cta.demo': 'جرّبه في المتصفح',
   'home.cta.features': 'استعراض الميزات',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const ar: Messages = {
 
   'home.cloud.eyebrow': 'نواة مفتوحة وسحابة اختيارية',
   'home.cloud.title': 'عميل {appLicense} مجاني للأبد',
-  'home.cloud.body': 'الاتصالات المحلية ونصوص الـ shell وMCP ومساعد الذكاء الاصطناعي بمفتاحك الخاص أو نموذج محلي لا تنتهي صلاحيتها أبدًا. الخدمات السحابية الاختيارية، مثل المزامنة المشفرة وجسر الويب المستضاف، ستكون مجانية بحدود استخدام عادل.',
+  'home.cloud.body': 'الاتصالات المحلية ونصوص الـ shell وMCP ومساعد الذكاء الاصطناعي بمفتاحك الخاص أو نموذج محلي لا تنتهي صلاحيتها أبدًا. الخدمات السحابية الاختيارية مثل المزامنة المشفرة صفرية المعرفة مجانية بحدود استخدام عادل.',
   'home.cloud.cta': 'السحابة والاستضافة الذاتية',
 
   'features.documentTitle': 'الميزات · {productName}',
@@ -159,6 +160,7 @@ const ar: Messages = {
   'download.allFor': 'جميع الإصدارات لـ {platform}',
   'download.get': 'تنزيل',
   'download.latestTag': 'أحدث إصدار موسوم: v{version}',
+  'download.demoCta': 'جرّبه في المتصفح',
   'download.verifyCta': 'المجموعات الاختبارية وملفات الإصدار',
   'download.unavailable': 'غير متاح بعد',
   'download.col.platform': 'المنصة',
@@ -217,7 +219,7 @@ const ar: Messages = {
   'cloud.local.f2': 'شل JavaScript مدمج وذكاء المخطط و15 لغة واجهة',
   'cloud.local.f3': 'خادم MCP محلي اختياري للقراءة فقط وتحديثات موثقة بـ minisign',
   'cloud.local.f4': 'مساعد استعلامات الذكاء الاصطناعي بمفتاحك الخاص (Anthropic وGemini والمتوافق مع OpenAI) أو نموذج محلي (Ollama وLM Studio)',
-  'cloud.local.f5': 'وضع الويب A التجريبي ووضع C الوكيل المحلي',
+  'cloud.local.f5': 'ساحة تجربة WebAssembly داخل المتصفح مع شل JavaScript مدمج',
   'cloud.local.cta': 'تنزيل تطبيق {appLicense} المجاني',
 
   'cloud.hosted.name': 'السحابة المستضافة',
@@ -226,7 +228,7 @@ const ar: Messages = {
   'cloud.hosted.summary': 'خدمات اختيارية نشغلها لك دون تكلفة. لا يعتمد أي جزء من التطبيق عليها.',
   'cloud.hosted.f1': 'مزامنة مشفرة صفرية المعرفة (Argon2id + AES-256-GCM): 20 مجموعة حتى 1 MiB لكل منها، و500 عملية رفع يوميًا',
   'cloud.hosted.f2': 'حتى 3 أجهزة لكل حساب',
-  'cloud.hosted.f3': 'جسر ويب TLS مستضاف ({bridgeHost}): جلسة واحدة لكل حساب، حتى ساعتين، يغلق بعد 15 دقيقة خمول، و1 GB حركة شهرية',
+  'cloud.hosted.f3': 'مصادقة ثنائية TOTP اختيارية، وتصدير فوري للبيانات بصيغة JSON وفق KVKK وGDPR، وحذف حساب قابل للتراجع خلال 30 يومًا',
   'cloud.hosted.f4': 'تُحذف بيانات المزامنة المشفرة للحساب غير المستخدم لمدة 12 شهرًا بعد تنبيه عبر البريد قبل 30 يومًا؛ ويبقى الحساب',
   'cloud.hosted.note': 'يُقدم كما هو دون ضمانات توافر، وقد تتغير الحدود؛ التفاصيل الكاملة في شروط الخدمة.',
   'cloud.hosted.cta': 'إنشاء حساب مجاني',
@@ -271,7 +273,7 @@ const ar: Messages = {
   'cloud.wire.tab.hosted': '02 مزامنة E2EE',
   'cloud.wire.tab.selfhost': '03 قفل السياسة',
   'cloud.wire.desc.local': 'اتصال mongocxx TCP/TLS مباشر من جهازك بلا حساب أو قياس عن بُعد.',
-  'cloud.wire.desc.hosted': 'تشفير Argon2id + AES-256-GCM على الجهاز قبل المزامنة أو الجسر الاختياري.',
+  'cloud.wire.desc.hosted': 'تشفير Argon2id + AES-256-GCM على الجهاز قبل المزامنة السحابية الاختيارية.',
   'cloud.wire.desc.selfhost': 'فرض نقاط HTTPS الداخلية وحظر السحابة الخارجية عبر enterprise.json.',
 
   'trademark.documentTitle': 'إشعار العلامة التجارية · {productName}',

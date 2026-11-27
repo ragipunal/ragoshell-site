@@ -24,6 +24,7 @@ const uz: Messages = {
   'home.title': 'Shell atrofida qurilgan MongoDB mijozi',
   'home.lead': '{productName} MongoDB shell-ni vositaning markaziga qoʻyadi va qolgan hamma narsani uning atrofida quradi.',
   'home.cta.download': 'Yuklab olish',
+  'home.cta.demo': 'Brauzerda sinab koʻrish',
   'home.cta.features': 'Imkoniyatlarni koʻrish',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const uz: Messages = {
 
   'home.cloud.eyebrow': 'Ochiq yadro va ixtiyoriy bulut',
   'home.cloud.title': 'Umrbod bepul {appLicense} mijozi',
-  'home.cloud.body': 'Mahalliy ulanishlar, shell skriptlari, MCP va oʻz kalitingiz yoki mahalliy model bilan SI yordamchisi hech qachon tugamaydi. Ixtiyoriy bulut xizmatlari (shifrlangan sinxronlash va xosting veb-koʻprigi) adolatli foydalanish chegaralarida bepul boʻladi.',
+  'home.cloud.body': 'Mahalliy ulanishlar, shell skriptlari, MCP va oʻz kalitingiz yoki mahalliy model bilan SI yordamchisi hech qachon tugamaydi. Nol-bilim shifrlangan sinxronlash kabi ixtiyoriy bulut xizmatlari adolatli foydalanish chegaralarida bepul.',
   'home.cloud.cta': 'Bulut va oʻz serveringiz',
 
   'features.documentTitle': 'Imkoniyatlar · {productName}',
@@ -159,6 +160,7 @@ const uz: Messages = {
   'download.allFor': '{platform} uchun barcha relizlar',
   'download.get': 'Yuklab olish',
   'download.latestTag': 'Joriy teglangan nashr: v{version}',
+  'download.demoCta': 'Brauzerda sinab koʻrish',
   'download.verifyCta': 'Tekshiruv yigʻindilari va fayllar',
   'download.unavailable': 'Hali mavjud emas',
   'download.col.platform': 'Platforma',
@@ -217,7 +219,7 @@ const uz: Messages = {
   'cloud.local.f2': 'Oʻrnatilgan JavaScript shell, Sxema zehni va 15 ta UI tili',
   'cloud.local.f3': 'Ixtiyoriy faqat-oʻqish mahalliy MCP serveri va minisign bilan tasdiqlangan yangilanishlar',
   'cloud.local.f4': 'Oʻz kalitingiz (Anthropic, Gemini, OpenAI-mos) yoki mahalliy model (Ollama, LM Studio) bilan SI soʻrov yordamchisi',
-  'cloud.local.f5': 'Web Mode A Playground va Mode C mahalliy agenti',
+  'cloud.local.f5': 'Oʻrnatilgan JavaScript shell bilan brauzer ichidagi WebAssembly sinov maydoni',
   'cloud.local.cta': 'Bepul {appLicense} ilovasini yuklab olish',
 
   'cloud.hosted.name': 'Xosting buluti',
@@ -226,7 +228,7 @@ const uz: Messages = {
   'cloud.hosted.summary': 'Siz uchun bepul boshqaradigan ixtiyoriy xizmatlarimiz. Ilovadagi hech narsa ularga bogʻliq emas.',
   'cloud.hosted.f1': 'Nol-bilim shifrlangan sinxronlash (Argon2id + AES-256-GCM): har biri 1 MiB gacha 20 kolleksiya, kuniga 500 yuklash',
   'cloud.hosted.f2': 'Har bir hisob uchun 3 tagacha qurilma',
-  'cloud.hosted.f3': 'Xosting TLS veb-koʻprigi ({bridgeHost}): hisobga bitta sessiya, 2 soatgacha, 15 daqiqa harakatsizlikda yopiladi, oyiga 1 GB trafik',
+  'cloud.hosted.f3': 'Ixtiyoriy TOTP 2FA, KVKK va GDPR boʻyicha tezkor JSON maʼlumot eksporti hamda 30 kun ichida qaytariladigan hisobni oʻchirish',
   'cloud.hosted.f4': '12 oy ishlatilmagan hisobning shifrlangan maʼlumotlari 30 kun oldingi email ogohlantirishidan keyin oʻchiriladi; hisob saqlanadi',
   'cloud.hosted.note': 'Uzilishsizlik kafolatisiz boricha taqdim etiladi va cheklovlar oʻzgarishi mumkin; batafsil Xizmat shartlarida.',
   'cloud.hosted.cta': 'Bepul hisob ochish',
@@ -271,7 +273,7 @@ const uz: Messages = {
   'cloud.wire.tab.hosted': '02 E2EE sinxronlash',
   'cloud.wire.tab.selfhost': '03 Siyosat qulfi',
   'cloud.wire.desc.local': 'Hisob va telemetriyasiz qurilmangizdan toʻgʻridan-toʻgʻri mongocxx TCP/TLS.',
-  'cloud.wire.desc.hosted': 'Ixtiyoriy sinxronlash yoki koʻprikdan oldin qurilmada Argon2id + AES-256-GCM shifrlash.',
+  'cloud.wire.desc.hosted': 'Ixtiyoriy bulut sinxronlashidan oldin qurilmada Argon2id + AES-256-GCM shifrlash.',
   'cloud.wire.desc.selfhost': 'enterprise.json orqali ichki HTTPS manzillarini majburiy qiling va tashqi bulutni yoping.',
 
   'trademark.documentTitle': 'Savdo belgisi bildirishnomasi · {productName}',

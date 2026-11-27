@@ -14,7 +14,7 @@ const { locale } = Astro.props;
 const cfg = validateCloudConfig(site.cloud);
 const downloadHref = localeUrl(locale, '/download/');
 const termsHref = localeUrl(locale, '/legal/terms/');
-const p = (key: MessageKey) => t(locale, key, { bridgeHost: site.hosts.bridge });
+const p = (key: MessageKey) => t(locale, key);
 
 const localFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'] as const;
 const hostedFeatures = ['f1', 'f2', 'f3', 'f4'] as const;
@@ -46,14 +46,14 @@ const wirePresets: Record<(typeof wireOrder)[number], WirePreset> = {
     ],
   },
   hosted: {
-    cmd: `sync.seal({ api: "${site.urls.api}", bridge: "${site.urls.bridge}" })`,
+    cmd: `sync.seal({ api: "${site.urls.api}", kdf: "Argon2id" })`,
     desc: p('cloud.wire.desc.hosted'),
     status: 'OPT-IN · FREE QUOTA',
     rows: [
       { key: 'cipher', tag: 'KDF + AEAD', val: 'Argon2id + AES-256-GCM (device-only key)', warm: true },
       { key: 'syncQuota', tag: 'Limits', val: '20 collections x 1 MiB, 500 uploads/day', warm: true },
       { key: 'devices', tag: 'RFC 8628', val: '3 active devices max per account' },
-      { key: 'bridgeCap', tag: 'Relay', val: '1 session, 2h max, 1 GB/month UTC', warm: true },
+      { key: 'privacy', tag: 'KVKK · GDPR', val: 'TOTP 2FA, JSON export, 30d erasure', warm: true },
     ],
   },
   selfhost: {

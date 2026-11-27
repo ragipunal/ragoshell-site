@@ -1,5 +1,5 @@
-// Pure validation for `site.cloud`.
-// Imported by `cloud.astro` at build time and tested in `scripts/check-content.mjs`.
+// Pure validation for `site.cloud` and `site.demo`.
+// Imported by `cloud.astro`, `index.astro`, and `download.astro` at build time and tested in `scripts/check-content.mjs`.
 
 export interface CloudConfig {
   mode: 'soon' | 'live';
@@ -8,18 +8,23 @@ export interface CloudConfig {
   donateUrl: string;
 }
 
-function assertHttpsUrl(raw: unknown, field: string): void {
+export interface DemoConfig {
+  enabled: boolean;
+  url: string;
+}
+
+function assertHttpsUrl(raw: unknown, field: string, scope = 'cloud'): void {
   if (typeof raw !== 'string' || raw.trim() === '') {
-    throw new Error(`cloud: missing ${field}`);
+    throw new Error(`${scope}: missing ${field}`);
   }
   let parsed: URL;
   try {
     parsed = new URL(raw);
   } catch {
-    throw new Error(`cloud: ${field} "${raw}" is not a valid URL`);
+    throw new Error(`${scope}: ${field} "${raw}" is not a valid URL`);
   }
   if (parsed.protocol !== 'https:' || parsed.username !== '' || parsed.password !== '') {
-    throw new Error(`cloud: ${field} "${raw}" must be an https URL without credentials`);
+    throw new Error(`${scope}: ${field} "${raw}" must be an https URL without credentials`);
   }
 }
 
@@ -39,4 +44,18 @@ export function validateCloudConfig(raw: unknown): CloudConfig {
   }
   assertHttpsUrl(cloud.donateUrl, 'donateUrl');
   return cloud;
+}
+
+/**
+ * Validates `site.demo`; throws on any misconfiguration. Pure. Validates `url` even while `enabled` is `false`
+ * so staging/production flips never ship a malformed playground link.
+ */
+export function validateDemoConfig(raw: unknown): DemoConfig {
+  if (!raw || typeof raw !== 'object') throw new Error('demo: missing configuration object');
+  const demo = raw as DemoConfig;
+  if (typeof demo.enabled !== 'boolean') {
+    throw new Error(`demo: enabled "${String((raw as { enabled?: unknown }).enabled)}" must be boolean`);
+  }
+  assertHttpsUrl(demo.url, 'url', 'demo');
+  return demo;
 }

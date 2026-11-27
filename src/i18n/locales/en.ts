@@ -24,6 +24,7 @@ const en = {
   'home.title': 'A MongoDB client built around the shell',
   'home.lead': '{productName} puts the MongoDB shell at the centre of the tool and builds the rest around it.',
   'home.cta.download': 'Download',
+  'home.cta.demo': 'Try in browser',
   'home.cta.features': 'See the features',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const en = {
 
   'home.cloud.eyebrow': 'Open core & optional cloud',
   'home.cloud.title': 'Free {appLicense} client forever',
-  'home.cloud.body': 'Local connections, shell scripts, MCP, and the AI assistant with your own key or a local model never expire. Optional cloud services, encrypted sync and a hosted web bridge, will be free with fair-use limits.',
+  'home.cloud.body': 'Local connections, shell scripts, MCP, and the AI assistant with your own key or a local model never expire. Optional cloud services such as zero-knowledge encrypted sync are free with fair-use limits.',
   'home.cloud.cta': 'Cloud & self-hosting',
 
   'features.documentTitle': 'Features · {productName}',
@@ -159,6 +160,7 @@ const en = {
   'download.allFor': 'All releases for {platform}',
   'download.get': 'Download',
   'download.latestTag': 'Current tagged release: v{version}',
+  'download.demoCta': 'Try in browser',
   'download.verifyCta': 'Checksums & release assets',
   'download.unavailable': 'Not available yet',
   'download.col.platform': 'Platform',
@@ -217,7 +219,7 @@ const en = {
   'cloud.local.f2': 'Embedded JavaScript shell, Schema Intelligence, and 15 UI languages',
   'cloud.local.f3': 'Optional read-only local MCP server and minisign-verified updates',
   'cloud.local.f4': 'AI Query Assistant with your own key (Anthropic, Gemini, OpenAI-compatible) or a local model (Ollama, LM Studio)',
-  'cloud.local.f5': 'Web Mode A Playground and Mode C local agent',
+  'cloud.local.f5': 'In-browser WebAssembly playground with embedded JavaScript shell',
   'cloud.local.cta': 'Download free {appLicense} app',
 
   'cloud.hosted.name': 'Hosted cloud',
@@ -226,7 +228,7 @@ const en = {
   'cloud.hosted.summary': 'Optional services we run for you at no cost. Nothing in the app depends on them.',
   'cloud.hosted.f1': 'Zero-knowledge encrypted sync (Argon2id + AES-256-GCM): 20 collections of up to 1 MiB each, 500 uploads a day',
   'cloud.hosted.f2': 'Up to 3 devices per account',
-  'cloud.hosted.f3': 'Hosted TLS web bridge ({bridgeHost}): one session per account, up to 2 hours, closed after 15 minutes idle, 1 GB of traffic a month',
+  'cloud.hosted.f3': 'Optional TOTP 2FA, instant KVKK & GDPR JSON data export, and 30-day reversible account deletion',
   'cloud.hosted.f4': 'Encrypted sync data of an account unused for 12 months is deleted after an email warning 30 days ahead; the account stays',
   'cloud.hosted.note': 'Provided as is, without uptime guarantees, and limits may change; full details are in the Terms of Service.',
   'cloud.hosted.cta': 'Create free account',
@@ -271,7 +273,7 @@ const en = {
   'cloud.wire.tab.hosted': '02 E2EE Sync',
   'cloud.wire.tab.selfhost': '03 Policy Lock',
   'cloud.wire.desc.local': 'Direct mongocxx TCP/TLS from your device with zero account or telemetry.',
-  'cloud.wire.desc.hosted': 'Client-side Argon2id + AES-256-GCM sealing before optional sync or relay.',
+  'cloud.wire.desc.hosted': 'Client-side Argon2id + AES-256-GCM sealing before optional cloud sync.',
   'cloud.wire.desc.selfhost': 'Enforce internal HTTPS profiles and block external cloud via enterprise.json.',
 
   'trademark.documentTitle': 'Trademark notice · {productName}',

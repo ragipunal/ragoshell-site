@@ -32,8 +32,9 @@ Set `ASTRO_TELEMETRY_DISABLED=1` (CI does) or run `npx astro telemetry disable` 
 ## Where things are
 
 - `site.config.mjs`: the **only** place that spells the product name, the domain and sub-domain addresses,
-  the repository addresses, the license names, the `cloud` page switch (`soon`: nothing is on sale) and sponsorship link, and the MongoDB trademark notice. `scripts/check-brand.mjs` fails
-  when any other source file spells the name.
+  the repository addresses, the license names, the `cloud` page switch and sponsorship link, the `demo` live-playground
+  flag (`enabled: false` until `demo.<domain>` goes live), and the MongoDB trademark notice. `scripts/check-brand.mjs`
+  fails when any other source file spells the name.
 - `src/i18n/locales/<code>.ts`: dictionaries (English is the reference). A missing or extra key, a missing
   dictionary for an enabled locale, a placeholder mismatch or a missing trademark notice fails the build.
   All 15 application languages (`en`, `tr`, `ar`, `az`, `de`, `es`, `fr`, `hi`, `ja`, `kk`, `ky`, `pt-BR`,

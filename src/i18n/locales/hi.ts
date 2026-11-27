@@ -24,6 +24,7 @@ const hi: Messages = {
   'home.title': 'शेल के चारों ओर बना एक MongoDB क्लाइंट',
   'home.lead': '{productName} MongoDB शेल को टूल के केंद्र में रखता है और बाकी सब कुछ उसी के चारों ओर बनाता है।',
   'home.cta.download': 'डाउनलोड',
+  'home.cta.demo': 'ब्राउज़र में आज़माएं',
   'home.cta.features': 'विशेषताएं देखें',
 
   'home.stage.engine': 'QJSEngine · mongocxx',
@@ -84,7 +85,7 @@ const hi: Messages = {
 
   'home.cloud.eyebrow': 'ओपन कोर और वैकल्पिक क्लाउड',
   'home.cloud.title': 'हमेशा के लिए मुफ्त {appLicense} क्लाइंट',
-  'home.cloud.body': 'स्थानीय कनेक्शन, शेल स्क्रिप्ट, MCP और आपकी अपनी कुंजी या स्थानीय मॉडल वाला AI सहायक कभी समाप्त नहीं होते। वैकल्पिक क्लाउड सेवाएं (एन्क्रिप्टेड सिंक और होस्टेड वेब ब्रिज) उचित उपयोग सीमाओं के साथ मुफ्त रहेंगी।',
+  'home.cloud.body': 'स्थानीय कनेक्शन, शेल स्क्रिप्ट, MCP और आपकी अपनी कुंजी या स्थानीय मॉडल वाला AI सहायक कभी समाप्त नहीं होते। ज़ीरो-नॉलेज एन्क्रिप्टेड सिंक जैसी वैकल्पिक क्लाउड सेवाएं उचित उपयोग सीमाओं के साथ मुफ्त हैं।',
   'home.cloud.cta': 'क्लाउड और सेल्फ़-होस्टिंग',
 
   'features.documentTitle': 'विशेषताएं · {productName}',
@@ -159,6 +160,7 @@ const hi: Messages = {
   'download.allFor': '{platform} के लिए सभी रिलीज़',
   'download.get': 'डाउनलोड',
   'download.latestTag': 'वर्तमान टैग किया गया संस्करण: v{version}',
+  'download.demoCta': 'ब्राउज़र में आज़माएं',
   'download.verifyCta': 'चेकसम और रिलीज़ फ़ाइलें',
   'download.unavailable': 'अभी उपलब्ध नहीं',
   'download.col.platform': 'प्लेटफ़ॉर्म',
@@ -217,7 +219,7 @@ const hi: Messages = {
   'cloud.local.f2': 'एम्बेडेड JavaScript शेल, स्कीमा इंटेलिजेंस और 15 UI भाषाएं',
   'cloud.local.f3': 'वैकल्पिक रीड-ओनली स्थानीय MCP सर्वर और minisign-सत्यापित अपडेट',
   'cloud.local.f4': 'अपनी कुंजी (Anthropic, Gemini, OpenAI-संगत) या स्थानीय मॉडल (Ollama, LM Studio) के साथ AI क्वेरी सहायक',
-  'cloud.local.f5': 'वेब मोड A प्लेग्राउंड और मोड C स्थानीय एजेंट',
+  'cloud.local.f5': 'एम्बेडेड JavaScript शेल के साथ ब्राउज़र-आधारित WebAssembly प्लेग्राउंड',
   'cloud.local.cta': 'मुफ्त {appLicense} ऐप डाउनलोड करें',
 
   'cloud.hosted.name': 'होस्टेड क्लाउड',
@@ -226,7 +228,7 @@ const hi: Messages = {
   'cloud.hosted.summary': 'वैकल्पिक सेवाएं जिन्हें हम आपके लिए बिना शुल्क चलाते हैं। ऐप में कुछ भी इन पर निर्भर नहीं है।',
   'cloud.hosted.f1': 'ज़ीरो-नॉलेज एन्क्रिप्टेड सिंक (Argon2id + AES-256-GCM): अधिकतम 1 MiB के 20 कलेक्शन, प्रति दिन 500 अपलोड',
   'cloud.hosted.f2': 'प्रति खाता अधिकतम 3 डिवाइस',
-  'cloud.hosted.f3': 'होस्टेड TLS वेब ब्रिज ({bridgeHost}): प्रति खाता 1 सत्र, अधिकतम 2 घंटे, 15 मिनट निष्क्रिय रहने पर बंद, 1 GB मासिक ट्रैफ़िक',
+  'cloud.hosted.f3': 'वैकल्पिक TOTP 2FA, तत्काल KVKK व GDPR JSON डेटा निर्यात, और 30-दिन की प्रतिवर्ती खाता समाप्ति',
   'cloud.hosted.f4': '12 महीने तक निष्क्रिय खाते का एन्क्रिप्टेड सिंक डेटा 30 दिन पहले ईमेल चेतावनी के बाद हटा दिया जाता है; खाता बना रहता है',
   'cloud.hosted.note': 'बिना अपटाइम गारंटी के जैसा है वैसा प्रदान किया जाता है और सीमाएं बदल सकती हैं; विवरण सेवा की शर्तों में देखें।',
   'cloud.hosted.cta': 'मुफ्त खाता बनाएं',
@@ -271,7 +273,7 @@ const hi: Messages = {
   'cloud.wire.tab.hosted': '02 E2EE सिंक',
   'cloud.wire.tab.selfhost': '03 नीति लॉक',
   'cloud.wire.desc.local': 'बिना खाते या टेलीमेट्री के आपके डिवाइस से सीधा mongocxx TCP/TLS.',
-  'cloud.wire.desc.hosted': 'वैकल्पिक सिंक या ब्रिज से पहले डिवाइस पर Argon2id + AES-256-GCM एन्क्रिप्शन.',
+  'cloud.wire.desc.hosted': 'वैकल्पिक क्लाउड सिंक से पहले डिवाइस पर Argon2id + AES-256-GCM एन्क्रिप्शन.',
   'cloud.wire.desc.selfhost': 'enterprise.json के माध्यम से आंतरिक HTTPS लागू करें और बाहरी क्लाउड ब्लॉक करें.',
 
   'trademark.documentTitle': 'ट्रेडमार्क सूचना · {productName}',
